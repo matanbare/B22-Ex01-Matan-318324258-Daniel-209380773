@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBoxCoverPhoto = new System.Windows.Forms.PictureBox();
             this.pictureBoxProfileImage = new System.Windows.Forms.PictureBox();
             this.buttonLogout = new System.Windows.Forms.Button();
@@ -39,14 +40,15 @@
             this.label1 = new System.Windows.Forms.Label();
             this.labelMostComments = new System.Windows.Forms.Label();
             this.labelMostLikedPhoto = new System.Windows.Forms.Label();
-            this.pictureBoxMostLIked = new System.Windows.Forms.PictureBox();
+            this.pictureBoxMostLiked = new System.Windows.Forms.PictureBox();
             this.pictureBoxMostComments = new System.Windows.Forms.PictureBox();
             this.labelPhotoDetails = new System.Windows.Forms.Label();
             this.labelTotalLikes = new System.Windows.Forms.Label();
             this.labelTotalComments = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLIked)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLiked)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostComments)).BeginInit();
             this.SuspendLayout();
             // 
@@ -109,9 +111,9 @@
             // listBoxFrinends
             // 
             this.listBoxFrinends.FormattingEnabled = true;
-            this.listBoxFrinends.Location = new System.Drawing.Point(397, 348);
+            this.listBoxFrinends.Location = new System.Drawing.Point(52, 458);
             this.listBoxFrinends.Name = "listBoxFrinends";
-            this.listBoxFrinends.Size = new System.Drawing.Size(81, 56);
+            this.listBoxFrinends.Size = new System.Drawing.Size(393, 56);
             this.listBoxFrinends.TabIndex = 63;
             // 
             // buttonFetchPhotosLikes
@@ -154,18 +156,19 @@
             this.labelMostLikedPhoto.TabIndex = 67;
             this.labelMostLikedPhoto.Text = "Most Liked:";
             // 
-            // pictureBoxMostLIked
+            // pictureBoxMostLiked
             // 
-            this.pictureBoxMostLIked.Location = new System.Drawing.Point(499, 458);
-            this.pictureBoxMostLIked.Name = "pictureBoxMostLIked";
-            this.pictureBoxMostLIked.Size = new System.Drawing.Size(164, 162);
-            this.pictureBoxMostLIked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxMostLIked.TabIndex = 68;
-            this.pictureBoxMostLIked.TabStop = false;
-            this.pictureBoxMostLIked.Click += new System.EventHandler(this.pictureBoxMostLIked_Click);
+            this.pictureBoxMostLiked.Enabled = false;
+            this.pictureBoxMostLiked.Location = new System.Drawing.Point(499, 458);
+            this.pictureBoxMostLiked.Name = "pictureBoxMostLiked";
+            this.pictureBoxMostLiked.Size = new System.Drawing.Size(164, 162);
+            this.pictureBoxMostLiked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxMostLiked.TabIndex = 68;
+            this.pictureBoxMostLiked.TabStop = false;
             // 
             // pictureBoxMostComments
             // 
+            this.pictureBoxMostComments.Enabled = false;
             this.pictureBoxMostComments.Location = new System.Drawing.Point(669, 458);
             this.pictureBoxMostComments.Name = "pictureBoxMostComments";
             this.pictureBoxMostComments.Size = new System.Drawing.Size(164, 162);
@@ -203,6 +206,12 @@
             this.labelTotalComments.TabIndex = 72;
             this.labelTotalComments.Text = "Total Comments:";
             // 
+            // toolTip1
+            // 
+            this.toolTip1.Tag = "";
+            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            this.toolTip1.ToolTipTitle = "Click to open photo in facebook";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -212,7 +221,7 @@
             this.Controls.Add(this.labelTotalLikes);
             this.Controls.Add(this.labelPhotoDetails);
             this.Controls.Add(this.pictureBoxMostComments);
-            this.Controls.Add(this.pictureBoxMostLIked);
+            this.Controls.Add(this.pictureBoxMostLiked);
             this.Controls.Add(this.labelMostLikedPhoto);
             this.Controls.Add(this.labelMostComments);
             this.Controls.Add(this.label1);
@@ -229,7 +238,7 @@
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLIked)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLiked)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostComments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -248,11 +257,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label labelMostComments;
         private System.Windows.Forms.Label labelMostLikedPhoto;
-        private System.Windows.Forms.PictureBox pictureBoxMostLIked;
+        private System.Windows.Forms.PictureBox pictureBoxMostLiked;
         private System.Windows.Forms.PictureBox pictureBoxMostComments;
         private System.Windows.Forms.Label labelPhotoDetails;
         private System.Windows.Forms.Label labelTotalLikes;
         private System.Windows.Forms.Label labelTotalComments;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

@@ -127,12 +127,10 @@ namespace BasicFacebookFeatures
             labelTotalComments.Text = string.Format("Total Comments: {0}", totalCommentsPhoto);
 
             pictureBoxMostComments.LoadAsync(mostCommentsPhotoUrl);
-            pictureBoxMostLIked.LoadAsync(mostLikedPhotoUrl);
-        }
+            pictureBoxMostComments.Enabled = true;
 
-        private void pictureBoxMostLIked_Click(object sender, EventArgs e)
-        {
-
+            pictureBoxMostLiked.LoadAsync(mostLikedPhotoUrl);
+            pictureBoxMostLiked.Enabled = true;
         }
     }
 }
