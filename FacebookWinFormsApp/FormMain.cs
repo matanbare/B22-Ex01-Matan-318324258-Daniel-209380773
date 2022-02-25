@@ -82,36 +82,57 @@ namespace BasicFacebookFeatures
                 listBoxFrinends.Items.Add(friend.Name);
                 
             }
-
-
-            int nuberOfLikes = 0;
-            foreach (var post in UserPosts)
-            {
-                listBoxFrinends.Items.Add("Name:" + post.Name);
-                listBoxFrinends.Items.Add("Description:" + post.Description);
-                listBoxFrinends.Items.Add("Message:" + post.Message);
-                listBoxFrinends.Items.Add("Caption:" + post.Caption);
-                if (post.Like())
-                {
-                    for (int i = 0; i < post.LikedBy.Count; i++)
-                    {
-                        listBoxFrinends.Items.Add("    " + i + 1 + ".Liked by:" + post.LikedBy[i].Name);
-                        nuberOfLikes++;
-                    }
-                }
-                else
-                {
-                    listBoxFrinends.Items.Add("    " + "NO LIKES!!!");
-                }
-
-            }
-            listBoxFrinends.Items.Add("Number Of Likes:" + nuberOfLikes);
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
             buttonLogin.Text = "Login";
+        }
+
+        private void buttonFetchPhotosLikes_Click(object sender, EventArgs e)
+        {
+            int mostLikedPhoto = int.MinValue;
+            int mostCommentsPhoto = int.MinValue;
+            string mostCommentsPhotoUrl = null;
+            string mostLikedPhotoUrl = null;
+
+            int totalCommentsPhoto = 0;
+            int totalLikesPhoto = 0;
+
+
+            foreach (var album in UserResults.Albums)
+            {
+                foreach (var photo in album.Photos)
+                {
+                    totalCommentsPhoto += photo.Comments.Count;
+                    totalLikesPhoto += photo.LikedBy.Count;
+
+                    if (mostLikedPhoto < photo.LikedBy.Count)
+                    {
+                        mostLikedPhoto = photo.LikedBy.Count;
+                        mostLikedPhotoUrl = photo.PictureAlbumURL;
+                    }
+
+                    if (mostCommentsPhoto < photo.Comments.Count)
+                    {
+                        mostCommentsPhoto = photo.Comments.Count;
+                        mostCommentsPhotoUrl = photo.PictureAlbumURL;
+                    }
+                }
+                
+            }
+
+            labelTotalLikes.Text = string.Format("Total Likes: {0}", totalLikesPhoto);
+            labelTotalComments.Text = string.Format("Total Comments: {0}", totalCommentsPhoto);
+
+            pictureBoxMostComments.LoadAsync(mostCommentsPhotoUrl);
+            pictureBoxMostLIked.LoadAsync(mostLikedPhotoUrl);
+        }
+
+        private void pictureBoxMostLIked_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
