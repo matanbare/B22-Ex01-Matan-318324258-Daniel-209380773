@@ -28,33 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.pictureBoxCoverPhoto = new System.Windows.Forms.PictureBox();
             this.pictureBoxProfileImage = new System.Windows.Forms.PictureBox();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
-            this.labelFriendsNumber = new System.Windows.Forms.Label();
-            this.labelFirendsList = new System.Windows.Forms.Label();
-            this.listBoxFrinends = new System.Windows.Forms.ListBox();
-            this.buttonFetchPhotosLikes = new System.Windows.Forms.Button();
+            this.listBoxFriends = new System.Windows.Forms.ListBox();
+            this.labelFriends = new System.Windows.Forms.Label();
+            this.labelBio = new System.Windows.Forms.Label();
+            this.panelBio = new System.Windows.Forms.Panel();
+            this.labelBirthday = new System.Windows.Forms.Label();
+            this.labelGender = new System.Windows.Forms.Label();
+            this.labelFrom = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.labelMostComments = new System.Windows.Forms.Label();
-            this.labelMostLikedPhoto = new System.Windows.Forms.Label();
-            this.pictureBoxMostLiked = new System.Windows.Forms.PictureBox();
-            this.pictureBoxMostComments = new System.Windows.Forms.PictureBox();
-            this.labelPhotoDetails = new System.Windows.Forms.Label();
-            this.labelTotalLikes = new System.Windows.Forms.Label();
-            this.labelTotalComments = new System.Windows.Forms.Label();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.pictureBoxFriendProfileImg = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLiked)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostComments)).BeginInit();
+            this.panelBio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxCoverPhoto
             // 
-            this.pictureBoxCoverPhoto.Location = new System.Drawing.Point(-5, 0);
+            this.pictureBoxCoverPhoto.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBoxCoverPhoto.Location = new System.Drawing.Point(-2, 0);
             this.pictureBoxCoverPhoto.Name = "pictureBoxCoverPhoto";
             this.pictureBoxCoverPhoto.Size = new System.Drawing.Size(845, 238);
             this.pictureBoxCoverPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -64,7 +63,7 @@
             // pictureBoxProfileImage
             // 
             this.pictureBoxProfileImage.BackColor = System.Drawing.Color.Transparent;
-            this.pictureBoxProfileImage.Location = new System.Drawing.Point(265, 134);
+            this.pictureBoxProfileImage.Location = new System.Drawing.Point(303, 134);
             this.pictureBoxProfileImage.Name = "pictureBoxProfileImage";
             this.pictureBoxProfileImage.Size = new System.Drawing.Size(231, 172);
             this.pictureBoxProfileImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -87,159 +86,168 @@
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(179, 23);
             this.buttonLogin.TabIndex = 60;
-            this.buttonLogin.Text = "Login";
+            this.buttonLogin.Text = "LoginResult";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
-            // labelFriendsNumber
+            // listBoxFriends
             // 
-            this.labelFriendsNumber.AutoSize = true;
-            this.labelFriendsNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelFriendsNumber.Location = new System.Drawing.Point(271, 319);
-            this.labelFriendsNumber.Name = "labelFriendsNumber";
-            this.labelFriendsNumber.Size = new System.Drawing.Size(0, 24);
-            this.labelFriendsNumber.TabIndex = 61;
+            this.listBoxFriends.BackColor = System.Drawing.SystemColors.Menu;
+            this.listBoxFriends.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxFriends.FormattingEnabled = true;
+            this.listBoxFriends.ItemHeight = 20;
+            this.listBoxFriends.Location = new System.Drawing.Point(610, 373);
+            this.listBoxFriends.Name = "listBoxFriends";
+            this.listBoxFriends.Size = new System.Drawing.Size(220, 222);
+            this.listBoxFriends.TabIndex = 63;
+            this.listBoxFriends.Click += new System.EventHandler(this.listBoxFriends_Click);
             // 
-            // labelFirendsList
+            // labelFriends
             // 
-            this.labelFirendsList.AutoSize = true;
-            this.labelFirendsList.Location = new System.Drawing.Point(28, 409);
-            this.labelFirendsList.Name = "labelFirendsList";
-            this.labelFirendsList.Size = new System.Drawing.Size(0, 13);
-            this.labelFirendsList.TabIndex = 62;
+            this.labelFriends.AutoSize = true;
+            this.labelFriends.BackColor = System.Drawing.Color.Transparent;
+            this.labelFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFriends.ForeColor = System.Drawing.Color.Black;
+            this.labelFriends.Location = new System.Drawing.Point(650, 334);
+            this.labelFriends.Name = "labelFriends";
+            this.labelFriends.Size = new System.Drawing.Size(74, 20);
+            this.labelFriends.TabIndex = 65;
+            this.labelFriends.Text = "Friends:";
             // 
-            // listBoxFrinends
+            // labelBio
             // 
-            this.listBoxFrinends.FormattingEnabled = true;
-            this.listBoxFrinends.Location = new System.Drawing.Point(52, 458);
-            this.listBoxFrinends.Name = "listBoxFrinends";
-            this.listBoxFrinends.Size = new System.Drawing.Size(393, 56);
-            this.listBoxFrinends.TabIndex = 63;
+            this.labelBio.AutoSize = true;
+            this.labelBio.BackColor = System.Drawing.Color.Transparent;
+            this.labelBio.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBio.Location = new System.Drawing.Point(386, 331);
+            this.labelBio.Name = "labelBio";
+            this.labelBio.Size = new System.Drawing.Size(46, 24);
+            this.labelBio.TabIndex = 66;
+            this.labelBio.Text = "Bio:";
             // 
-            // buttonFetchPhotosLikes
+            // panelBio
             // 
-            this.buttonFetchPhotosLikes.Location = new System.Drawing.Point(591, 258);
-            this.buttonFetchPhotosLikes.Name = "buttonFetchPhotosLikes";
-            this.buttonFetchPhotosLikes.Size = new System.Drawing.Size(145, 23);
-            this.buttonFetchPhotosLikes.TabIndex = 64;
-            this.buttonFetchPhotosLikes.Text = "Fetch";
-            this.buttonFetchPhotosLikes.UseVisualStyleBackColor = true;
-            this.buttonFetchPhotosLikes.Click += new System.EventHandler(this.buttonFetchPhotosLikes_Click);
+            this.panelBio.AccessibleRole = System.Windows.Forms.AccessibleRole.StaticText;
+            this.panelBio.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panelBio.Controls.Add(this.labelBirthday);
+            this.panelBio.Controls.Add(this.labelGender);
+            this.panelBio.Controls.Add(this.labelFrom);
+            this.panelBio.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panelBio.ImeMode = System.Windows.Forms.ImeMode.On;
+            this.panelBio.Location = new System.Drawing.Point(303, 373);
+            this.panelBio.Name = "panelBio";
+            this.panelBio.Size = new System.Drawing.Size(231, 130);
+            this.panelBio.TabIndex = 67;
+            // 
+            // labelBirthday
+            // 
+            this.labelBirthday.AutoSize = true;
+            this.labelBirthday.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBirthday.Location = new System.Drawing.Point(3, 91);
+            this.labelBirthday.Name = "labelBirthday";
+            this.labelBirthday.Size = new System.Drawing.Size(71, 20);
+            this.labelBirthday.TabIndex = 2;
+            this.labelBirthday.Text = "Birthday:";
+            // 
+            // labelGender
+            // 
+            this.labelGender.AutoSize = true;
+            this.labelGender.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGender.Location = new System.Drawing.Point(3, 51);
+            this.labelGender.Name = "labelGender";
+            this.labelGender.Size = new System.Drawing.Size(67, 20);
+            this.labelGender.TabIndex = 1;
+            this.labelGender.Text = "Gender:";
+            // 
+            // labelFrom
+            // 
+            this.labelFrom.AutoSize = true;
+            this.labelFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFrom.Location = new System.Drawing.Point(3, 14);
+            this.labelFrom.Name = "labelFrom";
+            this.labelFrom.Size = new System.Drawing.Size(50, 20);
+            this.labelFrom.TabIndex = 0;
+            this.labelFrom.Text = "From:";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(57, 379);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(158, 43);
+            this.button1.TabIndex = 68;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(57, 536);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(158, 43);
+            this.button2.TabIndex = 69;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(57, 456);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(158, 43);
+            this.button3.TabIndex = 70;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(397, 319);
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(63, 335);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 20);
-            this.label1.TabIndex = 65;
-            this.label1.Text = "Friend List:";
+            this.label1.Size = new System.Drawing.Size(128, 20);
+            this.label1.TabIndex = 71;
+            this.label1.Text = "Magic Fetures:";
             // 
-            // labelMostComments
+            // pictureBoxFriendProfileImg
             // 
-            this.labelMostComments.AutoSize = true;
-            this.labelMostComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMostComments.Location = new System.Drawing.Point(690, 435);
-            this.labelMostComments.Name = "labelMostComments";
-            this.labelMostComments.Size = new System.Drawing.Size(129, 20);
-            this.labelMostComments.TabIndex = 66;
-            this.labelMostComments.Text = "Most Comments:";
-            // 
-            // labelMostLikedPhoto
-            // 
-            this.labelMostLikedPhoto.AutoSize = true;
-            this.labelMostLikedPhoto.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMostLikedPhoto.Location = new System.Drawing.Point(533, 435);
-            this.labelMostLikedPhoto.Name = "labelMostLikedPhoto";
-            this.labelMostLikedPhoto.Size = new System.Drawing.Size(90, 20);
-            this.labelMostLikedPhoto.TabIndex = 67;
-            this.labelMostLikedPhoto.Text = "Most Liked:";
-            // 
-            // pictureBoxMostLiked
-            // 
-            this.pictureBoxMostLiked.Enabled = false;
-            this.pictureBoxMostLiked.Location = new System.Drawing.Point(499, 458);
-            this.pictureBoxMostLiked.Name = "pictureBoxMostLiked";
-            this.pictureBoxMostLiked.Size = new System.Drawing.Size(164, 162);
-            this.pictureBoxMostLiked.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxMostLiked.TabIndex = 68;
-            this.pictureBoxMostLiked.TabStop = false;
-            // 
-            // pictureBoxMostComments
-            // 
-            this.pictureBoxMostComments.Enabled = false;
-            this.pictureBoxMostComments.Location = new System.Drawing.Point(669, 458);
-            this.pictureBoxMostComments.Name = "pictureBoxMostComments";
-            this.pictureBoxMostComments.Size = new System.Drawing.Size(164, 162);
-            this.pictureBoxMostComments.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxMostComments.TabIndex = 69;
-            this.pictureBoxMostComments.TabStop = false;
-            // 
-            // labelPhotoDetails
-            // 
-            this.labelPhotoDetails.AutoSize = true;
-            this.labelPhotoDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPhotoDetails.Location = new System.Drawing.Point(599, 286);
-            this.labelPhotoDetails.Name = "labelPhotoDetails";
-            this.labelPhotoDetails.Size = new System.Drawing.Size(131, 20);
-            this.labelPhotoDetails.TabIndex = 70;
-            this.labelPhotoDetails.Text = "Photos Details:";
-            // 
-            // labelTotalLikes
-            // 
-            this.labelTotalLikes.AutoSize = true;
-            this.labelTotalLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalLikes.Location = new System.Drawing.Point(533, 333);
-            this.labelTotalLikes.Name = "labelTotalLikes";
-            this.labelTotalLikes.Size = new System.Drawing.Size(89, 20);
-            this.labelTotalLikes.TabIndex = 71;
-            this.labelTotalLikes.Text = "Total Likes:";
-            // 
-            // labelTotalComments
-            // 
-            this.labelTotalComments.AutoSize = true;
-            this.labelTotalComments.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotalComments.Location = new System.Drawing.Point(533, 373);
-            this.labelTotalComments.Name = "labelTotalComments";
-            this.labelTotalComments.Size = new System.Drawing.Size(129, 20);
-            this.labelTotalComments.TabIndex = 72;
-            this.labelTotalComments.Text = "Total Comments:";
-            // 
-            // toolTip1
-            // 
-            this.toolTip1.Tag = "";
-            this.toolTip1.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
-            this.toolTip1.ToolTipTitle = "Click to open photo in facebook";
+            this.pictureBoxFriendProfileImg.Location = new System.Drawing.Point(737, 510);
+            this.pictureBoxFriendProfileImg.Name = "pictureBoxFriendProfileImg";
+            this.pictureBoxFriendProfileImg.Size = new System.Drawing.Size(93, 85);
+            this.pictureBoxFriendProfileImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFriendProfileImg.TabIndex = 72;
+            this.pictureBoxFriendProfileImg.TabStop = false;
             // 
             // FormMain
             // 
+            this.AcceptButton = this.buttonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(842, 657);
-            this.Controls.Add(this.labelTotalComments);
-            this.Controls.Add(this.labelTotalLikes);
-            this.Controls.Add(this.labelPhotoDetails);
-            this.Controls.Add(this.pictureBoxMostComments);
-            this.Controls.Add(this.pictureBoxMostLiked);
-            this.Controls.Add(this.labelMostLikedPhoto);
-            this.Controls.Add(this.labelMostComments);
+            this.Controls.Add(this.pictureBoxFriendProfileImg);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.buttonFetchPhotosLikes);
-            this.Controls.Add(this.listBoxFrinends);
-            this.Controls.Add(this.labelFirendsList);
-            this.Controls.Add(this.labelFriendsNumber);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.listBoxFriends);
+            this.Controls.Add(this.panelBio);
+            this.Controls.Add(this.labelBio);
+            this.Controls.Add(this.labelFriends);
             this.Controls.Add(this.buttonLogin);
             this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.pictureBoxProfileImage);
             this.Controls.Add(this.pictureBoxCoverPhoto);
+            this.DoubleBuffered = true;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostLiked)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMostComments)).EndInit();
+            this.panelBio.ResumeLayout(false);
+            this.panelBio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -250,19 +258,18 @@
         private System.Windows.Forms.PictureBox pictureBoxProfileImage;
         private System.Windows.Forms.Button buttonLogout;
         private System.Windows.Forms.Button buttonLogin;
-        private System.Windows.Forms.Label labelFriendsNumber;
-        private System.Windows.Forms.Label labelFirendsList;
-        private System.Windows.Forms.ListBox listBoxFrinends;
-        private System.Windows.Forms.Button buttonFetchPhotosLikes;
+        private System.Windows.Forms.ListBox listBoxFriends;
+        private System.Windows.Forms.Label labelFriends;
+        private System.Windows.Forms.Label labelBio;
+        private System.Windows.Forms.Panel panelBio;
+        private System.Windows.Forms.Label labelBirthday;
+        private System.Windows.Forms.Label labelGender;
+        private System.Windows.Forms.Label labelFrom;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label labelMostComments;
-        private System.Windows.Forms.Label labelMostLikedPhoto;
-        private System.Windows.Forms.PictureBox pictureBoxMostLiked;
-        private System.Windows.Forms.PictureBox pictureBoxMostComments;
-        private System.Windows.Forms.Label labelPhotoDetails;
-        private System.Windows.Forms.Label labelTotalLikes;
-        private System.Windows.Forms.Label labelTotalComments;
-        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.PictureBox pictureBoxFriendProfileImg;
     }
 }
 

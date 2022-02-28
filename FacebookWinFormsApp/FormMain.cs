@@ -5,17 +5,19 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
+using Timer = System.Timers.Timer;
 
 namespace BasicFacebookFeatures
 {
     public partial class FormMain : Form
     {
-        public User UserResults{ get; set; }
-        public LoginResult Login{ get; set; }
-        public FacebookObjectCollection<Post> UserPosts { get; set; }
+        private User LoggedInUser{ get; set; }
+        private LoginResult LoginResult{ get; set; }
+        private UserProfile Profile { get; set; }
 
 
         public FormMain()
@@ -28,7 +30,7 @@ namespace BasicFacebookFeatures
         {
             Clipboard.SetText("gtaabc92"); /// the current password for Desig Patter
 
-            Login = FacebookService.Login(
+            LoginResult = FacebookService.Login(
                 /// (This is Desig Patter's App ID. replace it with your own)
                 "484536506563845",
                 /// requested permissions:
@@ -46,91 +48,58 @@ namespace BasicFacebookFeatures
                 "user_photos",
                 "user_posts",
                 "user_videos",
-                "groups_access_member_info"
-            /// add any relevant permissions
+                "groups_access_member_info",
+                "publish_to_groups"
+                /// add any relevant permissions
             );
 
 
-            if (!string.IsNullOrEmpty(Login.AccessToken))
+            if (!string.IsNullOrEmpty(LoginResult.AccessToken))
             {
-                UserResults = Login.LoggedInUser;
-                UserPosts = UserResults.Posts;
+                LoggedInUser = LoginResult.LoggedInUser;
 
-                buttonLogin.Text = $"Logged in as {Login.LoggedInUser.Name}";
-                Album album = new Album();
-                
-                pictureBoxProfileImage.LoadAsync(UserResults.PictureLargeURL);
-                //pictureBoxCoverPhoto.LoadAsync(UserResults.Albums);
+                buttonLogin.Text = $"Logged in as {LoginResult.LoggedInUser.Name}";
 
+               Profile = new UserProfile(LoggedInUser);
+               setProfileData();
+               buttonLogin.Enabled = false;
             }
-            // add cover photo
-            foreach (var album in UserResults.Albums)
+            else
             {
-                if (album.Name.Equals("Cover photos"))
-                {
-                    pictureBoxCoverPhoto.LoadAsync(album.PictureAlbumURL);
-                }
-            }
-            // add number of friends
-            if (labelFriendsNumber != null)
-            {
-                labelFriendsNumber.Text = string.Format("Friends: {0}", UserResults.Friends.Count);
-            }
-
-            foreach (var friend in UserResults.Friends)
-            {
-                listBoxFrinends.Items.Add(friend.Name);
-                
+                MessageBox.Show(LoginResult.ErrorMessage, "Login Failed");
             }
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            buttonLogin.Text = "Login";
+            buttonLogin.Text = "LoginResult";
         }
 
-        private void buttonFetchPhotosLikes_Click(object sender, EventArgs e)
+        private void setProfileData()
         {
-            int mostLikedPhoto = int.MinValue;
-            int mostCommentsPhoto = int.MinValue;
-            string mostCommentsPhotoUrl = null;
-            string mostLikedPhotoUrl = null;
+            pictureBoxProfileImage.LoadAsync(Profile.ProfileImageUrl);
+            pictureBoxCoverPhoto.LoadAsync(Profile.CoverImageUrl);
+            labelBirthday.Text += Profile.Bio.Birthday;
+            labelGender.Text += Profile.Bio.Gender;
+            labelFrom.Text += Profile.Bio.From;
+            labelFriends.Text = $"Friends:{Profile.FriendsCount}";
 
-            int totalCommentsPhoto = 0;
-            int totalLikesPhoto = 0;
-
-
-            foreach (var album in UserResults.Albums)
+            foreach (var item in Profile.GetUserFriendsName())
             {
-                foreach (var photo in album.Photos)
-                {
-                    totalCommentsPhoto += photo.Comments.Count;
-                    totalLikesPhoto += photo.LikedBy.Count;
-
-                    if (mostLikedPhoto < photo.LikedBy.Count)
-                    {
-                        mostLikedPhoto = photo.LikedBy.Count;
-                        mostLikedPhotoUrl = photo.PictureAlbumURL;
-                    }
-
-                    if (mostCommentsPhoto < photo.Comments.Count)
-                    {
-                        mostCommentsPhoto = photo.Comments.Count;
-                        mostCommentsPhotoUrl = photo.PictureAlbumURL;
-                    }
-                }
-                
+                listBoxFriends.Items.Add(item);
             }
+        }
 
-            labelTotalLikes.Text = string.Format("Total Likes: {0}", totalLikesPhoto);
-            labelTotalComments.Text = string.Format("Total Comments: {0}", totalCommentsPhoto);
-
-            pictureBoxMostComments.LoadAsync(mostCommentsPhotoUrl);
-            pictureBoxMostComments.Enabled = true;
-
-            pictureBoxMostLiked.LoadAsync(mostLikedPhotoUrl);
-            pictureBoxMostLiked.Enabled = true;
+        private void listBoxFriends_Click(object sender, EventArgs e)
+        {
+            foreach (var friend in LoggedInUser.Friends)
+            {
+                if (friend.Name.Equals(listBoxFriends.SelectedItem))
+                {
+                    pictureBoxFriendProfileImg.LoadAsync(Profile.GetFriendProfileImageUrl((string)(listBoxFriends.SelectedItem)));
+                }
+            }
         }
     }
 }
