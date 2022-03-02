@@ -101,5 +101,12 @@ namespace BasicFacebookFeatures
                 }
             }
         }
+
+        private void buttonStartTimerPost_Click(object sender, EventArgs e)
+        {
+            FormSchedulePosts formSchedulePosts = new FormSchedulePosts(LoggedInUser);
+
+            formSchedulePosts.Show();
+        }
     }
 }
