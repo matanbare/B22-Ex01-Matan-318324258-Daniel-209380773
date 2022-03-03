@@ -35,21 +35,36 @@ namespace BasicFacebookFeatures
 
         private void buttonPost_Click(object sender, EventArgs e)
         {
-            m_ScheduledPost.FuturePostPublication(
+            bool isValidPost = m_ScheduledPost.FuturePostPublication(
                 (string)comboBoxGroupToPost.SelectedItem,
                 textBoxPost.Text,
                 m_ScheduledPost.GetPostName(textBoxPostName.Text),
                 numericUpDownMinute.Text,
                 numericUpDownHours.Text);
 
-            addDateToPublishToListBox();
-            //MessageBox.Show(messageForUser);
-            clearControllers();
+            if (isValidPost)
+            {
+                addDatePublishToListBox();
+                clearControllers();
+            }
         }
 
-        private void addDateToPublishToListBox()
+        private void addDatePublishToListBox()
         {
-            listBoxFuture.Items.Add($"{m_ScheduledPost.GetPostName(textBoxPostName.Text)} To be published at {m_ScheduledPost.GetFutureDateToPublish(numericUpDownMinute.Text, numericUpDownHours.Text)}");
+            listBoxPostedDone.Items.Clear();
+            listBoxFuture.Items.Clear();
+
+            foreach (var postBySchedule in m_ScheduledPost.ScheduledPostsList)
+            {
+                if (postBySchedule.IsPosted)
+                {
+                    listBoxPostedDone.Items.Add($"{postBySchedule.PostID} -> published at {postBySchedule.PublishDate} ");
+                }
+                else
+                {
+                    listBoxFuture.Items.Add($"{postBySchedule.PostID} -> will publish at {postBySchedule.PublishDate} ");
+                }
+            }
         }
 
         private void clearControllers()
@@ -59,6 +74,11 @@ namespace BasicFacebookFeatures
             numericUpDownHours.Value = k_StartPoint;
             numericUpDownMinute.Value = k_StartPoint; 
             comboBoxGroupToPost.SelectedIndex = k_StartPoint;
+        }
+
+        private void buttonRefreshPosts_Click(object sender, EventArgs e)
+        {
+            addDatePublishToListBox();
         }
     }
 }

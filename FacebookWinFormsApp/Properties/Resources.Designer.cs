@@ -63,9 +63,39 @@ namespace BasicFacebookFeatures.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BackgroundTimerPosts {
+            get {
+                object obj = ResourceManager.GetObject("BackgroundTimerPosts", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap comment_icon {
+            get {
+                object obj = ResourceManager.GetObject("comment_icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap facebookBackgroundApp {
             get {
                 object obj = ResourceManager.GetObject("facebookBackgroundApp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap like_icon {
+            get {
+                object obj = ResourceManager.GetObject("like_icon", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

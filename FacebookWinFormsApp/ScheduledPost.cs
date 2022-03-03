@@ -16,71 +16,78 @@ namespace BasicFacebookFeatures
         private const string k_Unknown = "*UNKNOWN*";
         private const string k_EmptyText = "";
         private static int couterTimers = 0;
-        private readonly List<PostBySchedule> m_Timers = new List<PostBySchedule>();
+        public List<PostBySchedule> ScheduledPostsList { get; } = new List<PostBySchedule>();
         public FacebookObjectCollection<Group> UserGroups { get; set; }
+
+       
 
         public ScheduledPost(User i_LoggedInUser)
         {
             UserGroups = i_LoggedInUser.Groups;
         }
 
-        public void FuturePostPublication(string i_GroupName, string i_TextToPost, string i_PostID, string i_Minute, string i_Hours)
+        public bool FuturePostPublication(string i_GroupName, string i_TextToPost, string i_PostID, string i_Minute, string i_Hours)
         {
+            bool isValidTextToPost = false;
+
             PostBySchedule newPostToPublish = new PostBySchedule()
             {
                 TimeToPostInMillisecond = ConvertToMillisecond(i_Minute, i_Hours),
+                PublishDate = GetFutureDateToPublish(i_Minute, i_Hours),
                 PostText = i_TextToPost,
                 PostID = i_PostID,
                 GroupName = i_GroupName
             };
 
-            newPostToPublish.TimerToPost.Tick += TimerToPost_Tick;
-            newPostToPublish.TimerToPost.Interval = newPostToPublish.TimeToPostInMillisecond;
-            newPostToPublish.TimerToPost.Enabled = true;
-            newPostToPublish.TimerToPost.Tag = couterTimers++;
-            m_Timers.Add(newPostToPublish);
-        }
-
-        private bool postNow(string i_GroupName, string i_TextToPost)
-        {
-            bool isValidMessage = false;
-            
-            string messageForUser = null;
-
             if (textIsNotEmpty(i_TextToPost))
             {
-                foreach (var group in UserGroups)
-                {
-                    if (group.Name == i_GroupName)
-                    {
-                        try
-                        {
-                            group.PostToWall(i_TextToPost);
-                            messageForUser = $" ***Publish Succeeded*** ";
-                            isValidMessage = true;
-                        }
-                        catch (FacebookApiException e)
-                        {
-                            messageForUser = $" {e.ErrorType} + Error ";
-                        }
-                    }
-                }
+                isValidTextToPost = true;
+                newPostToPublish.TimerToPost.Tick += TimerToPost_Tick;
+                newPostToPublish.TimerToPost.Interval = 
+                    newPostToPublish.TimeToPostInMillisecond > 0 ? newPostToPublish.TimeToPostInMillisecond : 1000;
+                newPostToPublish.TimerToPost.Enabled = true;
+                newPostToPublish.TimerToPost.Tag = couterTimers++;
+                ScheduledPostsList.Add(newPostToPublish);
             }
             else
             {
-                messageForUser = $" The text field is empty! Please try again. ";
+                string messageForUser = $" The text field is empty! Please try again. ";
+                MessageBox.Show(messageForUser);
             }
 
+            return isValidTextToPost;
+        }
+
+        private void postNow(string i_GroupName, string i_TextToPost)
+        {
+            string messageForUser = null;
+
+            foreach (var group in UserGroups)
+            {
+                if (group.Name == i_GroupName)
+                {
+                    try
+                    {
+                        group.PostToWall(i_TextToPost);
+                        messageForUser = $" ***Publish Succeeded*** ";
+                    }
+                    catch (FacebookApiException e)
+                    {
+                        messageForUser = $" {e.ErrorType} + Error ";
+                    }
+                }
+            }
             MessageBox.Show(messageForUser);
-            return isValidMessage;
         }
 
         private void TimerToPost_Tick(object sender, EventArgs e)
         {
             int index = (int)(sender as Timer).Tag;
 
-            postNow(m_Timers[index].GroupName, m_Timers[index].PostText);
+
             (sender as Timer).Enabled = false;
+            postNow(ScheduledPostsList[index].GroupName, ScheduledPostsList[index].PostText);
+            ScheduledPostsList[index].IsPosted = true;
         }
 
 

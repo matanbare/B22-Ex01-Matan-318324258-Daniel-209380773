@@ -10,7 +10,6 @@ namespace BasicFacebookFeatures
     class UserProfile
     {
         private const string k_CoverAlbumName = "Cover photos";
-
         public string ProfileImageUrl { get; set; }
         public string CoverImageUrl { get; set; }
         public UserBio Bio { get; set; }

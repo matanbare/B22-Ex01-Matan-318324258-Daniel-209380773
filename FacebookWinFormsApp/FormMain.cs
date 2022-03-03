@@ -108,5 +108,11 @@ namespace BasicFacebookFeatures
 
             formSchedulePosts.Show();
         }
+
+        private void buttonPhotosTracker_Click(object sender, EventArgs e)
+        {
+            FormPhotosTracker formPhotosTracker = new FormPhotosTracker(LoggedInUser);
+            formPhotosTracker.Show();
+        }
     }
 }

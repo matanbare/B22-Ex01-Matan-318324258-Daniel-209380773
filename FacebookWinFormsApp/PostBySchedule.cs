@@ -17,6 +17,8 @@ namespace BasicFacebookFeatures
         public string PostID { get; set; } 
         public string GroupName { get; set; }
         public int TimeToPostInMillisecond { get; set; }
+        public DateTime PublishDate { get; set; }
+        public bool IsPosted { get; set; } = false;
 
         //int i_MillisecondToPost, string i_PostText, string i_PostID, string i_GroupName
         public PostBySchedule()

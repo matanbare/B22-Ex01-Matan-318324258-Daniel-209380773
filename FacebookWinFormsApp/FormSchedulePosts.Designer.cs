@@ -46,12 +46,14 @@ namespace BasicFacebookFeatures
             this.listBoxPostedDone = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.buttonRefreshPosts = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).BeginInit();
             this.SuspendLayout();
             // 
             // textBoxPost
             // 
+            this.textBoxPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPost.Location = new System.Drawing.Point(28, 135);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
@@ -60,13 +62,14 @@ namespace BasicFacebookFeatures
             // 
             // buttonPost
             // 
+            this.buttonPost.BackColor = System.Drawing.Color.PaleGreen;
             this.buttonPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonPost.Location = new System.Drawing.Point(29, 382);
             this.buttonPost.Name = "buttonPost";
-            this.buttonPost.Size = new System.Drawing.Size(448, 38);
+            this.buttonPost.Size = new System.Drawing.Size(448, 49);
             this.buttonPost.TabIndex = 1;
             this.buttonPost.Text = "Post";
-            this.buttonPost.UseVisualStyleBackColor = true;
+            this.buttonPost.UseVisualStyleBackColor = false;
             this.buttonPost.Click += new System.EventHandler(this.buttonPost_Click);
             // 
             // comboBoxGroupToPost
@@ -161,19 +164,27 @@ namespace BasicFacebookFeatures
             // 
             // listBoxFuture
             // 
+            this.listBoxFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxFuture.ForeColor = System.Drawing.Color.Red;
             this.listBoxFuture.FormattingEnabled = true;
+            this.listBoxFuture.ItemHeight = 15;
             this.listBoxFuture.Location = new System.Drawing.Point(513, 135);
             this.listBoxFuture.Name = "listBoxFuture";
             this.listBoxFuture.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxFuture.Size = new System.Drawing.Size(275, 108);
+            this.listBoxFuture.Size = new System.Drawing.Size(275, 94);
             this.listBoxFuture.TabIndex = 12;
             // 
             // listBoxPostedDone
             // 
+            this.listBoxPostedDone.BackColor = System.Drawing.SystemColors.Window;
+            this.listBoxPostedDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxPostedDone.ForeColor = System.Drawing.Color.Green;
             this.listBoxPostedDone.FormattingEnabled = true;
-            this.listBoxPostedDone.Location = new System.Drawing.Point(513, 312);
+            this.listBoxPostedDone.ItemHeight = 15;
+            this.listBoxPostedDone.Location = new System.Drawing.Point(513, 288);
             this.listBoxPostedDone.Name = "listBoxPostedDone";
-            this.listBoxPostedDone.Size = new System.Drawing.Size(275, 108);
+            this.listBoxPostedDone.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.listBoxPostedDone.Size = new System.Drawing.Size(275, 94);
             this.listBoxPostedDone.TabIndex = 13;
             // 
             // label1
@@ -189,18 +200,36 @@ namespace BasicFacebookFeatures
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(509, 280);
+            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.label2.Location = new System.Drawing.Point(509, 255);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 20);
             this.label2.TabIndex = 15;
             this.label2.Text = "Posted:";
             // 
+            // buttonRefreshPosts
+            // 
+            this.buttonRefreshPosts.BackColor = System.Drawing.Color.Orange;
+            this.buttonRefreshPosts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonRefreshPosts.Location = new System.Drawing.Point(513, 390);
+            this.buttonRefreshPosts.Name = "buttonRefreshPosts";
+            this.buttonRefreshPosts.Size = new System.Drawing.Size(275, 41);
+            this.buttonRefreshPosts.TabIndex = 16;
+            this.buttonRefreshPosts.Text = "Refresh";
+            this.buttonRefreshPosts.UseVisualStyleBackColor = false;
+            this.buttonRefreshPosts.Click += new System.EventHandler(this.buttonRefreshPosts_Click);
+            // 
             // FormSchedulePosts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 456);
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.BackgroundTimerPosts;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(800, 449);
+            this.Controls.Add(this.buttonRefreshPosts);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.listBoxPostedDone);
@@ -216,7 +245,13 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.comboBoxGroupToPost);
             this.Controls.Add(this.buttonPost);
             this.Controls.Add(this.textBoxPost);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormSchedulePosts";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormSchedulePosts";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
@@ -243,5 +278,6 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.ListBox listBoxPostedDone;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonRefreshPosts;
     }
 }

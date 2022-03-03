@@ -39,7 +39,7 @@
             this.labelBirthday = new System.Windows.Forms.Label();
             this.labelGender = new System.Windows.Forms.Label();
             this.labelFrom = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonPhotosTracker = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.buttonStartTimerPost = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -170,16 +170,17 @@
             this.labelFrom.TabIndex = 0;
             this.labelFrom.Text = "From:";
             // 
-            // button1
+            // buttonPhotosTracker
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(57, 379);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(158, 43);
-            this.button1.TabIndex = 68;
-            this.button1.Text = "Analysis Friends";
-            this.button1.UseVisualStyleBackColor = false;
+            this.buttonPhotosTracker.BackColor = System.Drawing.Color.White;
+            this.buttonPhotosTracker.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonPhotosTracker.Location = new System.Drawing.Point(57, 379);
+            this.buttonPhotosTracker.Name = "buttonPhotosTracker";
+            this.buttonPhotosTracker.Size = new System.Drawing.Size(158, 43);
+            this.buttonPhotosTracker.TabIndex = 68;
+            this.buttonPhotosTracker.Text = "Photos Tracker";
+            this.buttonPhotosTracker.UseVisualStyleBackColor = false;
+            this.buttonPhotosTracker.Click += new System.EventHandler(this.buttonPhotosTracker_Click);
             // 
             // button2
             // 
@@ -233,7 +234,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonStartTimerPost);
             this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonPhotosTracker);
             this.Controls.Add(this.listBoxFriends);
             this.Controls.Add(this.panelBio);
             this.Controls.Add(this.labelBio);
@@ -268,7 +269,7 @@
         private System.Windows.Forms.Label labelBirthday;
         private System.Windows.Forms.Label labelGender;
         private System.Windows.Forms.Label labelFrom;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonPhotosTracker;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button buttonStartTimerPost;
         private System.Windows.Forms.Label label1;
