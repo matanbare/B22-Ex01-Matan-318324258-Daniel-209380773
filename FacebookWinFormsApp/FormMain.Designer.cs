@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.pictureBoxCoverPhoto = new System.Windows.Forms.PictureBox();
             this.pictureBoxProfileImage = new System.Windows.Forms.PictureBox();
             this.buttonLogout = new System.Windows.Forms.Button();
@@ -44,6 +45,10 @@
             this.buttonStartTimerPost = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBoxFriendProfileImg = new System.Windows.Forms.PictureBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.timerProgressBar = new System.Windows.Forms.Timer(this.components);
+            this.labelProgressBar = new System.Windows.Forms.Label();
+            this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
             this.panelBio.SuspendLayout();
@@ -92,7 +97,7 @@
             // 
             // listBoxFriends
             // 
-            this.listBoxFriends.BackColor = System.Drawing.SystemColors.Menu;
+            this.listBoxFriends.BackColor = System.Drawing.Color.White;
             this.listBoxFriends.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.listBoxFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxFriends.FormattingEnabled = true;
@@ -137,7 +142,7 @@
             this.panelBio.ImeMode = System.Windows.Forms.ImeMode.On;
             this.panelBio.Location = new System.Drawing.Point(303, 373);
             this.panelBio.Name = "panelBio";
-            this.panelBio.Size = new System.Drawing.Size(231, 130);
+            this.panelBio.Size = new System.Drawing.Size(231, 132);
             this.panelBio.TabIndex = 67;
             // 
             // labelBirthday
@@ -221,6 +226,40 @@
             this.pictureBoxFriendProfileImg.TabIndex = 72;
             this.pictureBoxFriendProfileImg.TabStop = false;
             // 
+            // progressBar
+            // 
+            this.progressBar.BackColor = System.Drawing.Color.White;
+            this.progressBar.Location = new System.Drawing.Point(249, 622);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(339, 23);
+            this.progressBar.TabIndex = 73;
+            // 
+            // timerProgressBar
+            // 
+            this.timerProgressBar.Interval = 250;
+            this.timerProgressBar.Tick += new System.EventHandler(this.timerProgressBar_Tick);
+            // 
+            // labelProgressBar
+            // 
+            this.labelProgressBar.AutoSize = true;
+            this.labelProgressBar.BackColor = System.Drawing.Color.Transparent;
+            this.labelProgressBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelProgressBar.Location = new System.Drawing.Point(245, 582);
+            this.labelProgressBar.Name = "labelProgressBar";
+            this.labelProgressBar.Size = new System.Drawing.Size(0, 20);
+            this.labelProgressBar.TabIndex = 74;
+            // 
+            // checkBoxAutoLogin
+            // 
+            this.checkBoxAutoLogin.AutoSize = true;
+            this.checkBoxAutoLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkBoxAutoLogin.Location = new System.Drawing.Point(18, 102);
+            this.checkBoxAutoLogin.Name = "checkBoxAutoLogin";
+            this.checkBoxAutoLogin.Size = new System.Drawing.Size(133, 24);
+            this.checkBoxAutoLogin.TabIndex = 75;
+            this.checkBoxAutoLogin.Text = "Remember Me";
+            this.checkBoxAutoLogin.UseVisualStyleBackColor = true;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.buttonLogin;
@@ -230,6 +269,9 @@
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(842, 657);
+            this.Controls.Add(this.checkBoxAutoLogin);
+            this.Controls.Add(this.labelProgressBar);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.pictureBoxFriendProfileImg);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonStartTimerPost);
@@ -274,6 +316,10 @@
         private System.Windows.Forms.Button buttonStartTimerPost;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBoxFriendProfileImg;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Timer timerProgressBar;
+        private System.Windows.Forms.Label labelProgressBar;
+        private System.Windows.Forms.CheckBox checkBoxAutoLogin;
     }
 }
 

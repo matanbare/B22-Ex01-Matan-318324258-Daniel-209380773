@@ -93,6 +93,16 @@ namespace BasicFacebookFeatures.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap facebookPlusBsckGround {
+            get {
+                object obj = ResourceManager.GetObject("facebookPlusBsckGround", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap like_icon {
             get {
                 object obj = ResourceManager.GetObject("like_icon", resourceCulture);

@@ -34,7 +34,7 @@ namespace BasicFacebookFeatures
             this.labelPhotoDetails = new System.Windows.Forms.Label();
             this.labelMostLikedPhoto = new System.Windows.Forms.Label();
             this.labelMostComments = new System.Windows.Forms.Label();
-            this.buttonFetchPhotosLikes = new System.Windows.Forms.Button();
+            this.buttonFetchCommentsTheMost = new System.Windows.Forms.Button();
             this.labelBestFriendLikes = new System.Windows.Forms.Label();
             this.labelBestFriendComment = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -43,6 +43,9 @@ namespace BasicFacebookFeatures
             this.pictureBoxBestFriendsLikes = new System.Windows.Forms.PictureBox();
             this.pictureBoxMostComments = new System.Windows.Forms.PictureBox();
             this.pictureBoxMostLiked = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBestFriendsComments)).BeginInit();
@@ -102,24 +105,24 @@ namespace BasicFacebookFeatures
             this.labelMostComments.TabIndex = 74;
             this.labelMostComments.Text = "Most Comments:";
             // 
-            // buttonFetchPhotosLikes
+            // buttonFetchCommentsTheMost
             // 
-            this.buttonFetchPhotosLikes.BackColor = System.Drawing.Color.PeachPuff;
-            this.buttonFetchPhotosLikes.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonFetchPhotosLikes.ForeColor = System.Drawing.Color.Black;
-            this.buttonFetchPhotosLikes.Location = new System.Drawing.Point(33, 617);
-            this.buttonFetchPhotosLikes.Name = "buttonFetchPhotosLikes";
-            this.buttonFetchPhotosLikes.Size = new System.Drawing.Size(680, 44);
-            this.buttonFetchPhotosLikes.TabIndex = 73;
-            this.buttonFetchPhotosLikes.Text = "Fetch";
-            this.buttonFetchPhotosLikes.UseVisualStyleBackColor = false;
-            this.buttonFetchPhotosLikes.Click += new System.EventHandler(this.buttonFetchPhotosLikes_Click);
+            this.buttonFetchCommentsTheMost.BackColor = System.Drawing.Color.PeachPuff;
+            this.buttonFetchCommentsTheMost.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonFetchCommentsTheMost.ForeColor = System.Drawing.Color.Black;
+            this.buttonFetchCommentsTheMost.Location = new System.Drawing.Point(455, 631);
+            this.buttonFetchCommentsTheMost.Name = "buttonFetchCommentsTheMost";
+            this.buttonFetchCommentsTheMost.Size = new System.Drawing.Size(180, 30);
+            this.buttonFetchCommentsTheMost.TabIndex = 73;
+            this.buttonFetchCommentsTheMost.Text = "Fetch";
+            this.buttonFetchCommentsTheMost.UseVisualStyleBackColor = false;
+            this.buttonFetchCommentsTheMost.Click += new System.EventHandler(this.buttonFetchPhotosLikes_Click);
             // 
             // labelBestFriendLikes
             // 
             this.labelBestFriendLikes.AutoSize = true;
             this.labelBestFriendLikes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBestFriendLikes.Location = new System.Drawing.Point(28, 331);
+            this.labelBestFriendLikes.Location = new System.Drawing.Point(29, 362);
             this.labelBestFriendLikes.Name = "labelBestFriendLikes";
             this.labelBestFriendLikes.Size = new System.Drawing.Size(145, 20);
             this.labelBestFriendLikes.TabIndex = 81;
@@ -129,7 +132,7 @@ namespace BasicFacebookFeatures
             // 
             this.labelBestFriendComment.AutoSize = true;
             this.labelBestFriendComment.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBestFriendComment.Location = new System.Drawing.Point(408, 331);
+            this.labelBestFriendComment.Location = new System.Drawing.Point(409, 362);
             this.labelBestFriendComment.Name = "labelBestFriendComment";
             this.labelBestFriendComment.Size = new System.Drawing.Size(185, 20);
             this.labelBestFriendComment.TabIndex = 82;
@@ -159,7 +162,7 @@ namespace BasicFacebookFeatures
             // 
             this.pictureBoxBestFriendsComments.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxBestFriendsComments.Enabled = false;
-            this.pictureBoxBestFriendsComments.Location = new System.Drawing.Point(413, 354);
+            this.pictureBoxBestFriendsComments.Location = new System.Drawing.Point(413, 385);
             this.pictureBoxBestFriendsComments.Name = "pictureBoxBestFriendsComments";
             this.pictureBoxBestFriendsComments.Size = new System.Drawing.Size(280, 240);
             this.pictureBoxBestFriendsComments.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -170,7 +173,7 @@ namespace BasicFacebookFeatures
             // 
             this.pictureBoxBestFriendsLikes.BackColor = System.Drawing.Color.Transparent;
             this.pictureBoxBestFriendsLikes.Enabled = false;
-            this.pictureBoxBestFriendsLikes.Location = new System.Drawing.Point(33, 354);
+            this.pictureBoxBestFriendsLikes.Location = new System.Drawing.Point(32, 385);
             this.pictureBoxBestFriendsLikes.Name = "pictureBoxBestFriendsLikes";
             this.pictureBoxBestFriendsLikes.Size = new System.Drawing.Size(280, 240);
             this.pictureBoxBestFriendsLikes.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -200,6 +203,43 @@ namespace BasicFacebookFeatures
             this.pictureBoxMostLiked.TabStop = false;
             this.pictureBoxMostLiked.Click += new System.EventHandler(this.pictureBoxMostLiked_Click);
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.PeachPuff;
+            this.button1.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.Color.Black;
+            this.button1.Location = new System.Drawing.Point(76, 322);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(180, 30);
+            this.button1.TabIndex = 87;
+            this.button1.Text = "Fetch";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.PeachPuff;
+            this.button2.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.Black;
+            this.button2.Location = new System.Drawing.Point(455, 322);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(180, 30);
+            this.button2.TabIndex = 88;
+            this.button2.Text = "Fetch";
+            this.button2.UseVisualStyleBackColor = false;
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.PeachPuff;
+            this.button3.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.ForeColor = System.Drawing.Color.Black;
+            this.button3.Location = new System.Drawing.Point(76, 631);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(180, 30);
+            this.button3.TabIndex = 89;
+            this.button3.Text = "Fetch";
+            this.button3.UseVisualStyleBackColor = false;
+            // 
             // FormPhotosTracker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -208,6 +248,9 @@ namespace BasicFacebookFeatures
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(761, 673);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBoxBestFriendsComments);
@@ -221,7 +264,7 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.pictureBoxMostLiked);
             this.Controls.Add(this.labelMostLikedPhoto);
             this.Controls.Add(this.labelMostComments);
-            this.Controls.Add(this.buttonFetchPhotosLikes);
+            this.Controls.Add(this.buttonFetchCommentsTheMost);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "FormPhotosTracker";
@@ -246,12 +289,15 @@ namespace BasicFacebookFeatures
         private System.Windows.Forms.PictureBox pictureBoxMostLiked;
         private System.Windows.Forms.Label labelMostLikedPhoto;
         private System.Windows.Forms.Label labelMostComments;
-        private System.Windows.Forms.Button buttonFetchPhotosLikes;
+        private System.Windows.Forms.Button buttonFetchCommentsTheMost;
         private System.Windows.Forms.Label labelBestFriendLikes;
         private System.Windows.Forms.Label labelBestFriendComment;
         private System.Windows.Forms.PictureBox pictureBoxBestFriendsLikes;
         private System.Windows.Forms.PictureBox pictureBoxBestFriendsComments;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }

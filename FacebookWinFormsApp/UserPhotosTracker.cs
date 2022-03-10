@@ -9,10 +9,8 @@ namespace BasicFacebookFeatures
 {
     public class UserPhotosTracker
     {
-
         public FacebookObjectCollection<Album> AlbumsList { get; set; }
         public FacebookObjectCollection<User> FriendsList { get; set; }
-
         private readonly Dictionary<User, BestFriendsTracker> FriendsCommentsAndLikesDictionary;
         public int MostLikedPhoto { get; set; } = int.MinValue;
         public int MostCommentsPhoto { get; set; } = int.MinValue;
@@ -26,12 +24,16 @@ namespace BasicFacebookFeatures
             AlbumsList = i_UserAlbums;
             FriendsList = i_UserFriends;
             FriendsCommentsAndLikesDictionary = new Dictionary<User, BestFriendsTracker>(FriendsList.Count);
-            mostLikesAndCommentsCalculator();
-            setFriendsListNames();
-            foundLikesAndCommentsForUsers();
         }
 
-        private void mostLikesAndCommentsCalculator()
+        public void takeAllDetails()
+        {
+            MostLikesAndCommentsCalculator();
+            SetFriendsListNames();
+            FoundLikesAndCommentsForUsers();
+        }
+
+        public void MostLikesAndCommentsCalculator()
         {
             foreach (var album in AlbumsList)
             {
@@ -55,7 +57,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void foundLikesAndCommentsForUsers()
+        public void FoundLikesAndCommentsForUsers()
         {
             foreach (var album in AlbumsList)
             {
@@ -85,7 +87,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void setFriendsListNames()
+        public void SetFriendsListNames()
         {
             int index = 0;
 

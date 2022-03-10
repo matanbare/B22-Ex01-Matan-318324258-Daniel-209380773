@@ -19,22 +19,28 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             PhotosTracker = new UserPhotosTracker(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
+            PhotosTracker.MostLikesAndCommentsCalculator();
         }
 
         private void buttonFetchPhotosLikes_Click(object sender, EventArgs e)
         {
-            setTotalLikesAndComments();
-            setMostCommentsPicture();
-            setMostLikesPicture();
-            setBestFriendComments();
-            setBestFriendLikes();
+            setTotalComments();
+            //setMostCommentsPicture();
+            //setMostLikesPicture();
+            //setBestFriendComments();
+            //setBestFriendLikes();
         }
 
-        private void setTotalLikesAndComments()
+        private void setTotalComments()
+        {
+            //labelTotalLikes.Text = string.Format("Total Likes: {0}", PhotosTracker.TotalLikesPhoto);
+            labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosTracker.TotalCommentsPhoto);
+        }
+
+        private void setTotalLikes()
         {
             labelTotalLikes.Text = string.Format("Total Likes: {0}", PhotosTracker.TotalLikesPhoto);
-            labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosTracker.TotalCommentsPhoto);
-
+            //labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosTracker.TotalCommentsPhoto);
         }
 
         private void setMostCommentsPicture()
@@ -59,7 +65,7 @@ namespace BasicFacebookFeatures
 
         private void setBestFriendLikes()
         {
-            string name = PhotosTracker.BestFriendComments(out int numberOfLikes, out string profileImageUrl);
+            string name = PhotosTracker.BestFriendsLikes(out int numberOfLikes, out string profileImageUrl);
 
             labelBestFriendLikes.Text += $" {name} {numberOfLikes}";
             pictureBoxBestFriendsLikes.LoadAsync(profileImageUrl);
@@ -71,6 +77,11 @@ namespace BasicFacebookFeatures
 
         private void linkLabelMostLiked_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            setTotalLikes();
         }
     }
 }
