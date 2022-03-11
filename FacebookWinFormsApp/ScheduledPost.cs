@@ -73,7 +73,7 @@ namespace BasicFacebookFeatures
                     }
                     catch (FacebookApiException e)
                     {
-                        messageForUser = $" {e.ErrorType} + Error ";
+                        messageForUser = $"Error => Something went wrong please try again";
                     }
                 }
             }
@@ -90,15 +90,11 @@ namespace BasicFacebookFeatures
             ScheduledPostsList[index].IsPosted = true;
         }
 
-
-
         public int ConvertToMillisecond(string i_Minute, string i_Hours)
         {
             return k_HourToMillisecond * int.Parse(i_Hours) + k_MinuteToMillisecond * int.Parse(i_Minute);
         }
-    
-
-      
+        
         private bool textIsNotEmpty(string i_TextToPost)
         {
             return i_TextToPost != k_EmptyText;

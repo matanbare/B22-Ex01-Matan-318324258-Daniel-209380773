@@ -16,17 +16,15 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private const int k_StepsInProgressBar = 1;
-        private const int k_StepOneInProgressBar = 25;
-        private const int k_StepTwoInProgressBar = 50;
-        private const int k_StepThreeInProgressBar = 75;
+        private const int k_MinimumInterval = 20;
+        private const string k_CoverAlbumName = "Cover photos";
+        private const string k_ProgressBarMessageFirst = "In progress...";
+        private const string k_ProgressBarMessageLast = "Done!";
         private User LoggedInUser{ get; set; }
         private LoginResult LoginResult{ get; set; }
-        private UserProfile Profile { get; set; }
 
         private FormPhotosTracker m_FormPhotosTracker;
-
-
-
+        private FormSchedulePosts m_FormSchedulePosts;
         public FormMain()
         {
             InitializeComponent();
@@ -40,6 +38,7 @@ namespace BasicFacebookFeatures
             ApplicationSettings.Instance.LastWindowSize = this.Size;
             ApplicationSettings.Instance.LastWindowLocation = this.Location;
             ApplicationSettings.Instance.AutoLogin = this.checkBoxAutoLogin.Checked;
+
             ApplicationSettings.Instance.Save();
         }
 
@@ -69,8 +68,17 @@ namespace BasicFacebookFeatures
             if (string.IsNullOrEmpty(result.ErrorMessage))
             {
                 LoggedInUser = result.LoggedInUser;
+                buttonLogin.Text = $"Logged in as {LoggedInUser.Name}";
+                buttonLogin.Enabled = false;
+                enableButtons();
                 setProfileData();
             }
+        }
+
+        private void enableButtons()
+        {
+            buttonPhotosTracker.Enabled = true;
+            buttonStartTimerPost.Enabled = true;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -109,9 +117,11 @@ namespace BasicFacebookFeatures
 
                 buttonLogin.Text = $"Logged in as {LoginResult.LoggedInUser.Name}";
 
-                Profile = new UserProfile(LoggedInUser);
+                ApplicationSettings.Instance.AccessToken = LoginResult.AccessToken;
+              
                 setProfileData();
                 buttonLogin.Enabled = false;
+                enableButtons();
             }
             else
             {
@@ -122,22 +132,9 @@ namespace BasicFacebookFeatures
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             FacebookService.LogoutWithUI();
-            buttonLogin.Text = "LoginResult";
-        }
-
-        private void setProfileData()
-        {
-            pictureBoxProfileImage.LoadAsync(Profile.ProfileImageUrl);
-            pictureBoxCoverPhoto.LoadAsync(Profile.CoverImageUrl);
-            labelBirthday.Text += Profile.Bio.Birthday;
-            labelGender.Text += Profile.Bio.Gender;
-            labelFrom.Text += Profile.Bio.From;
-            labelFriends.Text = $"Friends:{Profile.FriendsCount}";
-
-            foreach (var item in Profile.GetUserFriendsName())
-            {
-                listBoxFriends.Items.Add(item);
-            }
+            checkBoxAutoLogin.Checked = false;
+            buttonLogin.Text = "Login";
+            buttonLogin.Enabled = true;
         }
 
         private void listBoxFriends_Click(object sender, EventArgs e)
@@ -146,55 +143,82 @@ namespace BasicFacebookFeatures
             {
                 if (friend.Name.Equals(listBoxFriends.SelectedItem))
                 {
-                    pictureBoxFriendProfileImg.LoadAsync(Profile.GetFriendProfileImageUrl((string)(listBoxFriends.SelectedItem)));
+                    pictureBoxFriendProfileImg.LoadAsync(friend.PictureLargeURL);
                 }
             }
         }
 
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
         {
-            FormSchedulePosts formSchedulePosts = new FormSchedulePosts(LoggedInUser);
-
-            formSchedulePosts.Show();
+            setNewProgressBarLoading(labelTimerPost, timerProgressBarPost, progressBarTimerPost);
+            m_FormSchedulePosts = new FormSchedulePosts(LoggedInUser);
         }
 
         private void buttonPhotosTracker_Click(object sender, EventArgs e)
         {
-            timerProgressBar.Start();
-
+            setNewProgressBarLoading(labelPhotosTracker, timerProgressBarPhotoTracker, progressBarPhotoTracker);
             m_FormPhotosTracker = new FormPhotosTracker(LoggedInUser);
         }
 
         private void timerProgressBar_Tick(object sender, EventArgs e)
         {
-            progressBarSteps();
+            progressBarStartLoading(labelPhotosTracker, timerProgressBarPhotoTracker, progressBarPhotoTracker, m_FormPhotosTracker);
         }
 
-        private void progressBarSteps()
+        private void timerProgressBarPost_Tick(object sender, EventArgs e)
         {
-            progressBar.Increment(k_StepsInProgressBar);
-            labelProgressBar.BackColor = progressBar.BackColor;
+            progressBarStartLoading(labelTimerPost, timerProgressBarPost, progressBarTimerPost, m_FormSchedulePosts);
+        }
 
-            if (progressBar.Value > k_StepsInProgressBar && progressBar.Value <= k_StepOneInProgressBar)
+        private void progressBarStartLoading(Label i_Label, System.Windows.Forms.Timer i_Timer, ProgressBar i_ProgressBar, Form i_Form)
+        {
+            i_ProgressBar.Increment(k_StepsInProgressBar);
+            i_Label.Text = $"{i_ProgressBar.Value}%";
+
+            if (i_ProgressBar.Value == i_ProgressBar.Maximum)
             {
-                labelProgressBar.Text = $"In progress...";
+                i_Label.Text = k_ProgressBarMessageLast;
+                i_Timer.Enabled = false;
+                i_Timer.Interval = k_MinimumInterval;
+                i_Form.Show();
             }
-            else if(progressBar.Value > k_StepOneInProgressBar && progressBar.Value <= k_StepTwoInProgressBar)
+        }
+
+        private void setNewProgressBarLoading(Label i_Label, System.Windows.Forms.Timer i_Timer,
+            ProgressBar i_ProgressBar)
+        {
+            i_Label.Text = k_ProgressBarMessageFirst;
+            i_ProgressBar.Value = 0;
+            i_Timer.Start();
+        }
+
+        private string getCoverPhoto()
+        {
+            string coverImageUrl = null;
+
+            foreach (var album in LoggedInUser.Albums)
             {
-                labelProgressBar.Text = $"Load images, likes and comments...";
+                if (album.Name.Equals(k_CoverAlbumName))
+                {
+                    coverImageUrl = album.PictureAlbumURL;
+                }
             }
-            else if (progressBar.Value > k_StepTwoInProgressBar && progressBar.Value <= k_StepThreeInProgressBar)
+
+            return coverImageUrl;
+        }
+
+        private void setProfileData()
+        {
+            pictureBoxProfileImage.LoadAsync(LoggedInUser.PictureLargeURL);
+            pictureBoxCoverPhoto.LoadAsync(getCoverPhoto());
+            labelBirthday.Text += LoggedInUser.Birthday;
+            labelGender.Text += LoggedInUser.Gender;
+            labelFrom.Text += LoggedInUser.Location.Name;
+            labelFriends.Text = $"Friends:{LoggedInUser.Friends.Count}";
+
+            foreach (var friend in LoggedInUser.Friends)
             {
-                labelProgressBar.Text = $"We passed the half, be patient.";
-            }
-            else if (progressBar.Value > k_StepThreeInProgressBar && progressBar.Value < progressBar.Maximum)
-            {
-                labelProgressBar.Text = $"Almost there...";
-            }
-            else if (progressBar.Value == progressBar.Maximum)
-            {
-                labelProgressBar.Text = $"Done!";
-                m_FormPhotosTracker.Show();
+                listBoxFriends.Items.Add(friend.Name);
             }
         }
     }

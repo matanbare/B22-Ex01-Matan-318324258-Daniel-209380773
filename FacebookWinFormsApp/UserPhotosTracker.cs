@@ -24,6 +24,7 @@ namespace BasicFacebookFeatures
             AlbumsList = i_UserAlbums;
             FriendsList = i_UserFriends;
             FriendsCommentsAndLikesDictionary = new Dictionary<User, BestFriendsTracker>(FriendsList.Count);
+            takeAllDetails();
         }
 
         public void takeAllDetails()
@@ -65,7 +66,6 @@ namespace BasicFacebookFeatures
                 {
                     FacebookObjectCollection<User> photoLikedByList = photo.LikedBy;
                     FacebookObjectCollection<Comment> photoCommentsByList = photo.Comments;
-
 
                     foreach (var user in photoLikedByList)
                     {

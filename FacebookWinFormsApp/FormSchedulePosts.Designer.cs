@@ -30,6 +30,7 @@ namespace BasicFacebookFeatures
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSchedulePosts));
             this.textBoxPost = new System.Windows.Forms.TextBox();
             this.buttonPost = new System.Windows.Forms.Button();
             this.comboBoxGroupToPost = new System.Windows.Forms.ComboBox();
@@ -53,20 +54,23 @@ namespace BasicFacebookFeatures
             // 
             // textBoxPost
             // 
+            this.textBoxPost.BackColor = System.Drawing.Color.LightGray;
             this.textBoxPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxPost.Location = new System.Drawing.Point(28, 135);
+            this.textBoxPost.Location = new System.Drawing.Point(47, 208);
+            this.textBoxPost.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxPost.Multiline = true;
             this.textBoxPost.Name = "textBoxPost";
-            this.textBoxPost.Size = new System.Drawing.Size(449, 165);
+            this.textBoxPost.Size = new System.Drawing.Size(746, 252);
             this.textBoxPost.TabIndex = 0;
             // 
             // buttonPost
             // 
             this.buttonPost.BackColor = System.Drawing.Color.PaleGreen;
             this.buttonPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonPost.Location = new System.Drawing.Point(29, 382);
+            this.buttonPost.Location = new System.Drawing.Point(48, 588);
+            this.buttonPost.Margin = new System.Windows.Forms.Padding(5);
             this.buttonPost.Name = "buttonPost";
-            this.buttonPost.Size = new System.Drawing.Size(448, 49);
+            this.buttonPost.Size = new System.Drawing.Size(747, 75);
             this.buttonPost.TabIndex = 1;
             this.buttonPost.Text = "Post";
             this.buttonPost.UseVisualStyleBackColor = false;
@@ -74,42 +78,51 @@ namespace BasicFacebookFeatures
             // 
             // comboBoxGroupToPost
             // 
+            this.comboBoxGroupToPost.BackColor = System.Drawing.Color.LightGray;
             this.comboBoxGroupToPost.FormattingEnabled = true;
-            this.comboBoxGroupToPost.Location = new System.Drawing.Point(28, 343);
+            this.comboBoxGroupToPost.Location = new System.Drawing.Point(47, 528);
+            this.comboBoxGroupToPost.Margin = new System.Windows.Forms.Padding(5);
             this.comboBoxGroupToPost.Name = "comboBoxGroupToPost";
-            this.comboBoxGroupToPost.Size = new System.Drawing.Size(170, 21);
+            this.comboBoxGroupToPost.Size = new System.Drawing.Size(281, 28);
             this.comboBoxGroupToPost.TabIndex = 2;
             this.comboBoxGroupToPost.Tag = "";
             // 
             // numericUpDownMinute
             // 
-            this.numericUpDownMinute.Location = new System.Drawing.Point(355, 343);
+            this.numericUpDownMinute.BackColor = System.Drawing.Color.LightGray;
+            this.numericUpDownMinute.Location = new System.Drawing.Point(592, 528);
+            this.numericUpDownMinute.Margin = new System.Windows.Forms.Padding(5);
             this.numericUpDownMinute.Maximum = new decimal(new int[] {
             59,
             0,
             0,
             0});
             this.numericUpDownMinute.Name = "numericUpDownMinute";
-            this.numericUpDownMinute.Size = new System.Drawing.Size(121, 20);
+            this.numericUpDownMinute.Size = new System.Drawing.Size(202, 26);
             this.numericUpDownMinute.TabIndex = 4;
             // 
             // numericUpDownHours
             // 
-            this.numericUpDownHours.Location = new System.Drawing.Point(210, 343);
+            this.numericUpDownHours.BackColor = System.Drawing.Color.LightGray;
+            this.numericUpDownHours.Location = new System.Drawing.Point(350, 528);
+            this.numericUpDownHours.Margin = new System.Windows.Forms.Padding(5);
             this.numericUpDownHours.Maximum = new decimal(new int[] {
             23,
             0,
             0,
             0});
             this.numericUpDownHours.Name = "numericUpDownHours";
-            this.numericUpDownHours.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDownHours.Size = new System.Drawing.Size(200, 26);
             this.numericUpDownHours.TabIndex = 5;
             // 
             // labelGroupsNames
             // 
             this.labelGroupsNames.AutoSize = true;
+            this.labelGroupsNames.BackColor = System.Drawing.Color.Transparent;
             this.labelGroupsNames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGroupsNames.Location = new System.Drawing.Point(24, 320);
+            this.labelGroupsNames.ForeColor = System.Drawing.Color.White;
+            this.labelGroupsNames.Location = new System.Drawing.Point(40, 492);
+            this.labelGroupsNames.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelGroupsNames.Name = "labelGroupsNames";
             this.labelGroupsNames.Size = new System.Drawing.Size(73, 20);
             this.labelGroupsNames.TabIndex = 6;
@@ -118,8 +131,11 @@ namespace BasicFacebookFeatures
             // labelHours
             // 
             this.labelHours.AutoSize = true;
+            this.labelHours.BackColor = System.Drawing.Color.Transparent;
             this.labelHours.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelHours.Location = new System.Drawing.Point(206, 320);
+            this.labelHours.ForeColor = System.Drawing.Color.White;
+            this.labelHours.Location = new System.Drawing.Point(343, 492);
+            this.labelHours.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelHours.Name = "labelHours";
             this.labelHours.Size = new System.Drawing.Size(62, 20);
             this.labelHours.TabIndex = 7;
@@ -128,8 +144,11 @@ namespace BasicFacebookFeatures
             // labelMinutes
             // 
             this.labelMinutes.AutoSize = true;
+            this.labelMinutes.BackColor = System.Drawing.Color.Transparent;
             this.labelMinutes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelMinutes.Location = new System.Drawing.Point(351, 320);
+            this.labelMinutes.ForeColor = System.Drawing.Color.White;
+            this.labelMinutes.Location = new System.Drawing.Point(585, 492);
+            this.labelMinutes.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelMinutes.Name = "labelMinutes";
             this.labelMinutes.Size = new System.Drawing.Size(77, 20);
             this.labelMinutes.TabIndex = 8;
@@ -138,8 +157,11 @@ namespace BasicFacebookFeatures
             // labelPost
             // 
             this.labelPost.AutoSize = true;
+            this.labelPost.BackColor = System.Drawing.Color.Transparent;
             this.labelPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPost.Location = new System.Drawing.Point(25, 102);
+            this.labelPost.ForeColor = System.Drawing.Color.White;
+            this.labelPost.Location = new System.Drawing.Point(43, 172);
+            this.labelPost.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelPost.Name = "labelPost";
             this.labelPost.Size = new System.Drawing.Size(114, 20);
             this.labelPost.TabIndex = 9;
@@ -148,8 +170,11 @@ namespace BasicFacebookFeatures
             // labelPostName
             // 
             this.labelPostName.AutoSize = true;
+            this.labelPostName.BackColor = System.Drawing.Color.Transparent;
             this.labelPostName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPostName.Location = new System.Drawing.Point(25, 32);
+            this.labelPostName.ForeColor = System.Drawing.Color.White;
+            this.labelPostName.Location = new System.Drawing.Point(40, 97);
+            this.labelPostName.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.labelPostName.Name = "labelPostName";
             this.labelPostName.Size = new System.Drawing.Size(101, 20);
             this.labelPostName.TabIndex = 10;
@@ -157,41 +182,49 @@ namespace BasicFacebookFeatures
             // 
             // textBoxPostName
             // 
-            this.textBoxPostName.Location = new System.Drawing.Point(25, 69);
+            this.textBoxPostName.BackColor = System.Drawing.Color.LightGray;
+            this.textBoxPostName.Location = new System.Drawing.Point(42, 132);
+            this.textBoxPostName.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxPostName.Name = "textBoxPostName";
-            this.textBoxPostName.Size = new System.Drawing.Size(173, 20);
+            this.textBoxPostName.Size = new System.Drawing.Size(286, 26);
             this.textBoxPostName.TabIndex = 11;
             // 
             // listBoxFuture
             // 
-            this.listBoxFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxFuture.BackColor = System.Drawing.Color.LightGray;
+            this.listBoxFuture.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxFuture.ForeColor = System.Drawing.Color.Red;
             this.listBoxFuture.FormattingEnabled = true;
-            this.listBoxFuture.ItemHeight = 15;
-            this.listBoxFuture.Location = new System.Drawing.Point(513, 135);
+            this.listBoxFuture.ItemHeight = 16;
+            this.listBoxFuture.Location = new System.Drawing.Point(855, 208);
+            this.listBoxFuture.Margin = new System.Windows.Forms.Padding(5);
             this.listBoxFuture.Name = "listBoxFuture";
             this.listBoxFuture.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.listBoxFuture.Size = new System.Drawing.Size(275, 94);
+            this.listBoxFuture.Size = new System.Drawing.Size(456, 132);
             this.listBoxFuture.TabIndex = 12;
             // 
             // listBoxPostedDone
             // 
-            this.listBoxPostedDone.BackColor = System.Drawing.SystemColors.Window;
-            this.listBoxPostedDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxPostedDone.BackColor = System.Drawing.Color.LightGray;
+            this.listBoxPostedDone.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxPostedDone.ForeColor = System.Drawing.Color.Green;
             this.listBoxPostedDone.FormattingEnabled = true;
-            this.listBoxPostedDone.ItemHeight = 15;
-            this.listBoxPostedDone.Location = new System.Drawing.Point(513, 288);
+            this.listBoxPostedDone.ItemHeight = 16;
+            this.listBoxPostedDone.Location = new System.Drawing.Point(855, 443);
+            this.listBoxPostedDone.Margin = new System.Windows.Forms.Padding(5);
             this.listBoxPostedDone.Name = "listBoxPostedDone";
             this.listBoxPostedDone.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.listBoxPostedDone.Size = new System.Drawing.Size(275, 94);
+            this.listBoxPostedDone.Size = new System.Drawing.Size(456, 132);
             this.listBoxPostedDone.TabIndex = 13;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(509, 102);
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(848, 157);
+            this.label1.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 20);
             this.label1.TabIndex = 14;
@@ -200,10 +233,11 @@ namespace BasicFacebookFeatures
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label2.Location = new System.Drawing.Point(509, 255);
+            this.label2.ForeColor = System.Drawing.Color.White;
+            this.label2.Location = new System.Drawing.Point(848, 392);
+            this.label2.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(70, 20);
             this.label2.TabIndex = 15;
@@ -213,9 +247,10 @@ namespace BasicFacebookFeatures
             // 
             this.buttonRefreshPosts.BackColor = System.Drawing.Color.Orange;
             this.buttonRefreshPosts.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRefreshPosts.Location = new System.Drawing.Point(513, 390);
+            this.buttonRefreshPosts.Location = new System.Drawing.Point(855, 600);
+            this.buttonRefreshPosts.Margin = new System.Windows.Forms.Padding(5);
             this.buttonRefreshPosts.Name = "buttonRefreshPosts";
-            this.buttonRefreshPosts.Size = new System.Drawing.Size(275, 41);
+            this.buttonRefreshPosts.Size = new System.Drawing.Size(458, 63);
             this.buttonRefreshPosts.TabIndex = 16;
             this.buttonRefreshPosts.Text = "Refresh";
             this.buttonRefreshPosts.UseVisualStyleBackColor = false;
@@ -223,12 +258,12 @@ namespace BasicFacebookFeatures
             // 
             // FormSchedulePosts
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.BackgroundTimerPosts;
+            this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.schedularPostsBackground;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(800, 449);
+            this.ClientSize = new System.Drawing.Size(1333, 691);
             this.Controls.Add(this.buttonRefreshPosts);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -246,13 +281,15 @@ namespace BasicFacebookFeatures
             this.Controls.Add(this.buttonPost);
             this.Controls.Add(this.textBoxPost);
             this.DoubleBuffered = true;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormSchedulePosts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormSchedulePosts";
+            this.Text = "Schedule Posts";
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
             this.ResumeLayout(false);

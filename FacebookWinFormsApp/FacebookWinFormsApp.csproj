@@ -91,12 +91,6 @@
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
     <Compile Include="BestFriendsTracker.cs" />
-    <Compile Include="FormLogIn.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormLogIn.Designer.cs">
-      <DependentUpon>FormLogIn.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormPhotosTracker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -119,12 +113,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScheduledPost.cs" />
-    <Compile Include="UserBio.cs" />
     <Compile Include="UserPhotosTracker.cs" />
-    <Compile Include="UserProfile.cs" />
-    <EmbeddedResource Include="FormLogIn.resx">
-      <DependentUpon>FormLogIn.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FormPhotosTracker.resx">
       <DependentUpon>FormPhotosTracker.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +161,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\facebookPlusBsckGround.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\schedularPostsBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\facebookBackgroundApp1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photoTrackerBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photoTrackerBackground1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

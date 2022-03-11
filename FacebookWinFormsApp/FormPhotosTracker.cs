@@ -20,15 +20,12 @@ namespace BasicFacebookFeatures
             InitializeComponent();
             PhotosTracker = new UserPhotosTracker(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
             PhotosTracker.MostLikesAndCommentsCalculator();
-        }
-
-        private void buttonFetchPhotosLikes_Click(object sender, EventArgs e)
-        {
             setTotalComments();
-            //setMostCommentsPicture();
-            //setMostLikesPicture();
-            //setBestFriendComments();
-            //setBestFriendLikes();
+            setTotalLikes();
+            setMostCommentsPicture();
+            setMostLikesPicture();
+            setBestFriendComments();
+            setBestFriendLikes();
         }
 
         private void setTotalComments()
@@ -71,17 +68,5 @@ namespace BasicFacebookFeatures
             pictureBoxBestFriendsLikes.LoadAsync(profileImageUrl);
         }
 
-        private void pictureBoxMostLiked_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void linkLabelMostLiked_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            setTotalLikes();
-        }
     }
 }
