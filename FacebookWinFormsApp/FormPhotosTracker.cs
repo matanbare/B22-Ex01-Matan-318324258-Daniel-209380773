@@ -13,13 +13,13 @@ namespace BasicFacebookFeatures
 {
     public partial class FormPhotosTracker : Form
     {
-        public UserPhotosTracker PhotosTracker { get; set; }
+        public UserPhotosDetails PhotosDetails { get; set; }
 
         public FormPhotosTracker(User i_LoggedInUser)
         {
             InitializeComponent();
-            PhotosTracker = new UserPhotosTracker(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
-            PhotosTracker.MostLikesAndCommentsCalculator();
+            PhotosDetails = new UserPhotosDetails(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
+
             setTotalComments();
             setTotalLikes();
             setMostCommentsPicture();
@@ -30,31 +30,31 @@ namespace BasicFacebookFeatures
 
         private void setTotalComments()
         {
-            //labelTotalLikes.Text = string.Format("Total Likes: {0}", PhotosTracker.TotalLikesPhoto);
-            labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosTracker.TotalCommentsPhoto);
+            labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosDetails.TotalCommentsPhoto);
         }
 
         private void setTotalLikes()
         {
-            labelTotalLikes.Text = string.Format("Total Likes: {0}", PhotosTracker.TotalLikesPhoto);
-            //labelTotalComments.Text = string.Format("Total Comments: {0}", PhotosTracker.TotalCommentsPhoto);
+            labelTotalLikes.Text = string.Format("Total Likes: {0}", PhotosDetails.TotalLikesPhoto);
         }
 
         private void setMostCommentsPicture()
         {
-            pictureBoxMostComments.LoadAsync(PhotosTracker.MostCommentsPhotoUrl);
+            pictureBoxMostComments.LoadAsync(PhotosDetails.MostCommentsPhotoUrl);
             pictureBoxMostComments.Enabled = true;
+            labelMostComments.Text += PhotosDetails.MostCommentsPhoto;
         }
 
         private void setMostLikesPicture()
         {
-            pictureBoxMostLiked.LoadAsync(PhotosTracker.MostLikedPhotoUrl);
+            pictureBoxMostLiked.LoadAsync(PhotosDetails.MostLikedPhotoUrl);
             pictureBoxMostLiked.Enabled = true;
+            labelMostLikedPhoto.Text += PhotosDetails.MostLikedPhoto;
         }
 
         private void setBestFriendComments()
         {
-            string name = PhotosTracker.BestFriendComments(out int numberOfComments, out string profileImageUrl);
+            string name = PhotosDetails.BestFriendComments(out int numberOfComments, out string profileImageUrl);
 
             labelBestFriendComment.Text += $" {name} {numberOfComments}";
             pictureBoxBestFriendsComments.LoadAsync(profileImageUrl);
@@ -62,11 +62,10 @@ namespace BasicFacebookFeatures
 
         private void setBestFriendLikes()
         {
-            string name = PhotosTracker.BestFriendsLikes(out int numberOfLikes, out string profileImageUrl);
+            string name = PhotosDetails.BestFriendsLikes(out int numberOfLikes, out string profileImageUrl);
 
             labelBestFriendLikes.Text += $" {name} {numberOfLikes}";
             pictureBoxBestFriendsLikes.LoadAsync(profileImageUrl);
         }
-
     }
 }

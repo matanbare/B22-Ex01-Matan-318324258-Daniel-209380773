@@ -52,10 +52,14 @@
             this.progressBarTimerPost = new System.Windows.Forms.ProgressBar();
             this.timerProgressBarPost = new System.Windows.Forms.Timer(this.components);
             this.labelTimerPost = new System.Windows.Forms.Label();
+            this.listBoxLikedPages = new System.Windows.Forms.ListBox();
+            this.labelLakdePages = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
             this.panelBio.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxCoverPhoto
@@ -155,7 +159,7 @@
             this.panelBio.Location = new System.Drawing.Point(504, 574);
             this.panelBio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelBio.Name = "panelBio";
-            this.panelBio.Size = new System.Drawing.Size(382, 124);
+            this.panelBio.Size = new System.Drawing.Size(382, 136);
             this.panelBio.TabIndex = 67;
             // 
             // labelBirthday
@@ -209,10 +213,10 @@
             // 
             this.buttonStartTimerPost.BackColor = System.Drawing.Color.LightGray;
             this.buttonStartTimerPost.Enabled = false;
-            this.buttonStartTimerPost.Location = new System.Drawing.Point(99, 732);
+            this.buttonStartTimerPost.Location = new System.Drawing.Point(99, 749);
             this.buttonStartTimerPost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonStartTimerPost.Name = "buttonStartTimerPost";
-            this.buttonStartTimerPost.Size = new System.Drawing.Size(263, 66);
+            this.buttonStartTimerPost.Size = new System.Drawing.Size(257, 75);
             this.buttonStartTimerPost.TabIndex = 70;
             this.buttonStartTimerPost.Text = "Timer Post";
             this.buttonStartTimerPost.UseVisualStyleBackColor = false;
@@ -245,7 +249,7 @@
             // progressBarPhotoTracker
             // 
             this.progressBarPhotoTracker.BackColor = System.Drawing.Color.White;
-            this.progressBarPhotoTracker.Location = new System.Drawing.Point(96, 658);
+            this.progressBarPhotoTracker.Location = new System.Drawing.Point(96, 669);
             this.progressBarPhotoTracker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBarPhotoTracker.Name = "progressBarPhotoTracker";
             this.progressBarPhotoTracker.Size = new System.Drawing.Size(260, 39);
@@ -253,7 +257,7 @@
             // 
             // timerProgressBarPhotoTracker
             // 
-            this.timerProgressBarPhotoTracker.Interval = 250;
+            this.timerProgressBarPhotoTracker.Interval = 50;
             this.timerProgressBarPhotoTracker.Tick += new System.EventHandler(this.timerProgressBar_Tick);
             // 
             // labelPhotosTracker
@@ -284,10 +288,10 @@
             // progressBarTimerPost
             // 
             this.progressBarTimerPost.BackColor = System.Drawing.Color.White;
-            this.progressBarTimerPost.Location = new System.Drawing.Point(99, 808);
+            this.progressBarTimerPost.Location = new System.Drawing.Point(93, 850);
             this.progressBarTimerPost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBarTimerPost.Name = "progressBarTimerPost";
-            this.progressBarTimerPost.Size = new System.Drawing.Size(263, 39);
+            this.progressBarTimerPost.Size = new System.Drawing.Size(260, 39);
             this.progressBarTimerPost.TabIndex = 76;
             // 
             // timerProgressBarPost
@@ -306,6 +310,44 @@
             this.labelTimerPost.Size = new System.Drawing.Size(0, 24);
             this.labelTimerPost.TabIndex = 77;
             // 
+            // listBoxLikedPages
+            // 
+            this.listBoxLikedPages.BackColor = System.Drawing.Color.LightGray;
+            this.listBoxLikedPages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxLikedPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxLikedPages.FormattingEnabled = true;
+            this.listBoxLikedPages.ItemHeight = 20;
+            this.listBoxLikedPages.Location = new System.Drawing.Point(504, 749);
+            this.listBoxLikedPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.listBoxLikedPages.Name = "listBoxLikedPages";
+            this.listBoxLikedPages.Size = new System.Drawing.Size(382, 142);
+            this.listBoxLikedPages.TabIndex = 78;
+            this.listBoxLikedPages.Click += new System.EventHandler(this.listBoxLikedPages_Click);
+            // 
+            // labelLakdePages
+            // 
+            this.labelLakdePages.AutoSize = true;
+            this.labelLakdePages.BackColor = System.Drawing.Color.Transparent;
+            this.labelLakdePages.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLakdePages.ForeColor = System.Drawing.Color.White;
+            this.labelLakdePages.Location = new System.Drawing.Point(501, 715);
+            this.labelLakdePages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelLakdePages.Name = "labelLakdePages";
+            this.labelLakdePages.Size = new System.Drawing.Size(165, 29);
+            this.labelLakdePages.TabIndex = 79;
+            this.labelLakdePages.Text = "Liked Pages:";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBox1.Location = new System.Drawing.Point(763, 808);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(125, 123);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 80;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormMain
             // 
             this.AcceptButton = this.buttonLogin;
@@ -315,6 +357,9 @@
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1403, 1011);
+            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.labelLakdePages);
+            this.Controls.Add(this.listBoxLikedPages);
             this.Controls.Add(this.labelTimerPost);
             this.Controls.Add(this.progressBarTimerPost);
             this.Controls.Add(this.checkBoxAutoLogin);
@@ -346,6 +391,7 @@
             this.panelBio.ResumeLayout(false);
             this.panelBio.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -374,6 +420,9 @@
         private System.Windows.Forms.ProgressBar progressBarTimerPost;
         private System.Windows.Forms.Timer timerProgressBarPost;
         private System.Windows.Forms.Label labelTimerPost;
+        private System.Windows.Forms.ListBox listBoxLikedPages;
+        private System.Windows.Forms.Label labelLakdePages;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

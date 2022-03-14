@@ -254,6 +254,7 @@ namespace BasicFacebookFeatures
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(1048, 747);
             this.Name = "FormPhotosTracker";
             this.Text = "Photos Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

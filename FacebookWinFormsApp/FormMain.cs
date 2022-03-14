@@ -34,11 +34,11 @@ namespace BasicFacebookFeatures
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
+
             ApplicationSettings.Instance.LastWindowState = this.WindowState;
             ApplicationSettings.Instance.LastWindowSize = this.Size;
             ApplicationSettings.Instance.LastWindowLocation = this.Location;
             ApplicationSettings.Instance.AutoLogin = this.checkBoxAutoLogin.Checked;
-
             ApplicationSettings.Instance.Save();
         }
 
@@ -72,6 +72,7 @@ namespace BasicFacebookFeatures
                 buttonLogin.Enabled = false;
                 enableButtons();
                 setProfileData();
+                setLikedPages();
             }
         }
 
@@ -120,6 +121,7 @@ namespace BasicFacebookFeatures
                 ApplicationSettings.Instance.AccessToken = LoginResult.AccessToken;
               
                 setProfileData();
+                
                 buttonLogin.Enabled = false;
                 enableButtons();
             }
@@ -135,17 +137,6 @@ namespace BasicFacebookFeatures
             checkBoxAutoLogin.Checked = false;
             buttonLogin.Text = "Login";
             buttonLogin.Enabled = true;
-        }
-
-        private void listBoxFriends_Click(object sender, EventArgs e)
-        {
-            foreach (var friend in LoggedInUser.Friends)
-            {
-                if (friend.Name.Equals(listBoxFriends.SelectedItem))
-                {
-                    pictureBoxFriendProfileImg.LoadAsync(friend.PictureLargeURL);
-                }
-            }
         }
 
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
@@ -221,5 +212,49 @@ namespace BasicFacebookFeatures
                 listBoxFriends.Items.Add(friend.Name);
             }
         }
+
+        private void setLikedPages()
+        {
+            foreach (var page in LoggedInUser.LikedPages)
+            {
+                listBoxLikedPages.Items.Add(page.Name);
+            }
+        }
+
+        private void listBoxLikedPages_Click(object sender, EventArgs e)
+        {
+            foreach (var page in LoggedInUser.LikedPages)
+            {
+                if (page.Name.Equals(listBoxLikedPages.SelectedItem))
+                {
+                    pictureBox1.LoadAsync(page.PictureURL);
+                    break;
+                }
+            }
+        }
+
+        private void listBoxFriends_Click(object sender, EventArgs e)
+        {
+            foreach (var friend in LoggedInUser.Friends)
+            {
+                if (friend.Name.Equals(listBoxFriends.SelectedItem))
+                {
+                    pictureBoxFriendProfileImg.LoadAsync(friend.PictureLargeURL);
+                    break;
+                }
+            }
+        }
+
+        //private void updatePhotoToListBox<T>(FacebookObjectCollection<T> i_LoggedInUser, ListBox i_ListBox, PictureBox i_PictureBox, string i_Name)
+        //{
+        //    foreach (var selectedItem in i_LoggedInUser)
+        //    {
+        //        if (i_Name.Equals(listBoxFriends.SelectedItem))
+        //        {
+        //            pictureBoxFriendProfileImg.LoadAsync(selectedItem.PictureLargeURL);
+        //            break;
+        //        }
+        //    }
+        //}
     }
 }
