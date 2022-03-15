@@ -9,17 +9,18 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    class ScheduledPost
+    public class ScheduledPost
     {
         private const int k_HourToMillisecond = 3600000;
         private const int k_MinuteToMillisecond = 60000;
         private const string k_Unknown = "*UNKNOWN*";
         private const string k_EmptyText = "";
-        private static int couterTimers = 0;
-        public List<PostBySchedule> ScheduledPostsList { get; } = new List<PostBySchedule>();
-        public FacebookObjectCollection<Group> UserGroups { get; set; }
+        
+        private static int s_CounterTimers = 0;
 
-       
+        public List<PostBySchedule> ScheduledPostsList { get; } = new List<PostBySchedule>();
+
+        public FacebookObjectCollection<Group> UserGroups { get; set; }
 
         public ScheduledPost(User i_LoggedInUser)
         {
@@ -46,7 +47,7 @@ namespace BasicFacebookFeatures
                 newPostToPublish.TimerToPost.Interval = 
                     newPostToPublish.TimeToPostInMillisecond > 0 ? newPostToPublish.TimeToPostInMillisecond : 1000;
                 newPostToPublish.TimerToPost.Enabled = true;
-                newPostToPublish.TimerToPost.Tag = couterTimers++;
+                newPostToPublish.TimerToPost.Tag = s_CounterTimers++;
                 ScheduledPostsList.Add(newPostToPublish);
             }
             else
@@ -71,19 +72,19 @@ namespace BasicFacebookFeatures
                         group.PostToWall(i_TextToPost);
                         messageForUser = $" ***Publish Succeeded*** ";
                     }
-                    catch (FacebookApiException e)
+                    catch (FacebookApiException)
                     {
                         messageForUser = $"Error => Something went wrong please try again";
                     }
                 }
             }
+
             MessageBox.Show(messageForUser);
         }
 
         private void TimerToPost_Tick(object sender, EventArgs e)
         {
             int index = (int)(sender as Timer).Tag;
-
 
             (sender as Timer).Enabled = false;
             postNow(ScheduledPostsList[index].GroupName, ScheduledPostsList[index].PostText);
@@ -92,7 +93,7 @@ namespace BasicFacebookFeatures
 
         public int ConvertToMillisecond(string i_Minute, string i_Hours)
         {
-            return k_HourToMillisecond * int.Parse(i_Hours) + k_MinuteToMillisecond * int.Parse(i_Minute);
+            return (k_HourToMillisecond * int.Parse(i_Hours)) + (k_MinuteToMillisecond * int.Parse(i_Minute));
         }
         
         private bool textIsNotEmpty(string i_TextToPost)

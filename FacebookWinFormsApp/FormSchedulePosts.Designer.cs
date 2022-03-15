@@ -80,6 +80,8 @@ namespace BasicFacebookFeatures
             // 
             this.comboBoxGroupToPost.BackColor = System.Drawing.Color.LightGray;
             this.comboBoxGroupToPost.FormattingEnabled = true;
+            this.comboBoxGroupToPost.Items.AddRange(new object[] {
+            "None"});
             this.comboBoxGroupToPost.Location = new System.Drawing.Point(47, 528);
             this.comboBoxGroupToPost.Margin = new System.Windows.Forms.Padding(5);
             this.comboBoxGroupToPost.Name = "comboBoxGroupToPost";
@@ -290,6 +292,7 @@ namespace BasicFacebookFeatures
             this.Name = "FormSchedulePosts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Schedule Posts";
+            this.Load += new System.EventHandler(this.FormSchedulePosts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
             this.ResumeLayout(false);

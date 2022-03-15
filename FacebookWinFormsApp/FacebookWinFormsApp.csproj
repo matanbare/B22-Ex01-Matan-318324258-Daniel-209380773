@@ -90,7 +90,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationSettings.cs" />
-    <Compile Include="BestFriendsTracker.cs" />
+    <Compile Include="FacebookPlusLogic\BestFriendsTracker.cs" />
+    <Compile Include="ENums\ETotalCount.cs" />
     <Compile Include="FormPhotosTracker.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -109,11 +110,11 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="PostBySchedule.cs" />
+    <Compile Include="FacebookPlusLogic\PostBySchedule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ScheduledPost.cs" />
-    <Compile Include="UserPhotosDetails.cs" />
+    <Compile Include="FacebookPlusLogic\ScheduledPost.cs" />
+    <Compile Include="FacebookPlusLogic\UserPhotosDetails.cs" />
     <EmbeddedResource Include="FormPhotosTracker.resx">
       <DependentUpon>FormPhotosTracker.cs</DependentUpon>
     </EmbeddedResource>
@@ -174,6 +175,7 @@
   <ItemGroup>
     <None Include="Resources\photoTrackerBackground1.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

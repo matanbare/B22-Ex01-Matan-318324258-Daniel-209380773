@@ -44,22 +44,22 @@
             this.buttonPhotosTracker = new System.Windows.Forms.Button();
             this.buttonStartTimerPost = new System.Windows.Forms.Button();
             this.labelMagicFetures = new System.Windows.Forms.Label();
-            this.pictureBoxFriendProfileImg = new System.Windows.Forms.PictureBox();
-            this.progressBarPhotoTracker = new System.Windows.Forms.ProgressBar();
+            this.pictureBoxFriendProfile = new System.Windows.Forms.PictureBox();
+            this.progressBarPhotoDetails = new System.Windows.Forms.ProgressBar();
             this.timerProgressBarPhotoTracker = new System.Windows.Forms.Timer(this.components);
-            this.labelPhotosTracker = new System.Windows.Forms.Label();
+            this.labelPhotosDetails = new System.Windows.Forms.Label();
             this.checkBoxAutoLogin = new System.Windows.Forms.CheckBox();
             this.progressBarTimerPost = new System.Windows.Forms.ProgressBar();
             this.timerProgressBarPost = new System.Windows.Forms.Timer(this.components);
             this.labelTimerPost = new System.Windows.Forms.Label();
             this.listBoxLikedPages = new System.Windows.Forms.ListBox();
             this.labelLakdePages = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLikedPages = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
             this.panelBio.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfile)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPages)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBoxCoverPhoto
@@ -213,10 +213,10 @@
             // 
             this.buttonStartTimerPost.BackColor = System.Drawing.Color.LightGray;
             this.buttonStartTimerPost.Enabled = false;
-            this.buttonStartTimerPost.Location = new System.Drawing.Point(99, 749);
+            this.buttonStartTimerPost.Location = new System.Drawing.Point(96, 749);
             this.buttonStartTimerPost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.buttonStartTimerPost.Name = "buttonStartTimerPost";
-            this.buttonStartTimerPost.Size = new System.Drawing.Size(257, 75);
+            this.buttonStartTimerPost.Size = new System.Drawing.Size(263, 66);
             this.buttonStartTimerPost.TabIndex = 70;
             this.buttonStartTimerPost.Text = "Timer Post";
             this.buttonStartTimerPost.UseVisualStyleBackColor = false;
@@ -235,47 +235,48 @@
             this.labelMagicFetures.TabIndex = 71;
             this.labelMagicFetures.Text = "Magic Fetures:";
             // 
-            // pictureBoxFriendProfileImg
+            // pictureBoxFriendProfile
             // 
-            this.pictureBoxFriendProfileImg.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBoxFriendProfileImg.Location = new System.Drawing.Point(1203, 770);
-            this.pictureBoxFriendProfileImg.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBoxFriendProfileImg.Name = "pictureBoxFriendProfileImg";
-            this.pictureBoxFriendProfileImg.Size = new System.Drawing.Size(180, 161);
-            this.pictureBoxFriendProfileImg.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxFriendProfileImg.TabIndex = 72;
-            this.pictureBoxFriendProfileImg.TabStop = false;
+            this.pictureBoxFriendProfile.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBoxFriendProfile.Location = new System.Drawing.Point(1203, 770);
+            this.pictureBoxFriendProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxFriendProfile.Name = "pictureBoxFriendProfile";
+            this.pictureBoxFriendProfile.Size = new System.Drawing.Size(180, 161);
+            this.pictureBoxFriendProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFriendProfile.TabIndex = 72;
+            this.pictureBoxFriendProfile.TabStop = false;
             // 
-            // progressBarPhotoTracker
+            // progressBarPhotoDetails
             // 
-            this.progressBarPhotoTracker.BackColor = System.Drawing.Color.White;
-            this.progressBarPhotoTracker.Location = new System.Drawing.Point(96, 669);
-            this.progressBarPhotoTracker.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.progressBarPhotoTracker.Name = "progressBarPhotoTracker";
-            this.progressBarPhotoTracker.Size = new System.Drawing.Size(260, 39);
-            this.progressBarPhotoTracker.TabIndex = 73;
+            this.progressBarPhotoDetails.BackColor = System.Drawing.Color.White;
+            this.progressBarPhotoDetails.Location = new System.Drawing.Point(96, 669);
+            this.progressBarPhotoDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.progressBarPhotoDetails.Name = "progressBarPhotoDetails";
+            this.progressBarPhotoDetails.Size = new System.Drawing.Size(260, 48);
+            this.progressBarPhotoDetails.TabIndex = 73;
             // 
             // timerProgressBarPhotoTracker
             // 
-            this.timerProgressBarPhotoTracker.Interval = 50;
+            this.timerProgressBarPhotoTracker.Interval = 15;
             this.timerProgressBarPhotoTracker.Tick += new System.EventHandler(this.timerProgressBar_Tick);
             // 
-            // labelPhotosTracker
+            // labelPhotosDetails
             // 
-            this.labelPhotosTracker.AutoSize = true;
-            this.labelPhotosTracker.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.labelPhotosTracker.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPhotosTracker.ForeColor = System.Drawing.Color.White;
-            this.labelPhotosTracker.Location = new System.Drawing.Point(95, 684);
-            this.labelPhotosTracker.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelPhotosTracker.Name = "labelPhotosTracker";
-            this.labelPhotosTracker.Size = new System.Drawing.Size(0, 24);
-            this.labelPhotosTracker.TabIndex = 74;
+            this.labelPhotosDetails.AutoSize = true;
+            this.labelPhotosDetails.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.labelPhotosDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPhotosDetails.ForeColor = System.Drawing.Color.White;
+            this.labelPhotosDetails.Location = new System.Drawing.Point(95, 684);
+            this.labelPhotosDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPhotosDetails.Name = "labelPhotosDetails";
+            this.labelPhotosDetails.Size = new System.Drawing.Size(0, 24);
+            this.labelPhotosDetails.TabIndex = 74;
             // 
             // checkBoxAutoLogin
             // 
             this.checkBoxAutoLogin.AutoSize = true;
             this.checkBoxAutoLogin.BackColor = System.Drawing.Color.LightGray;
+            this.checkBoxAutoLogin.Enabled = false;
             this.checkBoxAutoLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkBoxAutoLogin.Location = new System.Drawing.Point(61, 304);
             this.checkBoxAutoLogin.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
@@ -288,15 +289,15 @@
             // progressBarTimerPost
             // 
             this.progressBarTimerPost.BackColor = System.Drawing.Color.White;
-            this.progressBarTimerPost.Location = new System.Drawing.Point(93, 850);
+            this.progressBarTimerPost.Location = new System.Drawing.Point(96, 838);
             this.progressBarTimerPost.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBarTimerPost.Name = "progressBarTimerPost";
-            this.progressBarTimerPost.Size = new System.Drawing.Size(260, 39);
+            this.progressBarTimerPost.Size = new System.Drawing.Size(257, 51);
             this.progressBarTimerPost.TabIndex = 76;
             // 
             // timerProgressBarPost
             // 
-            this.timerProgressBarPost.Interval = 20;
+            this.timerProgressBarPost.Interval = 15;
             this.timerProgressBarPost.Tick += new System.EventHandler(this.timerProgressBarPost_Tick);
             // 
             // labelTimerPost
@@ -337,16 +338,16 @@
             this.labelLakdePages.TabIndex = 79;
             this.labelLakdePages.Text = "Liked Pages:";
             // 
-            // pictureBox1
+            // pictureBoxLikedPages
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBox1.Location = new System.Drawing.Point(763, 808);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(125, 123);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 80;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxLikedPages.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBoxLikedPages.Location = new System.Drawing.Point(763, 808);
+            this.pictureBoxLikedPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.pictureBoxLikedPages.Name = "pictureBoxLikedPages";
+            this.pictureBoxLikedPages.Size = new System.Drawing.Size(125, 123);
+            this.pictureBoxLikedPages.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLikedPages.TabIndex = 80;
+            this.pictureBoxLikedPages.TabStop = false;
             // 
             // FormMain
             // 
@@ -357,15 +358,15 @@
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1403, 1011);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxLikedPages);
             this.Controls.Add(this.labelLakdePages);
             this.Controls.Add(this.listBoxLikedPages);
             this.Controls.Add(this.labelTimerPost);
             this.Controls.Add(this.progressBarTimerPost);
             this.Controls.Add(this.checkBoxAutoLogin);
-            this.Controls.Add(this.labelPhotosTracker);
-            this.Controls.Add(this.progressBarPhotoTracker);
-            this.Controls.Add(this.pictureBoxFriendProfileImg);
+            this.Controls.Add(this.labelPhotosDetails);
+            this.Controls.Add(this.progressBarPhotoDetails);
+            this.Controls.Add(this.pictureBoxFriendProfile);
             this.Controls.Add(this.labelMagicFetures);
             this.Controls.Add(this.buttonStartTimerPost);
             this.Controls.Add(this.buttonPhotosTracker);
@@ -390,8 +391,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).EndInit();
             this.panelBio.ResumeLayout(false);
             this.panelBio.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfileImg)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfile)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPages)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -412,17 +413,17 @@
         private System.Windows.Forms.Button buttonPhotosTracker;
         private System.Windows.Forms.Button buttonStartTimerPost;
         private System.Windows.Forms.Label labelMagicFetures;
-        private System.Windows.Forms.PictureBox pictureBoxFriendProfileImg;
-        private System.Windows.Forms.ProgressBar progressBarPhotoTracker;
+        private System.Windows.Forms.PictureBox pictureBoxFriendProfile;
+        private System.Windows.Forms.ProgressBar progressBarPhotoDetails;
         private System.Windows.Forms.Timer timerProgressBarPhotoTracker;
-        private System.Windows.Forms.Label labelPhotosTracker;
+        private System.Windows.Forms.Label labelPhotosDetails;
         private System.Windows.Forms.CheckBox checkBoxAutoLogin;
         private System.Windows.Forms.ProgressBar progressBarTimerPost;
         private System.Windows.Forms.Timer timerProgressBarPost;
         private System.Windows.Forms.Label labelTimerPost;
         private System.Windows.Forms.ListBox listBoxLikedPages;
         private System.Windows.Forms.Label labelLakdePages;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBoxLikedPages;
     }
 }
 

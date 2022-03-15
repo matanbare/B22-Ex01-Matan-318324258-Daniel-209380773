@@ -20,6 +20,8 @@ namespace BasicFacebookFeatures
         private const string k_CoverAlbumName = "Cover photos";
         private const string k_ProgressBarMessageFirst = "In progress...";
         private const string k_ProgressBarMessageLast = "Done!";
+        private const string k_DisplayMemberPropertyName = "Name";
+        private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
         private User LoggedInUser{ get; set; }
         private LoginResult LoginResult{ get; set; }
 
@@ -72,7 +74,6 @@ namespace BasicFacebookFeatures
                 buttonLogin.Enabled = false;
                 enableButtons();
                 setProfileData();
-                setLikedPages();
             }
         }
 
@@ -133,10 +134,37 @@ namespace BasicFacebookFeatures
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            logoutFromAccount();
+        }
+
+        private void logoutFromAccount()
+        {
             FacebookService.LogoutWithUI();
+
             checkBoxAutoLogin.Checked = false;
+            checkBoxAutoLogin.Enabled = false;
+
             buttonLogin.Text = "Login";
             buttonLogin.Enabled = true;
+
+            pictureBoxCoverPhoto.LoadAsync(k_EmptyPictureUrl);
+            pictureBoxProfileImage.LoadAsync(k_EmptyPictureUrl);
+            pictureBoxFriendProfile.LoadAsync(k_EmptyPictureUrl);
+            pictureBoxLikedPages.LoadAsync(k_EmptyPictureUrl);
+
+            buttonPhotosTracker.Enabled = false;
+            buttonStartTimerPost.Enabled = false;
+
+            listBoxLikedPages.Items.Clear();
+            listBoxFriends.Items.Clear();
+
+            progressBarTimerPost.Value = 0;
+            labelTimerPost.Text = string.Empty;
+
+            progressBarPhotoDetails.Value = 0;
+            labelPhotosDetails.Text = string.Empty;
+
+            setBioLabelsDetails();
         }
 
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
@@ -147,13 +175,13 @@ namespace BasicFacebookFeatures
 
         private void buttonPhotosTracker_Click(object sender, EventArgs e)
         {
-            setNewProgressBarLoading(labelPhotosTracker, timerProgressBarPhotoTracker, progressBarPhotoTracker);
+            setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
             m_FormPhotosTracker = new FormPhotosTracker(LoggedInUser);
         }
 
         private void timerProgressBar_Tick(object sender, EventArgs e)
         {
-            progressBarStartLoading(labelPhotosTracker, timerProgressBarPhotoTracker, progressBarPhotoTracker, m_FormPhotosTracker);
+            progressBarStartLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails, m_FormPhotosTracker);
         }
 
         private void timerProgressBarPost_Tick(object sender, EventArgs e)
@@ -170,7 +198,6 @@ namespace BasicFacebookFeatures
             {
                 i_Label.Text = k_ProgressBarMessageLast;
                 i_Timer.Enabled = false;
-                i_Timer.Interval = k_MinimumInterval;
                 i_Form.Show();
             }
         }
@@ -185,7 +212,7 @@ namespace BasicFacebookFeatures
 
         private string getCoverPhoto()
         {
-            string coverImageUrl = null;
+            string coverImageUrl = k_EmptyPictureUrl;
 
             foreach (var album in LoggedInUser.Albums)
             {
@@ -200,61 +227,75 @@ namespace BasicFacebookFeatures
 
         private void setProfileData()
         {
+            checkBoxAutoLogin.Enabled = true;
             pictureBoxProfileImage.LoadAsync(LoggedInUser.PictureLargeURL);
             pictureBoxCoverPhoto.LoadAsync(getCoverPhoto());
-            labelBirthday.Text += LoggedInUser.Birthday;
-            labelGender.Text += LoggedInUser.Gender;
-            labelFrom.Text += LoggedInUser.Location.Name;
-            labelFriends.Text = $"Friends:{LoggedInUser.Friends.Count}";
 
-            foreach (var friend in LoggedInUser.Friends)
+            if (LoggedInUser.Location != null)
             {
-                listBoxFriends.Items.Add(friend.Name);
+                setBioLabelsDetails(LoggedInUser.Birthday, LoggedInUser.Gender.ToString(), LoggedInUser.Friends.Count, LoggedInUser.Location.Name);
+                
             }
-        }
+            else
+            {
+                setBioLabelsDetails(LoggedInUser.Birthday, LoggedInUser.Gender.ToString(), LoggedInUser.Friends.Count);
+            }
 
-        private void setLikedPages()
-        {
-            foreach (var page in LoggedInUser.LikedPages)
-            {
-                listBoxLikedPages.Items.Add(page.Name);
-            }
+            updateListBoxItemsByCollection(listBoxLikedPages, LoggedInUser.LikedPages);
+            updateListBoxItemsByCollection(listBoxFriends, LoggedInUser.Friends);
         }
 
         private void listBoxLikedPages_Click(object sender, EventArgs e)
         {
-            foreach (var page in LoggedInUser.LikedPages)
-            {
-                if (page.Name.Equals(listBoxLikedPages.SelectedItem))
-                {
-                    pictureBox1.LoadAsync(page.PictureURL);
-                    break;
-                }
-            }
+            updatePictureBoxImageByListBox(listBoxLikedPages, pictureBoxLikedPages, LoggedInUser.LikedPages);
         }
 
         private void listBoxFriends_Click(object sender, EventArgs e)
         {
-            foreach (var friend in LoggedInUser.Friends)
+            updatePictureBoxImageByListBox(listBoxFriends, pictureBoxFriendProfile, LoggedInUser.Friends);
+        }
+
+        private void updatePictureBoxImageByListBox<T>(ListBox i_ListBox, PictureBox i_PictureBox, ICollection<T> i_Collection)
+        {
+            foreach (var item in i_Collection)
             {
-                if (friend.Name.Equals(listBoxFriends.SelectedItem))
+                if (item.Equals(i_ListBox.SelectedItem))
                 {
-                    pictureBoxFriendProfileImg.LoadAsync(friend.PictureLargeURL);
-                    break;
+                    if (item is User)
+                    {
+                        i_PictureBox.LoadAsync((item as User).PictureLargeURL);
+                        break;
+                    }
+                    
+                    if (item is Page)
+                    {
+                        i_PictureBox.LoadAsync((item as Page).PictureLargeURL);
+                        break;
+                    }
                 }
             }
         }
 
-        //private void updatePhotoToListBox<T>(FacebookObjectCollection<T> i_LoggedInUser, ListBox i_ListBox, PictureBox i_PictureBox, string i_Name)
-        //{
-        //    foreach (var selectedItem in i_LoggedInUser)
-        //    {
-        //        if (i_Name.Equals(listBoxFriends.SelectedItem))
-        //        {
-        //            pictureBoxFriendProfileImg.LoadAsync(selectedItem.PictureLargeURL);
-        //            break;
-        //        }
-        //    }
-        //}
+        private void updateListBoxItemsByCollection<T>(ListBox i_ListBox, ICollection<T> i_Collection)
+        {
+            i_ListBox.DisplayMember = k_DisplayMemberPropertyName;
+
+            if (i_Collection != null)
+            {
+                foreach (var item in i_Collection)
+                {
+                    i_ListBox.Items.Add(item);
+                }
+            }
+        }
+
+        private void setBioLabelsDetails(string i_Birthday = "", string i_Gender = "", int i_FriendsCount = 0, string i_From = "")
+        {
+            labelBirthday.Text = $"Birthday:{i_Birthday}";
+            labelGender.Text = $"Gender:{i_Gender}";
+            labelFrom.Text = $"From:{i_From}";
+            labelFriends.Text = i_FriendsCount > 0 ? $"Friends:{i_FriendsCount}" : $"Friends:";
+        }
+
     }
 }

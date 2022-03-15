@@ -40,32 +40,59 @@ namespace BasicFacebookFeatures
 
         private void setMostCommentsPicture()
         {
-            pictureBoxMostComments.LoadAsync(PhotosDetails.MostCommentsPhotoUrl);
-            pictureBoxMostComments.Enabled = true;
-            labelMostComments.Text += PhotosDetails.MostCommentsPhoto;
+            if (!string.IsNullOrEmpty(PhotosDetails.MostCommentsPhotoUrl))
+            {
+                pictureBoxMostComments.LoadAsync(PhotosDetails.MostCommentsPhotoUrl);
+                pictureBoxMostComments.Enabled = true;
+                labelMostComments.Text += PhotosDetails.MostCommentsPhoto;
+            }
+            else
+            {
+                labelMostComments.Text = $"User doesn't have photos";
+            }
         }
 
         private void setMostLikesPicture()
         {
-            pictureBoxMostLiked.LoadAsync(PhotosDetails.MostLikedPhotoUrl);
-            pictureBoxMostLiked.Enabled = true;
-            labelMostLikedPhoto.Text += PhotosDetails.MostLikedPhoto;
+            if (!string.IsNullOrEmpty(PhotosDetails.MostLikedPhotoUrl))
+            {
+                pictureBoxMostLiked.LoadAsync(PhotosDetails.MostLikedPhotoUrl);
+                pictureBoxMostLiked.Enabled = true;
+                labelMostLikedPhoto.Text += PhotosDetails.MostLikedPhoto;
+            }
+            else
+            {
+                labelMostComments.Text = $"User doesn't have photos";
+            }
         }
 
         private void setBestFriendComments()
         {
             string name = PhotosDetails.BestFriendComments(out int numberOfComments, out string profileImageUrl);
-
-            labelBestFriendComment.Text += $" {name} {numberOfComments}";
-            pictureBoxBestFriendsComments.LoadAsync(profileImageUrl);
+            if (!string.IsNullOrEmpty(name))
+            {
+                labelBestFriendComment.Text += $" {name} {numberOfComments}";
+                pictureBoxBestFriendsComments.LoadAsync(profileImageUrl);
+            }
+            else
+            {
+                labelBestFriendComment.Text = $" No one comment on your photos";
+            }
         }
 
         private void setBestFriendLikes()
         {
             string name = PhotosDetails.BestFriendsLikes(out int numberOfLikes, out string profileImageUrl);
 
-            labelBestFriendLikes.Text += $" {name} {numberOfLikes}";
-            pictureBoxBestFriendsLikes.LoadAsync(profileImageUrl);
+            if (!string.IsNullOrEmpty(name))
+            {
+                labelBestFriendLikes.Text += $" {name} ({numberOfLikes})";
+                pictureBoxBestFriendsLikes.LoadAsync(profileImageUrl);
+            }
+            else
+            {
+                labelBestFriendLikes.Text = $" No one like your photos";
+            }
         }
     }
 }

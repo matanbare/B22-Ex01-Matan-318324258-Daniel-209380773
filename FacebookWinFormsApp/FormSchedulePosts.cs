@@ -35,18 +35,26 @@ namespace BasicFacebookFeatures
 
         private void buttonPost_Click(object sender, EventArgs e)
         {
-            bool isValidPost = m_ScheduledPost.FuturePostPublication(
-                (string)comboBoxGroupToPost.SelectedItem,
-                textBoxPost.Text,
-                m_ScheduledPost.GetPostName(textBoxPostName.Text),
-                numericUpDownMinute.Text,
-                numericUpDownHours.Text);
-
-            if (isValidPost)
+            if (comboBoxGroupToPost.SelectedIndex != 0)
             {
-                addDatePublishToListBox();
-                clearControllers();
+                bool isValidPost = m_ScheduledPost.FuturePostPublication(
+                    (string)comboBoxGroupToPost.SelectedItem,
+                    textBoxPost.Text,
+                    m_ScheduledPost.GetPostName(textBoxPostName.Text),
+                    numericUpDownMinute.Text,
+                    numericUpDownHours.Text);
+
+                if (isValidPost)
+                {
+                    addDatePublishToListBox();
+                    clearControllers();
+                }
             }
+            else
+            {
+                MessageBox.Show("You haven't selected any group, please try again...");
+            }
+
         }
 
         private void addDatePublishToListBox()
@@ -79,6 +87,11 @@ namespace BasicFacebookFeatures
         private void buttonRefreshPosts_Click(object sender, EventArgs e)
         {
             addDatePublishToListBox();
+        }
+
+        private void FormSchedulePosts_Load(object sender, EventArgs e)
+        {
+            comboBoxGroupToPost.SelectedIndex = k_StartPoint;
         }
     }
 }
