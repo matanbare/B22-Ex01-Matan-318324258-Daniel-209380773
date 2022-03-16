@@ -39,7 +39,7 @@ namespace BasicFacebookFeatures
         private void takeAllDetails()
         {
             CalculatePhotoDetails();
-            SetFriendsListNames();
+            setFriendsListNames();
         }
 
         public void CalculatePhotoDetails()
@@ -65,6 +65,26 @@ namespace BasicFacebookFeatures
                     }
                 }
             }
+        }
+
+        public string GetBestFriendReactions(eTotalCount i_TotalCount, out int i_NumberOfReactions, out string i_PictureUrl)
+        {
+            string friendName = null;
+
+            i_NumberOfReactions = 0;
+            i_PictureUrl = null;
+
+            switch (i_TotalCount)
+            {
+                case eTotalCount.Comments:
+                    friendName = BestFriendComments(out i_NumberOfReactions, out i_PictureUrl);
+                    break;
+                case eTotalCount.Likes:
+                    friendName = BestFriendsLikes(out i_NumberOfReactions, out i_PictureUrl);
+                    break;
+            }
+
+            return friendName;
         }
 
         private void setPhotosDetails(Photo i_Photo, eTotalCount i_TotalCountType)
@@ -98,7 +118,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        public void SetFriendsListNames()
+        private void setFriendsListNames()
         {
             foreach (var user in FriendsList)
             {
@@ -106,12 +126,12 @@ namespace BasicFacebookFeatures
             }
         }
 
-        public string BestFriendsLikes(out int i_NumberOfLikes, out string i_ImageUrl)
+        private string BestFriendsLikes(out int i_NumberOfLikes, out string i_ImageUrl)
         {
             return calculateTotalCountSum(eTotalCount.Likes, out i_NumberOfLikes, out i_ImageUrl);
         }
 
-        public string BestFriendComments(out int i_NumberOfComments, out string i_ImageUrl)
+        private string BestFriendComments(out int i_NumberOfComments, out string i_ImageUrl)
         {
             return calculateTotalCountSum(eTotalCount.Comments, out i_NumberOfComments, out i_ImageUrl);
         }

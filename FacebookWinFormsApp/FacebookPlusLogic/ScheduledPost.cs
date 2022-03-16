@@ -15,7 +15,6 @@ namespace BasicFacebookFeatures
         private const int k_MinuteToMillisecond = 60000;
         private const string k_Unknown = "*UNKNOWN*";
         private const string k_EmptyText = "";
-        
         private static int s_CounterTimers = 0;
 
         public List<PostBySchedule> ScheduledPostsList { get; } = new List<PostBySchedule>();

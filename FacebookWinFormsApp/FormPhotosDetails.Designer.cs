@@ -1,7 +1,6 @@
-﻿
-namespace BasicFacebookFeatures
+﻿namespace BasicFacebookFeatures
 {
-    partial class FormPhotosTracker
+    public partial class FormPhotosDetails
     {
         /// <summary>
         /// Required designer variable.
@@ -18,6 +17,7 @@ namespace BasicFacebookFeatures
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -29,7 +29,7 @@ namespace BasicFacebookFeatures
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPhotosTracker));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPhotosDetails));
             this.labelTotalComments = new System.Windows.Forms.Label();
             this.labelTotalLikes = new System.Windows.Forms.Label();
             this.labelPhotoDetails = new System.Windows.Forms.Label();
@@ -215,7 +215,7 @@ namespace BasicFacebookFeatures
             this.pictureBoxMostLiked.TabIndex = 76;
             this.pictureBoxMostLiked.TabStop = false;
             // 
-            // FormPhotosTracker
+            // FormPhotosDetails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -243,7 +243,7 @@ namespace BasicFacebookFeatures
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1048, 747);
-            this.Name = "FormPhotosTracker";
+            this.Name = "FormPhotosDetails";
             this.Text = "Photos Tracker";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxTotalCommentsIclon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikeTotalIcon)).EndInit();

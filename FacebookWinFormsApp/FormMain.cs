@@ -22,11 +22,13 @@ namespace BasicFacebookFeatures
         private const string k_ProgressBarMessageLast = "Done!";
         private const string k_DisplayMemberPropertyName = "Name";
         private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
-        private User LoggedInUser{ get; set; }
-        private LoginResult LoginResult{ get; set; }
-
-        private FormPhotosTracker m_FormPhotosTracker;
+        private FormPhotosDetails m_FormPhotosDetails;
         private FormSchedulePosts m_FormSchedulePosts;
+
+        private User LoggedInUser { get; set; }
+
+        private LoginResult LoginResult { get; set; }
+
         public FormMain()
         {
             InitializeComponent();
@@ -72,15 +74,15 @@ namespace BasicFacebookFeatures
                 LoggedInUser = result.LoggedInUser;
                 buttonLogin.Text = $"Logged in as {LoggedInUser.Name}";
                 buttonLogin.Enabled = false;
-                enableButtons();
+                enableFeaturesButtons(true);
                 setProfileData();
             }
         }
 
-        private void enableButtons()
+        private void enableFeaturesButtons(bool i_Boolean)
         {
-            buttonPhotosTracker.Enabled = true;
-            buttonStartTimerPost.Enabled = true;
+            buttonPhotosTracker.Enabled = i_Boolean;
+            buttonStartTimerPost.Enabled = i_Boolean;
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
@@ -91,9 +93,7 @@ namespace BasicFacebookFeatures
         private void loginAndInitialization()
         {
             LoginResult = FacebookService.Login(
-                /// (This is Desig Patter's App ID. replace it with your own)
                 "484536506563845",
-                /// requested permissions:
                 "email",
                 "public_profile",
                 "user_age_range",
@@ -109,9 +109,7 @@ namespace BasicFacebookFeatures
                 "user_posts",
                 "user_videos",
                 "groups_access_member_info",
-                "publish_to_groups"
-                /// add any relevant permissions
-            );
+                "publish_to_groups");
 
             if (!string.IsNullOrEmpty(LoginResult.AccessToken))
             {
@@ -124,11 +122,11 @@ namespace BasicFacebookFeatures
                 setProfileData();
                 
                 buttonLogin.Enabled = false;
-                enableButtons();
+                enableFeaturesButtons(true);
             }
             else
             {
-                MessageBox.Show(LoginResult.ErrorMessage, "Login Failed");
+                MessageBox.Show("Login Is Failed, Please Try Again", "Login Failed");
             }
         }
 
@@ -140,31 +138,53 @@ namespace BasicFacebookFeatures
         private void logoutFromAccount()
         {
             FacebookService.LogoutWithUI();
+            initializeLoginOption();
+            resetPictureBox(new PictureBox[]
+            { 
+                pictureBoxCoverPhoto,
+                pictureBoxFriendProfile,
+                pictureBoxLikedPages,
+                pictureBoxProfileImage
+            });
+            enableFeaturesButtons(false);
+            clearAllListBoxes(new ListBox[]
+            {
+                listBoxLikedPages,
+                listBoxFriends
+            });
+            resetProgressBar(progressBarTimerPost, labelTimerPost);
+            resetProgressBar(progressBarPhotoDetails, labelPhotosDetails);
+            setBioLabelsDetails();
+        }
 
+        private void initializeLoginOption()
+        {
             checkBoxAutoLogin.Checked = false;
             checkBoxAutoLogin.Enabled = false;
-
             buttonLogin.Text = "Login";
             buttonLogin.Enabled = true;
+        }
 
-            pictureBoxCoverPhoto.LoadAsync(k_EmptyPictureUrl);
-            pictureBoxProfileImage.LoadAsync(k_EmptyPictureUrl);
-            pictureBoxFriendProfile.LoadAsync(k_EmptyPictureUrl);
-            pictureBoxLikedPages.LoadAsync(k_EmptyPictureUrl);
+        private void resetProgressBar(ProgressBar i_ProgressBar, Label i_Label)
+        {
+            i_ProgressBar.Value = 0;
+            i_Label.Text = string.Empty;
+        }
 
-            buttonPhotosTracker.Enabled = false;
-            buttonStartTimerPost.Enabled = false;
+        private void clearAllListBoxes(ListBox[] i_ListBoxes)
+        {
+            foreach (ListBox listBox in i_ListBoxes)
+            {
+                listBox.Items.Clear();
+            }
+        }
 
-            listBoxLikedPages.Items.Clear();
-            listBoxFriends.Items.Clear();
-
-            progressBarTimerPost.Value = 0;
-            labelTimerPost.Text = string.Empty;
-
-            progressBarPhotoDetails.Value = 0;
-            labelPhotosDetails.Text = string.Empty;
-
-            setBioLabelsDetails();
+        private void resetPictureBox(PictureBox[] i_PictureBoxes)
+        {
+            foreach (PictureBox pictureBox in i_PictureBoxes)
+            {
+                pictureBox.LoadAsync(k_EmptyPictureUrl);
+            }
         }
 
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
@@ -176,12 +196,12 @@ namespace BasicFacebookFeatures
         private void buttonPhotosTracker_Click(object sender, EventArgs e)
         {
             setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
-            m_FormPhotosTracker = new FormPhotosTracker(LoggedInUser);
+            m_FormPhotosDetails = new FormPhotosDetails(LoggedInUser);
         }
 
         private void timerProgressBar_Tick(object sender, EventArgs e)
         {
-            progressBarStartLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails, m_FormPhotosTracker);
+            progressBarStartLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails, m_FormPhotosDetails);
         }
 
         private void timerProgressBarPost_Tick(object sender, EventArgs e)
@@ -202,8 +222,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private void setNewProgressBarLoading(Label i_Label, System.Windows.Forms.Timer i_Timer,
-            ProgressBar i_ProgressBar)
+        private void setNewProgressBarLoading(Label i_Label, System.Windows.Forms.Timer i_Timer, ProgressBar i_ProgressBar)
         {
             i_Label.Text = k_ProgressBarMessageFirst;
             i_ProgressBar.Value = 0;
@@ -214,7 +233,7 @@ namespace BasicFacebookFeatures
         {
             string coverImageUrl = k_EmptyPictureUrl;
 
-            foreach (var album in LoggedInUser.Albums)
+            foreach (Album album in LoggedInUser.Albums)
             {
                 if (album.Name.Equals(k_CoverAlbumName))
                 {
@@ -234,7 +253,6 @@ namespace BasicFacebookFeatures
             if (LoggedInUser.Location != null)
             {
                 setBioLabelsDetails(LoggedInUser.Birthday, LoggedInUser.Gender.ToString(), LoggedInUser.Friends.Count, LoggedInUser.Location.Name);
-                
             }
             else
             {
@@ -257,19 +275,19 @@ namespace BasicFacebookFeatures
 
         private void updatePictureBoxImageByListBox<T>(ListBox i_ListBox, PictureBox i_PictureBox, ICollection<T> i_Collection)
         {
-            foreach (var item in i_Collection)
+            foreach (T item in i_Collection)
             {
                 if (item.Equals(i_ListBox.SelectedItem))
                 {
-                    if (item is User)
+                    if (item is User user)
                     {
-                        i_PictureBox.LoadAsync((item as User).PictureLargeURL);
+                        i_PictureBox.LoadAsync(user.PictureLargeURL);
                         break;
                     }
                     
-                    if (item is Page)
+                    if (item is Page page)
                     {
-                        i_PictureBox.LoadAsync((item as Page).PictureLargeURL);
+                        i_PictureBox.LoadAsync(page.PictureLargeURL);
                         break;
                     }
                 }
@@ -282,7 +300,7 @@ namespace BasicFacebookFeatures
 
             if (i_Collection != null)
             {
-                foreach (var item in i_Collection)
+                foreach (T item in i_Collection)
                 {
                     i_ListBox.Items.Add(item);
                 }
@@ -296,6 +314,5 @@ namespace BasicFacebookFeatures
             labelFrom.Text = $"From:{i_From}";
             labelFriends.Text = i_FriendsCount > 0 ? $"Friends:{i_FriendsCount}" : $"Friends:";
         }
-
     }
 }

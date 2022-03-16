@@ -20,20 +20,12 @@ namespace BasicFacebookFeatures
             sr_FileName = Application.ExecutablePath + ".ApplicationSettings18.xml";
         }
 
-        /// <summary>
-        ///  private CTOR as part as the singltone pattern
-        /// </summary>
         private ApplicationSettings()
         {
         }
 
-        /// <summary>
-        /// Static reference to the single instance
-        /// </summary>
         private static ApplicationSettings s_This;
-        /// <summary>
-        /// Public static accsess point to the single instance (includig JIT creation)
-        /// </summary>
+
         public static ApplicationSettings Instance
         {
             get
@@ -47,23 +39,15 @@ namespace BasicFacebookFeatures
             }
         }
 
-        /// C# 3.0 feature: Automatic Properties
         public bool AutoLogin { get; set; }
+
         public Size LastWindowSize { get; set; }
+
         public FormWindowState LastWindowState { get; set; }
+
         public Point LastWindowLocation { get; set; }
+
         public string AccessToken { get; set; }
-
-        //public UserProfile UserProfileDetails { get; set; } = new UserProfile();
-
-        public void Save()
-        {
-            using (FileStream stream = new FileStream(sr_FileName, FileMode.Create))
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(ApplicationSettings));
-                serializer.Serialize(stream, this);
-            }
-        }
 
         public static ApplicationSettings FromFileOrDefault()
         {
@@ -90,6 +74,14 @@ namespace BasicFacebookFeatures
 
             return loadedThis;
         }
+
+        public void Save()
+        {
+            using (FileStream stream = new FileStream(sr_FileName, FileMode.Create))
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(ApplicationSettings));
+                serializer.Serialize(stream, this);
+            }
+        }
     }
 }
-

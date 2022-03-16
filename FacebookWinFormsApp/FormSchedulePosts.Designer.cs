@@ -1,7 +1,6 @@
-﻿
-namespace BasicFacebookFeatures
+﻿namespace BasicFacebookFeatures
 {
-    partial class FormSchedulePosts
+    public partial class FormSchedulePosts
     {
         /// <summary>
         /// Required designer variable.
@@ -18,6 +17,7 @@ namespace BasicFacebookFeatures
             {
                 components.Dispose();
             }
+
             base.Dispose(disposing);
         }
 
@@ -55,7 +55,7 @@ namespace BasicFacebookFeatures
             // textBoxPost
             // 
             this.textBoxPost.BackColor = System.Drawing.Color.LightGray;
-            this.textBoxPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPost.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxPost.Location = new System.Drawing.Point(47, 208);
             this.textBoxPost.Margin = new System.Windows.Forms.Padding(5);
             this.textBoxPost.Multiline = true;
@@ -87,7 +87,7 @@ namespace BasicFacebookFeatures
             this.comboBoxGroupToPost.Name = "comboBoxGroupToPost";
             this.comboBoxGroupToPost.Size = new System.Drawing.Size(281, 28);
             this.comboBoxGroupToPost.TabIndex = 2;
-            this.comboBoxGroupToPost.Tag = "";
+            this.comboBoxGroupToPost.Tag = string.Empty;
             // 
             // numericUpDownMinute
             // 

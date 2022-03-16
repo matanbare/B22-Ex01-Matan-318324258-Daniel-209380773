@@ -13,9 +13,9 @@ namespace BasicFacebookFeatures
 {
     public partial class FormSchedulePosts : Form
     {
-
         private const int k_StartPoint = 0;
-        private ScheduledPost m_ScheduledPost { get; set; }
+
+        private ScheduledPost m_ScheduledPost { get; }
 
         public FormSchedulePosts(User i_LoggedInUser)
         {
@@ -27,7 +27,7 @@ namespace BasicFacebookFeatures
 
         private void setGroupComboBoxByUser()
         {
-            foreach (var group in m_ScheduledPost.UserGroups)
+            foreach (Group group in m_ScheduledPost.UserGroups)
             {
                 comboBoxGroupToPost.Items.Add(group.Name);
             }
@@ -54,7 +54,6 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("You haven't selected any group, please try again...");
             }
-
         }
 
         private void addDatePublishToListBox()
@@ -62,7 +61,7 @@ namespace BasicFacebookFeatures
             listBoxPostedDone.Items.Clear();
             listBoxFuture.Items.Clear();
 
-            foreach (var postBySchedule in m_ScheduledPost.ScheduledPostsList)
+            foreach (PostBySchedule postBySchedule in m_ScheduledPost.ScheduledPostsList)
             {
                 if (postBySchedule.IsPosted)
                 {
