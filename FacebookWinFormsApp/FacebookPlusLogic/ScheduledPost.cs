@@ -42,7 +42,7 @@ namespace BasicFacebookFeatures
             if (textIsNotEmpty(i_TextToPost))
             {
                 isValidTextToPost = true;
-                newPostToPublish.TimerToPost.Tick += TimerToPost_Tick;
+                newPostToPublish.TimerToPost.Tick += timerToPost_Tick;
                 newPostToPublish.TimerToPost.Interval = 
                     newPostToPublish.TimeToPostInMillisecond > 0 ? newPostToPublish.TimeToPostInMillisecond : 1000;
                 newPostToPublish.TimerToPost.Enabled = true;
@@ -62,7 +62,7 @@ namespace BasicFacebookFeatures
         {
             string messageForUser = null;
 
-            foreach (var group in UserGroups)
+            foreach (Group group in UserGroups)
             {
                 if (group.Name == i_GroupName)
                 {
@@ -81,7 +81,7 @@ namespace BasicFacebookFeatures
             MessageBox.Show(messageForUser);
         }
 
-        private void TimerToPost_Tick(object sender, EventArgs e)
+        private void timerToPost_Tick(object sender, EventArgs e)
         {
             int index = (int)(sender as Timer).Tag;
 

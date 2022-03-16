@@ -16,7 +16,6 @@ namespace BasicFacebookFeatures
     public partial class FormMain : Form
     {
         private const int k_StepsInProgressBar = 1;
-        private const int k_MinimumInterval = 20;
         private const string k_CoverAlbumName = "Cover photos";
         private const string k_ProgressBarMessageFirst = "In progress...";
         private const string k_ProgressBarMessageLast = "Done!";
@@ -92,24 +91,7 @@ namespace BasicFacebookFeatures
 
         private void loginAndInitialization()
         {
-            LoginResult = FacebookService.Login(
-                "484536506563845",
-                "email",
-                "public_profile",
-                "user_age_range",
-                "user_birthday",
-                "user_events",
-                "user_friends",
-                "user_gender",
-                "user_hometown",
-                "user_likes",
-                "user_link",
-                "user_location",
-                "user_photos",
-                "user_posts",
-                "user_videos",
-                "groups_access_member_info",
-                "publish_to_groups");
+            LoginResult = loginToFacebook();
 
             if (!string.IsNullOrEmpty(LoginResult.AccessToken))
             {
@@ -128,6 +110,39 @@ namespace BasicFacebookFeatures
             {
                 MessageBox.Show("Login Is Failed, Please Try Again", "Login Failed");
             }
+        }
+
+        private LoginResult loginToFacebook()
+        {
+            LoginResult loginResult = null;
+
+            try
+            {
+                loginResult = FacebookService.Login(
+                    "484536506563845",
+                    "email",
+                    "public_profile",
+                    "user_age_range",
+                    "user_birthday",
+                    "user_events",
+                    "user_friends",
+                    "user_gender",
+                    "user_hometown",
+                    "user_likes",
+                    "user_link",
+                    "user_location",
+                    "user_photos",
+                    "user_posts",
+                    "user_videos",
+                    "groups_access_member_info",
+                    "publish_to_groups");
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Login Is Failed, Please Try Again", "Login Failed");
+            }
+
+            return loginResult;
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -193,7 +208,7 @@ namespace BasicFacebookFeatures
             m_FormSchedulePosts = new FormSchedulePosts(LoggedInUser);
         }
 
-        private void buttonPhotosTracker_Click(object sender, EventArgs e)
+        private void buttonPhotosDetails_Click(object sender, EventArgs e)
         {
             setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
             m_FormPhotosDetails = new FormPhotosDetails(LoggedInUser);

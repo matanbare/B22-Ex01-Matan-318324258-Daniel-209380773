@@ -15,19 +15,19 @@ namespace BasicFacebookFeatures
     {
         private const int k_StartPoint = 0;
 
-        private ScheduledPost m_ScheduledPost { get; }
+        private ScheduledPost ScheduledPost { get; }
 
         public FormSchedulePosts(User i_LoggedInUser)
         {
             InitializeComponent();
 
-            m_ScheduledPost = new ScheduledPost(i_LoggedInUser);
+            ScheduledPost = new ScheduledPost(i_LoggedInUser);
             setGroupComboBoxByUser();
         }
 
         private void setGroupComboBoxByUser()
         {
-            foreach (Group group in m_ScheduledPost.UserGroups)
+            foreach (Group group in ScheduledPost.UserGroups)
             {
                 comboBoxGroupToPost.Items.Add(group.Name);
             }
@@ -37,10 +37,10 @@ namespace BasicFacebookFeatures
         {
             if (comboBoxGroupToPost.SelectedIndex != 0)
             {
-                bool isValidPost = m_ScheduledPost.FuturePostPublication(
+                bool isValidPost = ScheduledPost.FuturePostPublication(
                     (string)comboBoxGroupToPost.SelectedItem,
                     textBoxPost.Text,
-                    m_ScheduledPost.GetPostName(textBoxPostName.Text),
+                    ScheduledPost.GetPostName(textBoxPostName.Text),
                     numericUpDownMinute.Text,
                     numericUpDownHours.Text);
 
@@ -61,7 +61,7 @@ namespace BasicFacebookFeatures
             listBoxPostedDone.Items.Clear();
             listBoxFuture.Items.Clear();
 
-            foreach (PostBySchedule postBySchedule in m_ScheduledPost.ScheduledPostsList)
+            foreach (PostBySchedule postBySchedule in ScheduledPost.ScheduledPostsList)
             {
                 if (postBySchedule.IsPosted)
                 {
@@ -88,7 +88,7 @@ namespace BasicFacebookFeatures
             addDatePublishToListBox();
         }
 
-        private void FormSchedulePosts_Load(object sender, EventArgs e)
+        private void formSchedulePosts_Load(object sender, EventArgs e)
         {
             comboBoxGroupToPost.SelectedIndex = k_StartPoint;
         }

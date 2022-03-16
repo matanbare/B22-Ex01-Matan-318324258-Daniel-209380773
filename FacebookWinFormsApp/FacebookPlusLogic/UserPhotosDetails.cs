@@ -38,15 +38,15 @@ namespace BasicFacebookFeatures
 
         private void takeAllDetails()
         {
-            CalculatePhotoDetails();
+            calculatePhotoDetails();
             setFriendsListNames();
         }
 
-        public void CalculatePhotoDetails()
+        private void calculatePhotoDetails()
         {
-            foreach (var album in AlbumsList)
+            foreach (Album album in AlbumsList)
             {
-                foreach (var photo in album.Photos)
+                foreach (Photo photo in album.Photos)
                 {
                     TotalCommentsPhoto += photo.Comments.Count;
                     TotalLikesPhoto += photo.LikedBy.Count;
@@ -54,12 +54,12 @@ namespace BasicFacebookFeatures
                     setPhotosDetails(photo, eTotalCount.Comments);
                     setPhotosDetails(photo, eTotalCount.Likes);
 
-                    foreach (var user in photo.LikedBy)
+                    foreach (User user in photo.LikedBy)
                     {
                         foundLikesAndCommentsForUsers(user, eTotalCount.Likes);
                     }
 
-                    foreach (var comment in photo.Comments)
+                    foreach (Comment comment in photo.Comments)
                     {
                         foundLikesAndCommentsForUsers(comment.From, eTotalCount.Comments);
                     }
@@ -77,10 +77,10 @@ namespace BasicFacebookFeatures
             switch (i_TotalCount)
             {
                 case eTotalCount.Comments:
-                    friendName = BestFriendComments(out i_NumberOfReactions, out i_PictureUrl);
+                    friendName = bestFriendComments(out i_NumberOfReactions, out i_PictureUrl);
                     break;
                 case eTotalCount.Likes:
-                    friendName = BestFriendsLikes(out i_NumberOfReactions, out i_PictureUrl);
+                    friendName = bestFriendsLikes(out i_NumberOfReactions, out i_PictureUrl);
                     break;
             }
 
@@ -120,18 +120,18 @@ namespace BasicFacebookFeatures
 
         private void setFriendsListNames()
         {
-            foreach (var user in FriendsList)
+            foreach (User user in FriendsList)
             {
                 r_FriendsCommentsAndLikesDictionary.Add(user, new BestFriendsTracker(user.Name));
             }
         }
 
-        private string BestFriendsLikes(out int i_NumberOfLikes, out string i_ImageUrl)
+        private string bestFriendsLikes(out int i_NumberOfLikes, out string i_ImageUrl)
         {
             return calculateTotalCountSum(eTotalCount.Likes, out i_NumberOfLikes, out i_ImageUrl);
         }
 
-        private string BestFriendComments(out int i_NumberOfComments, out string i_ImageUrl)
+        private string bestFriendComments(out int i_NumberOfComments, out string i_ImageUrl)
         {
             return calculateTotalCountSum(eTotalCount.Comments, out i_NumberOfComments, out i_ImageUrl);
         }
@@ -143,7 +143,7 @@ namespace BasicFacebookFeatures
 
             i_ImageUrl = null;
 
-            foreach (var friendsTracker in r_FriendsCommentsAndLikesDictionary)
+            foreach (KeyValuePair<User, BestFriendsTracker> friendsTracker in r_FriendsCommentsAndLikesDictionary)
             {
                 if (getTotalCountFacebookReaction(i_TotalCount, friendsTracker.Key) >= maximumCount)
                 {

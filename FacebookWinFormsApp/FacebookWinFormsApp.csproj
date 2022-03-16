@@ -89,7 +89,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationSettings.cs" />
+    <Compile Include="FacebookPlusLogic\ApplicationSettings.cs" />
     <Compile Include="FacebookPlusLogic\BestFriendsTracker.cs" />
     <Compile Include="ENums\ETotalCount.cs" />
     <Compile Include="FormPhotosDetails.cs">

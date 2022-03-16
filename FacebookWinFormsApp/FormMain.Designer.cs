@@ -208,7 +208,7 @@
             this.buttonPhotosTracker.TabIndex = 68;
             this.buttonPhotosTracker.Text = "Photos Tracker";
             this.buttonPhotosTracker.UseVisualStyleBackColor = false;
-            this.buttonPhotosTracker.Click += new System.EventHandler(this.buttonPhotosTracker_Click);
+            this.buttonPhotosTracker.Click += new System.EventHandler(this.buttonPhotosDetails_Click);
             // 
             // buttonStartTimerPost
             // 

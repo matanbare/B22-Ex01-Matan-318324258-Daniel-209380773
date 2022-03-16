@@ -292,7 +292,7 @@
             this.Name = "FormSchedulePosts";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Schedule Posts";
-            this.Load += new System.EventHandler(this.FormSchedulePosts_Load);
+            this.Load += new System.EventHandler(this.formSchedulePosts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinute)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownHours)).EndInit();
             this.ResumeLayout(false);
