@@ -30,12 +30,15 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.Label uRLLabel;
+            System.Windows.Forms.Label linkLabel;
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.pictureBoxCoverPhoto = new System.Windows.Forms.PictureBox();
             this.pictureBoxProfileImage = new System.Windows.Forms.PictureBox();
             this.buttonLogout = new System.Windows.Forms.Button();
             this.buttonLogin = new System.Windows.Forms.Button();
             this.listBoxFriends = new System.Windows.Forms.ListBox();
+            this.userBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelFriends = new System.Windows.Forms.Label();
             this.labelBio = new System.Windows.Forms.Label();
             this.panelBio = new System.Windows.Forms.Panel();
@@ -45,7 +48,6 @@
             this.buttonPhotosTracker = new System.Windows.Forms.Button();
             this.buttonStartTimerPost = new System.Windows.Forms.Button();
             this.labelMagicFetures = new System.Windows.Forms.Label();
-            this.pictureBoxFriendProfile = new System.Windows.Forms.PictureBox();
             this.progressBarPhotoDetails = new System.Windows.Forms.ProgressBar();
             this.timerProgressBarPhotoTracker = new System.Windows.Forms.Timer(this.components);
             this.labelPhotosDetails = new System.Windows.Forms.Label();
@@ -54,14 +56,46 @@
             this.timerProgressBarPost = new System.Windows.Forms.Timer(this.components);
             this.labelTimerPost = new System.Windows.Forms.Label();
             this.listBoxLikedPages = new System.Windows.Forms.ListBox();
+            this.pageBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.labelLakdePages = new System.Windows.Forms.Label();
-            this.pictureBoxLikedPages = new System.Windows.Forms.PictureBox();
+            this.pictureBoxLikedPage = new System.Windows.Forms.PictureBox();
+            this.linkLabelLikedPage = new System.Windows.Forms.LinkLabel();
+            this.pictureBoxFriendProfile = new System.Windows.Forms.PictureBox();
+            this.linkLabelFriendProfile = new System.Windows.Forms.LinkLabel();
+            uRLLabel = new System.Windows.Forms.Label();
+            linkLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).BeginInit();
             this.panelBio.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfile)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPages)).BeginInit();
             this.SuspendLayout();
+            // 
+            // uRLLabel
+            // 
+            uRLLabel.AutoSize = true;
+            uRLLabel.BackColor = System.Drawing.Color.Transparent;
+            uRLLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            uRLLabel.ForeColor = System.Drawing.Color.White;
+            uRLLabel.Location = new System.Drawing.Point(500, 867);
+            uRLLabel.Name = "uRLLabel";
+            uRLLabel.Size = new System.Drawing.Size(39, 15);
+            uRLLabel.TabIndex = 79;
+            uRLLabel.Text = "URL:";
+            // 
+            // linkLabel
+            // 
+            linkLabel.AutoSize = true;
+            linkLabel.BackColor = System.Drawing.Color.Transparent;
+            linkLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            linkLabel.ForeColor = System.Drawing.SystemColors.Control;
+            linkLabel.Location = new System.Drawing.Point(1004, 842);
+            linkLabel.Name = "linkLabel";
+            linkLabel.Size = new System.Drawing.Size(84, 15);
+            linkLabel.TabIndex = 84;
+            linkLabel.Text = "Profile Link:";
             // 
             // pictureBoxCoverPhoto
             // 
@@ -111,15 +145,20 @@
             // 
             this.listBoxFriends.BackColor = System.Drawing.Color.LightGray;
             this.listBoxFriends.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxFriends.DataSource = this.userBindingSource;
+            this.listBoxFriends.DisplayMember = "Name";
             this.listBoxFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxFriends.FormattingEnabled = true;
             this.listBoxFriends.ItemHeight = 20;
-            this.listBoxFriends.Location = new System.Drawing.Point(1017, 574);
+            this.listBoxFriends.Location = new System.Drawing.Point(1008, 515);
             this.listBoxFriends.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxFriends.Name = "listBoxFriends";
             this.listBoxFriends.Size = new System.Drawing.Size(365, 322);
             this.listBoxFriends.TabIndex = 63;
-            this.listBoxFriends.Click += new System.EventHandler(this.listBoxFriends_Click);
+            // 
+            // userBindingSource
+            // 
+            this.userBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.User);
             // 
             // labelFriends
             // 
@@ -127,7 +166,7 @@
             this.labelFriends.BackColor = System.Drawing.Color.Transparent;
             this.labelFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFriends.ForeColor = System.Drawing.Color.White;
-            this.labelFriends.Location = new System.Drawing.Point(1012, 534);
+            this.labelFriends.Location = new System.Drawing.Point(1003, 475);
             this.labelFriends.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFriends.Name = "labelFriends";
             this.labelFriends.Size = new System.Drawing.Size(109, 29);
@@ -140,7 +179,7 @@
             this.labelBio.BackColor = System.Drawing.Color.Transparent;
             this.labelBio.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelBio.ForeColor = System.Drawing.Color.White;
-            this.labelBio.Location = new System.Drawing.Point(501, 525);
+            this.labelBio.Location = new System.Drawing.Point(501, 466);
             this.labelBio.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelBio.Name = "labelBio";
             this.labelBio.Size = new System.Drawing.Size(59, 29);
@@ -157,7 +196,7 @@
             this.panelBio.Controls.Add(this.labelFrom);
             this.panelBio.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.panelBio.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.panelBio.Location = new System.Drawing.Point(504, 574);
+            this.panelBio.Location = new System.Drawing.Point(504, 515);
             this.panelBio.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.panelBio.Name = "panelBio";
             this.panelBio.Size = new System.Drawing.Size(382, 136);
@@ -236,17 +275,6 @@
             this.labelMagicFetures.TabIndex = 71;
             this.labelMagicFetures.Text = "Magic Fetures:";
             // 
-            // pictureBoxFriendProfile
-            // 
-            this.pictureBoxFriendProfile.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBoxFriendProfile.Location = new System.Drawing.Point(1203, 770);
-            this.pictureBoxFriendProfile.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBoxFriendProfile.Name = "pictureBoxFriendProfile";
-            this.pictureBoxFriendProfile.Size = new System.Drawing.Size(180, 161);
-            this.pictureBoxFriendProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxFriendProfile.TabIndex = 72;
-            this.pictureBoxFriendProfile.TabStop = false;
-            // 
             // progressBarPhotoDetails
             // 
             this.progressBarPhotoDetails.BackColor = System.Drawing.Color.White;
@@ -316,15 +344,20 @@
             // 
             this.listBoxLikedPages.BackColor = System.Drawing.Color.LightGray;
             this.listBoxLikedPages.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.listBoxLikedPages.DataSource = this.pageBindingSource;
+            this.listBoxLikedPages.DisplayMember = "Name";
             this.listBoxLikedPages.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.listBoxLikedPages.FormattingEnabled = true;
             this.listBoxLikedPages.ItemHeight = 20;
-            this.listBoxLikedPages.Location = new System.Drawing.Point(504, 749);
+            this.listBoxLikedPages.Location = new System.Drawing.Point(504, 720);
             this.listBoxLikedPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.listBoxLikedPages.Name = "listBoxLikedPages";
             this.listBoxLikedPages.Size = new System.Drawing.Size(382, 142);
             this.listBoxLikedPages.TabIndex = 78;
-            this.listBoxLikedPages.Click += new System.EventHandler(this.listBoxLikedPages_Click);
+            // 
+            // pageBindingSource
+            // 
+            this.pageBindingSource.DataSource = typeof(FacebookWrapper.ObjectModel.Page);
             // 
             // labelLakdePages
             // 
@@ -332,42 +365,82 @@
             this.labelLakdePages.BackColor = System.Drawing.Color.Transparent;
             this.labelLakdePages.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelLakdePages.ForeColor = System.Drawing.Color.White;
-            this.labelLakdePages.Location = new System.Drawing.Point(501, 715);
+            this.labelLakdePages.Location = new System.Drawing.Point(501, 686);
             this.labelLakdePages.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelLakdePages.Name = "labelLakdePages";
             this.labelLakdePages.Size = new System.Drawing.Size(165, 29);
             this.labelLakdePages.TabIndex = 79;
             this.labelLakdePages.Text = "Liked Pages:";
             // 
-            // pictureBoxLikedPages
+            // pictureBoxLikedPage
             // 
-            this.pictureBoxLikedPages.BackColor = System.Drawing.Color.DimGray;
-            this.pictureBoxLikedPages.Location = new System.Drawing.Point(763, 808);
-            this.pictureBoxLikedPages.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.pictureBoxLikedPages.Name = "pictureBoxLikedPages";
-            this.pictureBoxLikedPages.Size = new System.Drawing.Size(125, 123);
-            this.pictureBoxLikedPages.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLikedPages.TabIndex = 80;
-            this.pictureBoxLikedPages.TabStop = false;
+            this.pictureBoxLikedPage.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBoxLikedPage.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.pageBindingSource, "ImageNormal", true));
+            this.pictureBoxLikedPage.Location = new System.Drawing.Point(780, 789);
+            this.pictureBoxLikedPage.Name = "pictureBoxLikedPage";
+            this.pictureBoxLikedPage.Size = new System.Drawing.Size(106, 103);
+            this.pictureBoxLikedPage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxLikedPage.TabIndex = 4;
+            this.pictureBoxLikedPage.TabStop = false;
+            // 
+            // linkLabelLikedPage
+            // 
+            this.linkLabelLikedPage.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabelLikedPage.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.pageBindingSource, "URL", true));
+            this.linkLabelLikedPage.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelLikedPage.ForeColor = System.Drawing.Color.White;
+            this.linkLabelLikedPage.Location = new System.Drawing.Point(544, 867);
+            this.linkLabelLikedPage.Name = "linkLabelLikedPage";
+            this.linkLabelLikedPage.Size = new System.Drawing.Size(220, 23);
+            this.linkLabelLikedPage.TabIndex = 80;
+            this.linkLabelLikedPage.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.likedPagesURl_LinkClicked);
+            // 
+            // pictureBoxFriendProfile
+            // 
+            this.pictureBoxFriendProfile.BackColor = System.Drawing.Color.DimGray;
+            this.pictureBoxFriendProfile.DataBindings.Add(new System.Windows.Forms.Binding("Image", this.userBindingSource, "ImageNormal", true));
+            this.pictureBoxFriendProfile.Location = new System.Drawing.Point(1216, 749);
+            this.pictureBoxFriendProfile.Name = "pictureBoxFriendProfile";
+            this.pictureBoxFriendProfile.Size = new System.Drawing.Size(157, 143);
+            this.pictureBoxFriendProfile.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBoxFriendProfile.TabIndex = 83;
+            this.pictureBoxFriendProfile.TabStop = false;
+            // 
+            // linkLabelFriendProfile
+            // 
+            this.linkLabelFriendProfile.BackColor = System.Drawing.Color.Transparent;
+            this.linkLabelFriendProfile.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.userBindingSource, "Link", true));
+            this.linkLabelFriendProfile.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkLabelFriendProfile.ForeColor = System.Drawing.Color.Black;
+            this.linkLabelFriendProfile.Location = new System.Drawing.Point(1005, 867);
+            this.linkLabelFriendProfile.Name = "linkLabelFriendProfile";
+            this.linkLabelFriendProfile.Size = new System.Drawing.Size(205, 23);
+            this.linkLabelFriendProfile.TabIndex = 85;
+            this.linkLabelFriendProfile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.friendUrl_LinkClicked);
             // 
             // FormMain
             // 
             this.AcceptButton = this.buttonLogin;
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1403, 1011);
-            this.Controls.Add(this.pictureBoxLikedPages);
+            this.Controls.Add(this.pictureBoxFriendProfile);
+            this.Controls.Add(linkLabel);
+            this.Controls.Add(this.linkLabelFriendProfile);
+            this.Controls.Add(uRLLabel);
+            this.Controls.Add(this.linkLabelLikedPage);
             this.Controls.Add(this.labelLakdePages);
+            this.Controls.Add(this.pictureBoxLikedPage);
             this.Controls.Add(this.listBoxLikedPages);
             this.Controls.Add(this.labelTimerPost);
             this.Controls.Add(this.progressBarTimerPost);
             this.Controls.Add(this.checkBoxAutoLogin);
             this.Controls.Add(this.labelPhotosDetails);
             this.Controls.Add(this.progressBarPhotoDetails);
-            this.Controls.Add(this.pictureBoxFriendProfile);
             this.Controls.Add(this.labelMagicFetures);
             this.Controls.Add(this.buttonStartTimerPost);
             this.Controls.Add(this.buttonPhotosTracker);
@@ -390,10 +463,12 @@
             this.Text = "Facebook+";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxProfileImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.userBindingSource)).EndInit();
             this.panelBio.ResumeLayout(false);
             this.panelBio.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pageBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxFriendProfile)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxLikedPages)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -414,7 +489,6 @@
         private System.Windows.Forms.Button buttonPhotosTracker;
         private System.Windows.Forms.Button buttonStartTimerPost;
         private System.Windows.Forms.Label labelMagicFetures;
-        private System.Windows.Forms.PictureBox pictureBoxFriendProfile;
         private System.Windows.Forms.ProgressBar progressBarPhotoDetails;
         private System.Windows.Forms.Timer timerProgressBarPhotoTracker;
         private System.Windows.Forms.Label labelPhotosDetails;
@@ -424,6 +498,11 @@
         private System.Windows.Forms.Label labelTimerPost;
         private System.Windows.Forms.ListBox listBoxLikedPages;
         private System.Windows.Forms.Label labelLakdePages;
-        private System.Windows.Forms.PictureBox pictureBoxLikedPages;
+        private System.Windows.Forms.BindingSource pageBindingSource;
+        private System.Windows.Forms.PictureBox pictureBoxLikedPage;
+        private System.Windows.Forms.LinkLabel linkLabelLikedPage;
+        private System.Windows.Forms.BindingSource userBindingSource;
+        private System.Windows.Forms.PictureBox pictureBoxFriendProfile;
+        private System.Windows.Forms.LinkLabel linkLabelFriendProfile;
     }
 }

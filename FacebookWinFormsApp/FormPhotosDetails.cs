@@ -12,17 +12,15 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public partial class FormPhotosDetails : Form
+    public partial class FormPhotosDetails : Form , IScreen
     {
         private const string k_UserWithoutPhotos = "You haven't photos =(";
 
         public UserPhotosDetails PhotosDetails { get; set; }
 
-        public FormPhotosDetails(User i_LoggedInUser)
+        public FormPhotosDetails()
         {
             InitializeComponent();
-            PhotosDetails = new UserPhotosDetails(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
-            updateAllControls();
         }
 
         private void updateAllControls()
@@ -66,6 +64,12 @@ namespace BasicFacebookFeatures
             {
                 i_Label.Text = k_UserWithoutPhotos;
             }
+        }
+
+        public void StartFeature(User i_LoggedInUser)
+        {
+            PhotosDetails = new UserPhotosDetails(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
+            updateAllControls();
         }
     }
 }

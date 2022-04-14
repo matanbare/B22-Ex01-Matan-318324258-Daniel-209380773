@@ -11,18 +11,15 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public partial class FormSchedulePosts : Form
+    public partial class FormSchedulePosts : Form , IScreen
     {
         private const int k_StartPoint = 0;
 
-        private ScheduledPost ScheduledPost { get; }
+        private ScheduledPost ScheduledPost { get; set; }
 
-        public FormSchedulePosts(User i_LoggedInUser)
+        public FormSchedulePosts()
         {
             InitializeComponent();
-
-            ScheduledPost = new ScheduledPost(i_LoggedInUser);
-            setGroupComboBoxByUser();
         }
 
         private void setGroupComboBoxByUser()
@@ -91,6 +88,12 @@ namespace BasicFacebookFeatures
         private void formSchedulePosts_Load(object sender, EventArgs e)
         {
             comboBoxGroupToPost.SelectedIndex = k_StartPoint;
+        }
+
+        public void StartFeature(User i_LoggedInUser)
+        {
+            ScheduledPost = new ScheduledPost(i_LoggedInUser);
+            setGroupComboBoxByUser();
         }
     }
 }
