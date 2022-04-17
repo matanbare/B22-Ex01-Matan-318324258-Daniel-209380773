@@ -16,19 +16,21 @@ namespace BasicFacebookFeatures
     {
         private const string k_UserWithoutPhotos = "You haven't photos =(";
 
-        public UserPhotosDetails PhotosDetails { get; set; }
 
-        public FormPhotosDetails()
+        public FacadeLogicManager FacadeLogicManager { get;}
+
+        public FormPhotosDetails(FacadeLogicManager i_FacadeLogicManager)
         {
             InitializeComponent();
+            FacadeLogicManager = i_FacadeLogicManager;
         }
 
         private void updateAllControls()
         {
-            setTotalReactionsLabelText(labelTotalComments, $"Total Comments:{PhotosDetails.TotalCommentsPhoto}");
-            setTotalReactionsLabelText(labelTotalLikes, $"Total Likes:{PhotosDetails.TotalLikesPhoto}");
-            setMostReactionsPictureBox(labelMostComments, pictureBoxMostComments, PhotosDetails.MostCommentsPhotoUrl, PhotosDetails.MostCommentsPhoto);
-            setMostReactionsPictureBox(labelMostLikedPhoto, pictureBoxMostLiked, PhotosDetails.MostLikedPhotoUrl, PhotosDetails.MostLikedPhoto);
+            setTotalReactionsLabelText(labelTotalComments, $"Total Comments:{FacadeLogicManager.UserPhotosDetails.TotalCommentsPhoto}");
+            setTotalReactionsLabelText(labelTotalLikes, $"Total Likes:{FacadeLogicManager.UserPhotosDetails.TotalLikesPhoto}");
+            setMostReactionsPictureBox(labelMostComments, pictureBoxMostComments, FacadeLogicManager.UserPhotosDetails.MostCommentsPhotoUrl, FacadeLogicManager.UserPhotosDetails.MostCommentsPhoto);
+            setMostReactionsPictureBox(labelMostLikedPhoto, pictureBoxMostLiked, FacadeLogicManager.UserPhotosDetails.MostLikedPhotoUrl, FacadeLogicManager.UserPhotosDetails.MostLikedPhoto);
             setBestFriendReactions(eTotalCount.Comments, out int numberOfComments, out string bestFriendPictureUrlComments, labelBestFriendComment, pictureBoxBestFriendsComments);
             setBestFriendReactions(eTotalCount.Comments, out int numberOfLikes, out string bestFriendPictureUrlLikes, labelBestFriendLikes, pictureBoxBestFriendsLikes);
         }
@@ -53,7 +55,7 @@ namespace BasicFacebookFeatures
 
         private void setBestFriendReactions(eTotalCount i_TotalCount, out int i_NumberOfReactions, out string i_PictureUrl, Label i_Label, PictureBox i_PictureBox)
         {
-            string name = PhotosDetails.GetBestFriendReactions(i_TotalCount, out i_NumberOfReactions, out i_PictureUrl);
+            string name = FacadeLogicManager.GetBestFriendReactions(i_TotalCount, out i_NumberOfReactions, out i_PictureUrl);
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -66,9 +68,9 @@ namespace BasicFacebookFeatures
             }
         }
 
-        public void StartFeature(User i_LoggedInUser)
+        public void LoadFeature(User i_LoggedInUser)
         {
-            PhotosDetails = new UserPhotosDetails(i_LoggedInUser.Albums, i_LoggedInUser.Friends);
+            FacadeLogicManager.LoadUserPhotosDetails();
             updateAllControls();
         }
     }

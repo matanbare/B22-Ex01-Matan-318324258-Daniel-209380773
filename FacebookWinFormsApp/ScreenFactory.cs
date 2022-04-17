@@ -9,23 +9,22 @@ namespace BasicFacebookFeatures
 {
     public static class ScreenFactory
     {
-        public static IScreen CreateScreen(eScreen i_EScreen)
+        public static IScreen CreateScreen(eScreen i_EScreen, FacadeLogicManager i_FacadeLogicManager)
         {
             IScreen screen = null;
 
             switch (i_EScreen)
             {
                 case eScreen.SchedulePost:
-                    screen = new FormSchedulePosts();
+                    screen = new FormSchedulePosts(i_FacadeLogicManager);
                     break;
                 case eScreen.PhotoDetails:
-                    screen = new FormPhotosDetails();
+                    screen = new FormPhotosDetails(i_FacadeLogicManager);
                     break;
             }
 
             return screen;
         }
-
     }
 
     public enum eScreen

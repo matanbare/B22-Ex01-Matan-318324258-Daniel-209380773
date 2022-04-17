@@ -25,7 +25,7 @@ namespace BasicFacebookFeatures
         private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
 
         private IScreen Screen { get; set; }
-
+        private FacadeLogicManager FacadeLogicManager { get; set; }
         private User LoggedInUser { get; set; }
 
         private LoginResult LoginResult { get; set; }
@@ -34,6 +34,10 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 20;
+
+            //new Thread((() => FacadeLogicManager = new FacadeLogicManager(LoggedInUser)));
+
+            
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -227,10 +231,17 @@ namespace BasicFacebookFeatures
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
         {
             setNewProgressBarLoading(labelTimerPost, timerProgressBarPost, progressBarTimerPost);
-            Screen = ScreenFactory.CreateScreen(eScreen.SchedulePost);
-            Screen.StartFeature(LoggedInUser);
-            //m_FormSchedulePosts = new FormSchedulePosts(LoggedInUser);
-            //new Thread(startTimerPost).Start();
+            Screen = ScreenFactory.CreateScreen(eScreen.SchedulePost, FacadeLogicManager);
+            //new Thread(startFeature);
+
+            Screen.LoadFeature(LoggedInUser);
+
+
+        }
+
+        private void startFeature()
+        {
+            Screen.LoadFeature(LoggedInUser);
         }
 
 
@@ -239,8 +250,10 @@ namespace BasicFacebookFeatures
             setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
             //m_FormPhotosDetails = new FormPhotosDetails(LoggedInUser);
             //new Thread(startPhotoDetails).Start();
-            Screen = ScreenFactory.CreateScreen(eScreen.PhotoDetails);
-            Screen.StartFeature(LoggedInUser);
+            Screen = ScreenFactory.CreateScreen(eScreen.PhotoDetails, FacadeLogicManager);
+            // new Thread(startFeature);
+            
+            Screen.LoadFeature(LoggedInUser);
         }
 
         private void timerProgressBar_Tick(object sender, EventArgs e)
@@ -290,6 +303,7 @@ namespace BasicFacebookFeatures
 
         private void setProfileData()
         {
+            FacadeLogicManager = new FacadeLogicManager(LoggedInUser);
             checkBoxAutoLogin.Invoke(new Action(() => checkBoxAutoLogin.Enabled = true));
             pictureBoxProfileImage.LoadAsync(LoggedInUser.PictureLargeURL);
             pictureBoxCoverPhoto.LoadAsync(getCoverPhoto());

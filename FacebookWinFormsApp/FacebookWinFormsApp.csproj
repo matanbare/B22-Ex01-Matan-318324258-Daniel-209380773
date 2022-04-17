@@ -90,9 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ScreenFactory.cs" />
-    <Compile Include="FacebookPlusLogic\ApplicationSettings.cs" />
-    <Compile Include="FacebookPlusLogic\BestFriendsTracker.cs" />
-    <Compile Include="ENums\ETotalCount.cs" />
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="FormPhotosDetails.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,12 +109,9 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FacebookPlusLogic\PostBySchedule.cs" />
     <Compile Include="IScreen.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FacebookPlusLogic\ScheduledPost.cs" />
-    <Compile Include="FacebookPlusLogic\UserPhotosDetails.cs" />
     <EmbeddedResource Include="FormPhotosDetails.resx">
       <DependentUpon>FormPhotosDetails.cs</DependentUpon>
     </EmbeddedResource>
@@ -178,6 +173,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\photoTrackerBackground1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LogicFacebookPlus\LogicFacebookPlus.csproj">
+      <Project>{a226d545-c472-4f24-b055-c7ea3933aa3c}</Project>
+      <Name>LogicFacebookPlus</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

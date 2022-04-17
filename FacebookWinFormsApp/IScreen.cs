@@ -9,6 +9,6 @@ namespace BasicFacebookFeatures
 {
     public interface IScreen
     {
-        void StartFeature(User i_LoggedInUser);
+        void LoadFeature(User i_LoggedInUser);
     }
 }

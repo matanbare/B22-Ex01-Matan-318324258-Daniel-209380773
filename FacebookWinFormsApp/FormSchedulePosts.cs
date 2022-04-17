@@ -15,16 +15,18 @@ namespace BasicFacebookFeatures
     {
         private const int k_StartPoint = 0;
 
-        private ScheduledPost ScheduledPost { get; set; }
+        private FacadeLogicManager FacadeLogicManager { get; }
 
-        public FormSchedulePosts()
+        public FormSchedulePosts(FacadeLogicManager iFacadeLogicManager)
         {
             InitializeComponent();
+
+            FacadeLogicManager = iFacadeLogicManager;
         }
 
         private void setGroupComboBoxByUser()
         {
-            foreach (Group group in ScheduledPost.UserGroups)
+            foreach (Group group in FacadeLogicManager.GetUserGroups())
             {
                 comboBoxGroupToPost.Items.Add(group.Name);
             }
@@ -34,10 +36,11 @@ namespace BasicFacebookFeatures
         {
             if (comboBoxGroupToPost.SelectedIndex != 0)
             {
-                bool isValidPost = ScheduledPost.FuturePostPublication(
+                bool isValidPost = FacadeLogicManager.LoadSchedulePost (
+
                     (string)comboBoxGroupToPost.SelectedItem,
                     textBoxPost.Text,
-                    ScheduledPost.GetPostName(textBoxPostName.Text),
+                    FacadeLogicManager.GetPostName(textBoxPostName.Text),
                     numericUpDownMinute.Text,
                     numericUpDownHours.Text);
 
@@ -58,7 +61,7 @@ namespace BasicFacebookFeatures
             listBoxPostedDone.Items.Clear();
             listBoxFuture.Items.Clear();
 
-            foreach (PostBySchedule postBySchedule in ScheduledPost.ScheduledPostsList)
+            foreach (PostBySchedule postBySchedule in FacadeLogicManager.GetPostList())
             {
                 if (postBySchedule.IsPosted)
                 {
@@ -90,9 +93,9 @@ namespace BasicFacebookFeatures
             comboBoxGroupToPost.SelectedIndex = k_StartPoint;
         }
 
-        public void StartFeature(User i_LoggedInUser)
+        public void LoadFeature(User i_LoggedInUser)
         {
-            ScheduledPost = new ScheduledPost(i_LoggedInUser);
+           // ScheduledPost = new ScheduledPost(i_LoggedInUser);
             setGroupComboBoxByUser();
         }
     }
