@@ -93,9 +93,8 @@ namespace BasicFacebookFeatures
             comboBoxGroupToPost.SelectedIndex = k_StartPoint;
         }
 
-        public void LoadFeature(User i_LoggedInUser)
+        public void LoadFeature()
         {
-           // ScheduledPost = new ScheduledPost(i_LoggedInUser);
             setGroupComboBoxByUser();
         }
     }

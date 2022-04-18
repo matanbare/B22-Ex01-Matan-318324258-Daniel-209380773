@@ -11,7 +11,6 @@ using System.Timers;
 using System.Windows.Forms;
 using FacebookWrapper.ObjectModel;
 using FacebookWrapper;
-using Timer = System.Timers.Timer;
 
 namespace BasicFacebookFeatures
 {
@@ -25,19 +24,17 @@ namespace BasicFacebookFeatures
         private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
 
         private IScreen Screen { get; set; }
-        private FacadeLogicManager FacadeLogicManager { get; set; }
-        private User LoggedInUser { get; set; }
 
-        private LoginResult LoginResult { get; set; }
+        private FacadeLogicManager FacadeLogicManager { get; set; }
+
+        private User FacebookLoggedInUser { get; set; }
+
+        private ILoginable LoginAdapter { get; } = new FacebookAdapter();
 
         public FormMain()
         {
             InitializeComponent();
             FacebookService.s_CollectionLimit = 20;
-
-            //new Thread((() => FacadeLogicManager = new FacadeLogicManager(LoggedInUser)));
-
-            
         }
 
         protected override void OnClosing(CancelEventArgs e)
@@ -73,19 +70,16 @@ namespace BasicFacebookFeatures
 
         private void autoLogin()
         {
-            LoginResult result = FacebookService.Connect(ApplicationSettings.Instance.AccessToken);
-            if (string.IsNullOrEmpty(result.ErrorMessage))
-            {
-                LoggedInUser = result.LoggedInUser;
-                buttonLogin.Invoke(new Action(buttonLoginStatusAfterAutoLogin));
-                
-                setProfileData();
-            }
+            LoginAdapter.AutoLogin();
+            FacebookLoggedInUser = (LoginAdapter as FacebookAdapter).LoggedInUser;
+
+            buttonLogin.Invoke(new Action(buttonLoginStatusAfterAutoLogin));
+            setProfileData();
         }
 
         private void buttonLoginStatusAfterAutoLogin()
         {
-            buttonLogin.Text = $"Logged in as {LoggedInUser.Name}";
+            buttonLogin.Text = $"Logged in as {FacebookLoggedInUser.Name}";
             buttonLogin.Enabled = false;
             enableFeaturesButtons(true);
         }
@@ -103,68 +97,26 @@ namespace BasicFacebookFeatures
 
         private void loginAndInitialization()
         {
-            LoginResult = loginToFacebook();
-
-            if (!string.IsNullOrEmpty(LoginResult.AccessToken))
+            try
             {
-                LoggedInUser = LoginResult.LoggedInUser;
-
-                buttonLogin.Text = $"Logged in as {LoginResult.LoggedInUser.Name}";
-
-                ApplicationSettings.Instance.AccessToken = LoginResult.AccessToken;
-              
+                LoginAdapter.Login();
+                FacebookLoggedInUser = (LoginAdapter as FacebookAdapter).LoggedInUser;
+                buttonLogin.Text = $"Logged in as {FacebookLoggedInUser.Name}";
                 new Thread(setProfileData).Start();
-                //setProfileData();
-
+                
                 listBoxLikedPages.DataSource = pageBindingSource;
                 listBoxLikedPages.DisplayMember = k_DisplayMemberPropertyName;
-                //linkLabelLikedPage.Text = string.Empty;
-                
+
                 listBoxFriends.DataSource = userBindingSource;
                 listBoxFriends.DisplayMember = k_DisplayMemberPropertyName;
-                //linkLabelFriendProfile.Text = string.Empty;
-
 
                 buttonLogin.Enabled = false;
                 enableFeaturesButtons(true);
             }
-            else
+            catch (Exception e)
             {
-                MessageBox.Show("Login Is Failed, Please Try Again", "Login Failed");
+                MessageBox.Show(e.Message, "Login Failed");
             }
-        }
-
-        private LoginResult loginToFacebook()
-        {
-            LoginResult loginResult = null;
-
-            try
-            {
-                loginResult = FacebookService.Login(
-                    "484536506563845",
-                    "email",
-                    "public_profile",
-                    "user_age_range",
-                    "user_birthday",
-                    "user_events",
-                    "user_friends",
-                    "user_gender",
-                    "user_hometown",
-                    "user_likes",
-                    "user_link",
-                    "user_location",
-                    "user_photos",
-                    "user_posts",
-                    "user_videos",
-                    "groups_access_member_info",
-                    "publish_to_groups");
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Login Is Failed, Please Try Again", "Login Failed");
-            }
-
-            return loginResult;
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -231,29 +183,19 @@ namespace BasicFacebookFeatures
         private void buttonStartTimerPost_Click(object sender, EventArgs e)
         {
             setNewProgressBarLoading(labelTimerPost, timerProgressBarPost, progressBarTimerPost);
-            Screen = ScreenFactory.CreateScreen(eScreen.SchedulePost, FacadeLogicManager);
-            //new Thread(startFeature);
-
-            Screen.LoadFeature(LoggedInUser);
-
-
+            startFeatureAfterClicked(eScreenType.SchedulePost);
         }
-
-        private void startFeature()
-        {
-            Screen.LoadFeature(LoggedInUser);
-        }
-
 
         private void buttonPhotosDetails_Click(object sender, EventArgs e)
         {
             setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
-            //m_FormPhotosDetails = new FormPhotosDetails(LoggedInUser);
-            //new Thread(startPhotoDetails).Start();
-            Screen = ScreenFactory.CreateScreen(eScreen.PhotoDetails, FacadeLogicManager);
-            // new Thread(startFeature);
-            
-            Screen.LoadFeature(LoggedInUser);
+            startFeatureAfterClicked(eScreenType.PhotoDetails);
+        }
+
+        private void startFeatureAfterClicked(eScreenType iScreenTypeType)
+        {
+            Screen = ScreenFactory.CreateScreen(iScreenTypeType, FacadeLogicManager);
+            Screen.LoadFeature();
         }
 
         private void timerProgressBar_Tick(object sender, EventArgs e)
@@ -290,7 +232,7 @@ namespace BasicFacebookFeatures
         {
             string coverImageUrl = k_EmptyPictureUrl;
 
-            foreach (Album album in LoggedInUser.Albums)
+            foreach (Album album in FacebookLoggedInUser.Albums)
             {
                 if (album.Name.Equals(k_CoverAlbumName))
                 {
@@ -303,58 +245,23 @@ namespace BasicFacebookFeatures
 
         private void setProfileData()
         {
-            FacadeLogicManager = new FacadeLogicManager(LoggedInUser);
+            FacadeLogicManager = new FacadeLogicManager(FacebookLoggedInUser);
             checkBoxAutoLogin.Invoke(new Action(() => checkBoxAutoLogin.Enabled = true));
-            pictureBoxProfileImage.LoadAsync(LoggedInUser.PictureLargeURL);
+            pictureBoxProfileImage.LoadAsync(FacebookLoggedInUser.PictureLargeURL);
             pictureBoxCoverPhoto.LoadAsync(getCoverPhoto());
 
-            if (LoggedInUser.Location != null)
+            if (FacebookLoggedInUser.Location != null)
             {
-                setBioLabelsDetails(LoggedInUser.Birthday, LoggedInUser.Gender.ToString(), LoggedInUser.Friends.Count, LoggedInUser.Location.Name);
+                setBioLabelsDetails(FacebookLoggedInUser.Birthday, FacebookLoggedInUser.Gender.ToString(), FacebookLoggedInUser.Friends.Count, FacebookLoggedInUser.Location.Name);
             }
             else
             {
-                setBioLabelsDetails(LoggedInUser.Birthday, LoggedInUser.Gender.ToString(), LoggedInUser.Friends.Count);
+                setBioLabelsDetails(FacebookLoggedInUser.Birthday, FacebookLoggedInUser.Gender.ToString(), FacebookLoggedInUser.Friends.Count);
             }
 
-            Invoke(new Action(() => pageBindingSource.DataSource = LoggedInUser.LikedPages));
-            Invoke(new Action(() => userBindingSource.DataSource = LoggedInUser.Friends));
+            Invoke(new Action(() => pageBindingSource.DataSource = FacebookLoggedInUser.LikedPages));
+            Invoke(new Action(() => userBindingSource.DataSource = FacebookLoggedInUser.Friends));
         }
-
-
-        //private void updatePictureBoxImageByListBox<T>(ListBox i_ListBox, PictureBox i_PictureBox, ICollection<T> i_Collection)
-        //{
-        //    foreach (T item in i_Collection)
-        //    {
-        //        if (item.Equals(i_ListBox.SelectedItem))
-        //        {
-        //            if (item is User user)
-        //            {
-        //                i_PictureBox.LoadAsync(user.PictureLargeURL);
-        //                break;
-        //            }
-                    
-        //            if (item is Page page)
-        //            {
-        //                i_PictureBox.LoadAsync(page.PictureLargeURL);
-        //                break;
-        //            }
-        //        }
-        //    }
-        //}
-
-        //private void updateListBoxItemsByCollection<T>(ListBox i_ListBox, ICollection<T> i_Collection)
-        //{
-        //    i_ListBox.Invoke(new Action(() => i_ListBox.DisplayMember = k_DisplayMemberPropertyName));
-
-        //    if (i_Collection != null)
-        //    {
-        //        foreach (T item in i_Collection)
-        //        {
-        //            i_ListBox.Invoke(new Action(() => i_ListBox.Items.Add(item)));
-        //        }
-        //    }
-        //}
 
         private void setBioLabelsDetails(string i_Birthday = "", string i_Gender = "", int i_FriendsCount = 0, string i_From = "")
         {
@@ -377,6 +284,5 @@ namespace BasicFacebookFeatures
 
             Process.Start(url);
         }
-
     }
 }

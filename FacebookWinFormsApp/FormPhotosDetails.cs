@@ -16,7 +16,6 @@ namespace BasicFacebookFeatures
     {
         private const string k_UserWithoutPhotos = "You haven't photos =(";
 
-
         public FacadeLogicManager FacadeLogicManager { get;}
 
         public FormPhotosDetails(FacadeLogicManager i_FacadeLogicManager)
@@ -68,7 +67,7 @@ namespace BasicFacebookFeatures
             }
         }
 
-        public void LoadFeature(User i_LoggedInUser)
+        public void LoadFeature()
         {
             FacadeLogicManager.LoadUserPhotosDetails();
             updateAllControls();
