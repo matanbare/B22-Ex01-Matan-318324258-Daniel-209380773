@@ -34,6 +34,14 @@ namespace BasicFacebookFeatures
             return SchedulePost.UserGroups;
         }
 
+        public IEnumerable<Group> GetGroups()
+        {
+            foreach (Group group in SchedulePost.UserGroups)
+            {
+                yield return group;
+            }
+        }
+
         public string GetPostName(string i_UserInput)
         {
             return SchedulePost.GetPostName(i_UserInput);

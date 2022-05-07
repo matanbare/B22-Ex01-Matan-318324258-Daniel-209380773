@@ -14,15 +14,17 @@ using FacebookWrapper;
 
 namespace BasicFacebookFeatures
 {
-    public partial class FormMain : Form
+    public partial class FormMain : Form, IProgressBarListener
     {
         private const int k_StepsInProgressBar = 1;
+        private const int k_startPoint = 0;
         private const string k_CoverAlbumName = "Cover photos";
         private const string k_ProgressBarMessageFirst = "In progress...";
         private const string k_ProgressBarMessageLast = "Done!";
         private const string k_DisplayMemberPropertyName = "Name";
         private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
 
+        private ISorterStrategy FriendsSortSorterStrategy{ get; set; }
         private IScreen Screen { get; set; }
 
         private FacadeLogicManager FacadeLogicManager { get; set; }
@@ -56,6 +58,7 @@ namespace BasicFacebookFeatures
             this.WindowState = ApplicationSettings.Instance.LastWindowState;
             this.Location = ApplicationSettings.Instance.LastWindowLocation;
             this.checkBoxAutoLogin.Checked = ApplicationSettings.Instance.AutoLogin;
+            comboBoxFriendsSortBy.SelectedIndex = k_startPoint;
         }
 
         protected override void OnShown(EventArgs e)
@@ -188,7 +191,9 @@ namespace BasicFacebookFeatures
 
         private void buttonPhotosDetails_Click(object sender, EventArgs e)
         {
-            setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
+            IProgressBarListener listener = this;
+            FacadeLogicManager.UserPhotosDetails.AddListener(listener);
+            //setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
             startFeatureAfterClicked(eScreenType.PhotoDetails);
         }
 
@@ -283,6 +288,97 @@ namespace BasicFacebookFeatures
             string url = (sender as LinkLabel).Text;
 
             Process.Start(url);
+        }
+
+        public void UpdateProgressBar(string i_AlbumName, int i_NumberOfAlbums)
+        {
+            progressBarPhotoDetails.Maximum = FacebookLoggedInUser.Albums.Count;
+            progressBarPhotoDetails.Increment(1);
+            Thread.Sleep(1000);
+            if (progressBarPhotoDetails.Value == progressBarPhotoDetails.Maximum)
+            {
+                labelPhotosDetails.Text = k_ProgressBarMessageLast;
+                
+                (Screen as Form).Show();
+            }
+            else
+            {
+                string text =
+                    $"Load Album {i_AlbumName} {i_NumberOfAlbums} / {FacebookLoggedInUser.Albums.Count}";
+
+                changeLabelText(labelPhotosDetails, text);
+            }
+
+            Application.DoEvents();
+        }
+
+        private void changeLabelText(Label i_Label, string i_TextToChange)
+        {
+            i_Label.Text = i_TextToChange;
+        }
+
+        private void comboBoxFriendsSortBy_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string Type = String.Concat(comboBoxFriendsSortBy.SelectedItem.ToString().Where(ch => !Char.IsWhiteSpace(ch)));
+            ;
+
+            if (eFriendsSortType.TryParse(Type, out eFriendsSortType friendsSortType))
+            {
+                   FriendsSortSorterStrategy = setStrategy(friendsSortType);
+                   listBoxFriends.DataSource = null;
+
+                   listBoxFriends.Items.Clear();
+                   listBoxFriends.SelectedIndexChanged += ListBoxFriends_SelectedIndexChanged;
+
+                   FacebookObjectCollection<User> sortedFriendsList = FriendsSortSorterStrategy.SortCollection();
+
+                   foreach (var friend in sortedFriendsList)
+                   {
+                       listBoxFriends.Items.Add(friend);
+                   }
+
+                   labelFriends.Text = $"Friends: {sortedFriendsList.Count}";
+            }
+            else
+            {
+                listBoxFriends.SelectedIndexChanged -= ListBoxFriends_SelectedIndexChanged;
+                listBoxFriends.DataSource = userBindingSource;
+                listBoxFriends.DisplayMember = k_DisplayMemberPropertyName;
+            }
+        }
+
+        private void ListBoxFriends_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            User selectedUser = listBoxFriends.SelectedItem as User;
+            
+            if (selectedUser != null)
+            {
+                pictureBoxFriendProfile.LoadAsync(selectedUser.PictureNormalURL);
+                linkLabelFriendProfile.Text = selectedUser.Link;
+            }
+        }
+
+        private ISorterStrategy setStrategy(eFriendsSortType i_SortType)
+        {
+            ISorterStrategy concreteSorterStrategy = null;
+
+            switch (i_SortType)
+            {
+                case eFriendsSortType.AgeASC:
+                    concreteSorterStrategy = new AgeSorter(FacebookLoggedInUser.Friends, eSortAgeBy.Ascending);
+                    break;
+                case eFriendsSortType.AgeDEC:
+                    concreteSorterStrategy = new AgeSorter(FacebookLoggedInUser.Friends, eSortAgeBy.Descending);
+                    break;
+                case eFriendsSortType.Female:
+                    concreteSorterStrategy = new GenderSorter(FacebookLoggedInUser.Friends, User.eGender.female);
+                    break;
+                case eFriendsSortType.Male:
+                    concreteSorterStrategy = new GenderSorter(FacebookLoggedInUser.Friends, User.eGender.male);
+                    break;
+            }
+
+            return concreteSorterStrategy;
         }
     }
 }

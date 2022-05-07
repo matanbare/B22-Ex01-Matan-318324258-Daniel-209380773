@@ -80,6 +80,7 @@
             // 
             this.comboBoxGroupToPost.BackColor = System.Drawing.Color.LightGray;
             this.comboBoxGroupToPost.FormattingEnabled = true;
+            this.comboBoxGroupToPost.ItemHeight = 20;
             this.comboBoxGroupToPost.Items.AddRange(new object[] {
             "None"});
             this.comboBoxGroupToPost.Location = new System.Drawing.Point(47, 528);
@@ -87,7 +88,7 @@
             this.comboBoxGroupToPost.Name = "comboBoxGroupToPost";
             this.comboBoxGroupToPost.Size = new System.Drawing.Size(281, 28);
             this.comboBoxGroupToPost.TabIndex = 2;
-            this.comboBoxGroupToPost.Tag = string.Empty;
+            this.comboBoxGroupToPost.Tag = "";
             // 
             // numericUpDownMinute
             // 

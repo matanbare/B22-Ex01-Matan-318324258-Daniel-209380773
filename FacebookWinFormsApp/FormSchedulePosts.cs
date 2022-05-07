@@ -24,21 +24,33 @@ namespace BasicFacebookFeatures
             FacadeLogicManager = iFacadeLogicManager;
         }
 
+        //private void setGroupComboBoxByUser()
+        //{
+        //    foreach (Group group in FacadeLogicManager.GetUserGroups())
+        //    {
+        //        comboBoxGroupToPost.Items.Add(group.Name);
+        //    }
+        //}
+
         private void setGroupComboBoxByUser()
         {
-            foreach (Group group in FacadeLogicManager.GetUserGroups())
+            foreach (Group group in FacadeLogicManager.GetGroups())
             {
-                comboBoxGroupToPost.Items.Add(group.Name);
+                comboBoxGroupToPost.Items.Add(group);
             }
         }
 
         private void buttonPost_Click(object sender, EventArgs e)
         {
+
+            string groupName = comboBoxGroupToPost.SelectedItem.ToString();
+
             if (comboBoxGroupToPost.SelectedIndex != 0)
             {
                 bool isValidPost = FacadeLogicManager.LoadSchedulePost (
 
-                    (string)comboBoxGroupToPost.SelectedItem,
+                    //(string)comboBoxGroupToPost.SelectedItem,
+                    groupName,
                     textBoxPost.Text,
                     FacadeLogicManager.GetPostName(textBoxPostName.Text),
                     numericUpDownMinute.Text,

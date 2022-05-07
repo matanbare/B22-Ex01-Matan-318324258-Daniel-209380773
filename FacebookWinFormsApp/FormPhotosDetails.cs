@@ -15,6 +15,7 @@ namespace BasicFacebookFeatures
     public partial class FormPhotosDetails : Form , IScreen
     {
         private const string k_UserWithoutPhotos = "You haven't photos =(";
+        private static bool isFeatureLoad = false;
 
         public FacadeLogicManager FacadeLogicManager { get;}
 
@@ -22,6 +23,7 @@ namespace BasicFacebookFeatures
         {
             InitializeComponent();
             FacadeLogicManager = i_FacadeLogicManager;
+            
         }
 
         private void updateAllControls()
@@ -69,7 +71,16 @@ namespace BasicFacebookFeatures
 
         public void LoadFeature()
         {
-            FacadeLogicManager.LoadUserPhotosDetails();
+            if (!isFeatureLoad)
+            {
+                FacadeLogicManager.LoadUserPhotosDetails();
+                isFeatureLoad = true;
+            }
+            else
+            {
+                this.Show();
+            }
+           
             updateAllControls();
         }
     }

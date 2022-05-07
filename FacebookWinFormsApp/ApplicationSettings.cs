@@ -17,7 +17,7 @@ namespace BasicFacebookFeatures
 
         static ApplicationSettings()
         {
-            sr_FileName = Application.ExecutablePath + ".ApplicationSettings18.xml";
+            sr_FileName = Application.ExecutablePath + ".ApplicationSettings20.xml";
         }
 
         private ApplicationSettings()

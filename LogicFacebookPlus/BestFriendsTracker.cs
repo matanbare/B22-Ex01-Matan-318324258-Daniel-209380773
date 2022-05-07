@@ -15,9 +15,9 @@ namespace BasicFacebookFeatures
 
         public int TotalComments { get; set; } = 0;
 
-        public BestFriendsTracker(string i_FriendName)
+        public BestFriendsTracker(string i_Name)
         {
-            Name = i_FriendName;
+            Name = i_Name;
         }
     }
 }

@@ -28,12 +28,32 @@ namespace BasicFacebookFeatures
         
         public int TotalLikesPhoto { get; set; }
 
+        private readonly List<IProgressBarListener> r_Listeners = new List<IProgressBarListener>();
+
         public UserPhotosDetails(FacebookObjectCollection<Album> i_UserAlbums, FacebookObjectCollection<User> i_UserFriends)
         {
             AlbumsList = i_UserAlbums;
             FriendsList = i_UserFriends;
             r_FriendsCommentsAndLikesDictionary = new Dictionary<User, BestFriendsTracker>(FriendsList.Count);
             //TakeAllDetails();
+        }
+
+        public void AddListener(IProgressBarListener i_ProgressBarListener)
+        {
+            r_Listeners.Add(i_ProgressBarListener);
+        }
+
+        public void RemoveListener(IProgressBarListener i_ProgressBarListener)
+        {
+            r_Listeners.Remove(i_ProgressBarListener);
+        }
+
+        private void notifyAllListeners(string i_AlbumName, int i_NumberOfAlbums)
+        {
+            foreach (IProgressBarListener listener in r_Listeners)
+            {
+                listener.UpdateProgressBar(i_AlbumName, i_NumberOfAlbums);
+            }
         }
 
         internal void TakeAllDetails()
@@ -44,8 +64,12 @@ namespace BasicFacebookFeatures
 
         private void calculatePhotoDetails()
         {
+            int counterAlbums = 1;
+
             foreach (Album album in AlbumsList)
             {
+                notifyAllListeners(album.Name, counterAlbums++);
+
                 foreach (Photo photo in album.Photos)
                 {
                     TotalCommentsPhoto += photo.Comments.Count;

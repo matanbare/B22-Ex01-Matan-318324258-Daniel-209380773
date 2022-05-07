@@ -62,6 +62,8 @@
             this.linkLabelLikedPage = new System.Windows.Forms.LinkLabel();
             this.pictureBoxFriendProfile = new System.Windows.Forms.PictureBox();
             this.linkLabelFriendProfile = new System.Windows.Forms.LinkLabel();
+            this.labelFriendsSortBy = new System.Windows.Forms.Label();
+            this.comboBoxFriendsSortBy = new System.Windows.Forms.ComboBox();
             uRLLabel = new System.Windows.Forms.Label();
             linkLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCoverPhoto)).BeginInit();
@@ -166,7 +168,7 @@
             this.labelFriends.BackColor = System.Drawing.Color.Transparent;
             this.labelFriends.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelFriends.ForeColor = System.Drawing.Color.White;
-            this.labelFriends.Location = new System.Drawing.Point(1003, 475);
+            this.labelFriends.Location = new System.Drawing.Point(1003, 442);
             this.labelFriends.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelFriends.Name = "labelFriends";
             this.labelFriends.Size = new System.Drawing.Size(109, 29);
@@ -278,7 +280,7 @@
             // progressBarPhotoDetails
             // 
             this.progressBarPhotoDetails.BackColor = System.Drawing.Color.White;
-            this.progressBarPhotoDetails.Location = new System.Drawing.Point(96, 669);
+            this.progressBarPhotoDetails.Location = new System.Drawing.Point(96, 667);
             this.progressBarPhotoDetails.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.progressBarPhotoDetails.Name = "progressBarPhotoDetails";
             this.progressBarPhotoDetails.Size = new System.Drawing.Size(260, 48);
@@ -293,12 +295,12 @@
             // 
             this.labelPhotosDetails.AutoSize = true;
             this.labelPhotosDetails.BackColor = System.Drawing.Color.MediumSlateBlue;
-            this.labelPhotosDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPhotosDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPhotosDetails.ForeColor = System.Drawing.Color.White;
             this.labelPhotosDetails.Location = new System.Drawing.Point(95, 684);
             this.labelPhotosDetails.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelPhotosDetails.Name = "labelPhotosDetails";
-            this.labelPhotosDetails.Size = new System.Drawing.Size(0, 24);
+            this.labelPhotosDetails.Size = new System.Drawing.Size(0, 16);
             this.labelPhotosDetails.TabIndex = 74;
             // 
             // checkBoxAutoLogin
@@ -418,6 +420,35 @@
             this.linkLabelFriendProfile.TabIndex = 85;
             this.linkLabelFriendProfile.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.friendUrl_LinkClicked);
             // 
+            // labelFriendsSortBy
+            // 
+            this.labelFriendsSortBy.AutoSize = true;
+            this.labelFriendsSortBy.BackColor = System.Drawing.Color.Transparent;
+            this.labelFriendsSortBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelFriendsSortBy.ForeColor = System.Drawing.Color.White;
+            this.labelFriendsSortBy.Location = new System.Drawing.Point(1007, 486);
+            this.labelFriendsSortBy.Name = "labelFriendsSortBy";
+            this.labelFriendsSortBy.Size = new System.Drawing.Size(81, 24);
+            this.labelFriendsSortBy.TabIndex = 86;
+            this.labelFriendsSortBy.Text = "Sort by:";
+            // 
+            // comboBoxFriendsSortBy
+            // 
+            this.comboBoxFriendsSortBy.BackColor = System.Drawing.Color.LightGray;
+            this.comboBoxFriendsSortBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBoxFriendsSortBy.FormattingEnabled = true;
+            this.comboBoxFriendsSortBy.Items.AddRange(new object[] {
+            "Default",
+            "Age ASC",
+            "Age DEC",
+            "Male",
+            "Female"});
+            this.comboBoxFriendsSortBy.Location = new System.Drawing.Point(1089, 482);
+            this.comboBoxFriendsSortBy.Name = "comboBoxFriendsSortBy";
+            this.comboBoxFriendsSortBy.Size = new System.Drawing.Size(121, 32);
+            this.comboBoxFriendsSortBy.TabIndex = 87;
+            this.comboBoxFriendsSortBy.SelectedIndexChanged += new System.EventHandler(this.comboBoxFriendsSortBy_SelectedIndexChanged);
+            // 
             // FormMain
             // 
             this.AcceptButton = this.buttonLogin;
@@ -427,7 +458,9 @@
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImage = global::BasicFacebookFeatures.Properties.Resources.facebookBackgroundApp1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(1403, 1011);
+            this.ClientSize = new System.Drawing.Size(1403, 1028);
+            this.Controls.Add(this.comboBoxFriendsSortBy);
+            this.Controls.Add(this.labelFriendsSortBy);
             this.Controls.Add(this.pictureBoxFriendProfile);
             this.Controls.Add(linkLabel);
             this.Controls.Add(this.linkLabelFriendProfile);
@@ -504,5 +537,7 @@
         private System.Windows.Forms.BindingSource userBindingSource;
         private System.Windows.Forms.PictureBox pictureBoxFriendProfile;
         private System.Windows.Forms.LinkLabel linkLabelFriendProfile;
+        private System.Windows.Forms.Label labelFriendsSortBy;
+        private System.Windows.Forms.ComboBox comboBoxFriendsSortBy;
     }
 }
