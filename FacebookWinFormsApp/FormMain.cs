@@ -24,7 +24,8 @@ namespace BasicFacebookFeatures
         private const string k_DisplayMemberPropertyName = "Name";
         private const string k_EmptyPictureUrl = "https://cdn.discordapp.com/attachments/643135463275888650/953215889656926278/1483382.jpg";
 
-        private ISorterStrategy FriendsSortSorterStrategy{ get; set; }
+        private ISorterStrategy FriendsSortSorterStrategy { get; set; }
+
         private IScreen Screen { get; set; }
 
         private FacadeLogicManager FacadeLogicManager { get; set; }
@@ -193,7 +194,6 @@ namespace BasicFacebookFeatures
         {
             IProgressBarListener listener = this;
             FacadeLogicManager.UserPhotosDetails.AddListener(listener);
-            //setNewProgressBarLoading(labelPhotosDetails, timerProgressBarPhotoTracker, progressBarPhotoDetails);
             startFeatureAfterClicked(eScreenType.PhotoDetails);
         }
 
@@ -270,10 +270,10 @@ namespace BasicFacebookFeatures
 
         private void setBioLabelsDetails(string i_Birthday = "", string i_Gender = "", int i_FriendsCount = 0, string i_From = "")
         {
-            labelBirthday.Invoke(new Action((() => labelBirthday.Text = $"Birthday:{i_Birthday}")));
-            labelGender.Invoke(new Action((() => labelGender.Text = $"Gender:{i_Gender}")));
-            labelFrom.Invoke(new Action((() => labelFrom.Text = $"From:{i_From}")));
-            labelFriends.Invoke(new Action((() => labelFriends.Text = i_FriendsCount > 0 ? $"Friends:{i_FriendsCount}" : $"Friends:")));
+            labelBirthday.Invoke(new Action(() => labelBirthday.Text = $"Birthday:{i_Birthday}"));
+            labelGender.Invoke(new Action(() => labelGender.Text = $"Gender:{i_Gender}"));
+            labelFrom.Invoke(new Action(() => labelFrom.Text = $"From:{i_From}"));
+            labelFriends.Invoke(new Action(() => labelFriends.Text = i_FriendsCount > 0 ? $"Friends:{i_FriendsCount}" : $"Friends:"));
         }
 
         private void likedPagesURl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -294,7 +294,7 @@ namespace BasicFacebookFeatures
         {
             progressBarPhotoDetails.Maximum = FacebookLoggedInUser.Albums.Count;
             progressBarPhotoDetails.Increment(1);
-            Thread.Sleep(1000);
+            Thread.Sleep(200);
             if (progressBarPhotoDetails.Value == progressBarPhotoDetails.Maximum)
             {
                 labelPhotosDetails.Text = k_ProgressBarMessageLast;
@@ -319,10 +319,9 @@ namespace BasicFacebookFeatures
 
         private void comboBoxFriendsSortBy_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string Type = String.Concat(comboBoxFriendsSortBy.SelectedItem.ToString().Where(ch => !Char.IsWhiteSpace(ch)));
-            ;
+            string Type = string.Concat(comboBoxFriendsSortBy.SelectedItem.ToString().Where(ch => !char.IsWhiteSpace(ch)));
 
-            if (eFriendsSortType.TryParse(Type, out eFriendsSortType friendsSortType))
+            if (EFriendsSortType.eFriendsSortType.TryParse(Type, out EFriendsSortType.eFriendsSortType friendsSortType))
             {
                    FriendsSortSorterStrategy = setStrategy(friendsSortType);
                    listBoxFriends.DataSource = null;
@@ -358,22 +357,22 @@ namespace BasicFacebookFeatures
             }
         }
 
-        private ISorterStrategy setStrategy(eFriendsSortType i_SortType)
+        private ISorterStrategy setStrategy(EFriendsSortType.eFriendsSortType i_SortType)
         {
             ISorterStrategy concreteSorterStrategy = null;
 
             switch (i_SortType)
             {
-                case eFriendsSortType.AgeASC:
+                case EFriendsSortType.eFriendsSortType.AgeASC:
                     concreteSorterStrategy = new AgeSorter(FacebookLoggedInUser.Friends, eSortAgeBy.Ascending);
                     break;
-                case eFriendsSortType.AgeDEC:
+                case EFriendsSortType.eFriendsSortType.AgeDEC:
                     concreteSorterStrategy = new AgeSorter(FacebookLoggedInUser.Friends, eSortAgeBy.Descending);
                     break;
-                case eFriendsSortType.Female:
+                case EFriendsSortType.eFriendsSortType.Female:
                     concreteSorterStrategy = new GenderSorter(FacebookLoggedInUser.Friends, User.eGender.female);
                     break;
-                case eFriendsSortType.Male:
+                case EFriendsSortType.eFriendsSortType.Male:
                     concreteSorterStrategy = new GenderSorter(FacebookLoggedInUser.Friends, User.eGender.male);
                     break;
             }

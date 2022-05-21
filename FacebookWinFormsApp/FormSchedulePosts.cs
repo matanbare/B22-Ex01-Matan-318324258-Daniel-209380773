@@ -11,7 +11,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public partial class FormSchedulePosts : Form , IScreen
+    public partial class FormSchedulePosts : Form, IScreen
     {
         private const int k_StartPoint = 0;
 
@@ -24,17 +24,9 @@ namespace BasicFacebookFeatures
             FacadeLogicManager = iFacadeLogicManager;
         }
 
-        //private void setGroupComboBoxByUser()
-        //{
-        //    foreach (Group group in FacadeLogicManager.GetUserGroups())
-        //    {
-        //        comboBoxGroupToPost.Items.Add(group.Name);
-        //    }
-        //}
-
         private void setGroupComboBoxByUser()
         {
-            foreach (Group group in FacadeLogicManager.GetGroups())
+            foreach (Group group in FacadeLogicManager.UserGroups)
             {
                 comboBoxGroupToPost.Items.Add(group);
             }
@@ -42,20 +34,16 @@ namespace BasicFacebookFeatures
 
         private void buttonPost_Click(object sender, EventArgs e)
         {
-
             string groupName = comboBoxGroupToPost.SelectedItem.ToString();
 
             if (comboBoxGroupToPost.SelectedIndex != 0)
             {
-                bool isValidPost = FacadeLogicManager.LoadSchedulePost (
-
-                    //(string)comboBoxGroupToPost.SelectedItem,
+                bool isValidPost = FacadeLogicManager.LoadSchedulePost(
                     groupName,
                     textBoxPost.Text,
                     FacadeLogicManager.GetPostName(textBoxPostName.Text),
                     numericUpDownMinute.Text,
                     numericUpDownHours.Text);
-
                 if (isValidPost)
                 {
                     addDatePublishToListBox();

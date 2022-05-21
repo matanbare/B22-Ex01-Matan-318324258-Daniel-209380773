@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace BasicFacebookFeatures
 {
-    public interface ILoginable
+    public enum eSortAgeBy
     {
-        void Login();
-
-        void AutoLogin();
+        Ascending = 1,
+        Descending
     }
 }

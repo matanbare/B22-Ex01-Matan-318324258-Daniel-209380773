@@ -35,7 +35,6 @@ namespace BasicFacebookFeatures
             AlbumsList = i_UserAlbums;
             FriendsList = i_UserFriends;
             r_FriendsCommentsAndLikesDictionary = new Dictionary<User, BestFriendsTracker>(FriendsList.Count);
-            //TakeAllDetails();
         }
 
         public void AddListener(IProgressBarListener i_ProgressBarListener)

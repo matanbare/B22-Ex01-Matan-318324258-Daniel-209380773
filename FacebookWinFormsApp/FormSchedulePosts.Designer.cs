@@ -88,7 +88,7 @@
             this.comboBoxGroupToPost.Name = "comboBoxGroupToPost";
             this.comboBoxGroupToPost.Size = new System.Drawing.Size(281, 28);
             this.comboBoxGroupToPost.TabIndex = 2;
-            this.comboBoxGroupToPost.Tag = "";
+            this.comboBoxGroupToPost.Tag = string.Empty;
             // 
             // numericUpDownMinute
             // 

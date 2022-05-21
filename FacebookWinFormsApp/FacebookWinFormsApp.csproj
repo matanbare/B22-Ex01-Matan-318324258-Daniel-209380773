@@ -59,7 +59,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="AgeSorter.cs" />
+    <Compile Include="EFriendsSortType.cs" />
     <Compile Include="eScreenType.cs" />
+    <Compile Include="ESortAgeBy.cs" />
     <Compile Include="FacebookAdapter.cs" />
     <Compile Include="ILoginable.cs" />
     <Compile Include="ISorterStrategy.cs" />
@@ -106,6 +108,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="B22 Ex03 Matan 318324258 Daniel 209380773.docx" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.Page.datasource" />
     <None Include="Properties\DataSources\FacebookWrapper.ObjectModel.User.datasource" />

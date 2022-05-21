@@ -5,7 +5,7 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public class FacebookAdapter : FacebookService , ILoginable
+    public class FacebookAdapter : FacebookService, ILoginable
     {
         public User LoggedInUser { get; set; }
 

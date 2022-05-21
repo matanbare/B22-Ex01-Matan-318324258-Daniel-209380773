@@ -7,16 +7,8 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    interface ISorterStrategy
+    public interface ISorterStrategy
     {
         FacebookObjectCollection<User> SortCollection();
-    }
-
-    public enum eFriendsSortType
-    {
-        AgeASC = 1,
-        AgeDEC,
-        Male,
-        Female
     }
 }

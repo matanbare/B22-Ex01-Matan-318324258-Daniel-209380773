@@ -7,9 +7,10 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    class GenderSorter : ISorterStrategy
+    public class GenderSorter : ISorterStrategy
     {
-        private FacebookObjectCollection<User> UserFriends { get;}
+        private FacebookObjectCollection<User> UserFriends { get; }
+
         private User.eGender GenderToSort { get; }
 
         public GenderSorter(FacebookObjectCollection<User> i_UserFriends, User.eGender i_GenderToSort)

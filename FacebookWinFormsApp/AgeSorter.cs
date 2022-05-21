@@ -33,7 +33,8 @@ namespace BasicFacebookFeatures
         {
             foreach (var friend in UserFriends)
             {
-                DateTime newDateTime = DateTime.Parse(friend.Birthday,
+                DateTime newDateTime = DateTime.Parse(
+                    friend.Birthday,
                     new CultureInfo("en-US", true),
                     DateTimeStyles.AssumeLocal);
                 UserFriendsCollection.Add(friend, newDateTime);
@@ -60,11 +61,5 @@ namespace BasicFacebookFeatures
             
             return upToDateFriendList;
         }
-    }
-
-    public enum eSortAgeBy
-    {
-        Ascending = 1,
-        Descending
     }
 }

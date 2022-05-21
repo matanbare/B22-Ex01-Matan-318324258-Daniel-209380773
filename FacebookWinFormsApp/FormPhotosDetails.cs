@@ -12,18 +12,17 @@ using FacebookWrapper.ObjectModel;
 
 namespace BasicFacebookFeatures
 {
-    public partial class FormPhotosDetails : Form , IScreen
+    public partial class FormPhotosDetails : Form, IScreen
     {
         private const string k_UserWithoutPhotos = "You haven't photos =(";
         private static bool isFeatureLoad = false;
 
-        public FacadeLogicManager FacadeLogicManager { get;}
+        public FacadeLogicManager FacadeLogicManager { get; }
 
         public FormPhotosDetails(FacadeLogicManager i_FacadeLogicManager)
         {
             InitializeComponent();
             FacadeLogicManager = i_FacadeLogicManager;
-            
         }
 
         private void updateAllControls()
